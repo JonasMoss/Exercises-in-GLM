@@ -1,0 +1,25 @@
+\section*{Exercise 2.14}
+\subsection*{(i)}
+In linear model, projection matrix is hat matrix. So,
+\begin{align*}
+\bm{P}_{X}\bm{X} = \bm{X}(\bm{X}^{\rm T}\bm{X})^{-1}\bm{X}^{\rm T}\bm{X} = \bm{X}.
+\end{align*}
+
+\subsection*{(ii)}
+By definition of model space, we have
+\begin{align*}
+C(\bm{X}) = \{\bm{\eta}: \mbox{there exists $\bm{\beta} \in \mathbb{R}^{p}$ such that $\bm{\eta} = \bm{X}\bm{\beta}$}\}
+\end{align*}
+and
+\begin{align*}
+C(\bm{P}_{X}) = \{\bm{\tau}: \mbox{there exists $\bm{a} \in \mathbb{R}^{n}$ such that $\bm{\tau} = \bm{P}_{X}\bm{a}$}\}.
+\end{align*}
+
+Take an arbitrary $\bm{\tau} \in C(\bm{P}_{X})$. Then, $\bm{\tau} = \bm{P}_{X}\bm{a}$ for an $\bm{a} \in \mathbb{R}^{n}$.
+Note that
+\begin{align*}
+\bm{\tau} = \bm{P}_{X}\bm{a} =  \bm{X}\underbrace{(\bm{X}^{\rm T}\bm{X})^{-1}\bm{X}^{\rm T}\bm{a}}_{\bm{c}} = \bm{X}\bm{c} \in \mathbb{R}^{p} \quad \mbox{and} \quad \bm{c} = (\bm{X}^{\rm T}\bm{X})^{-1}\bm{X}^{\rm T}\bm{a} \in \mathbb{R}^{p}.
+\end{align*}
+Hence, $\bm{\tau} \in C(\bm{X})$.
+
+The other way follows from $P_X X \beta = X \beta$. Then we have $C(\bm{X}) = C(\bm{P}_{X})$.

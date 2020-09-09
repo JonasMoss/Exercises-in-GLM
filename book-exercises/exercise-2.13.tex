@@ -1,0 +1,13 @@
+\section*{Exercise 2.13}
+Let $\bm{X}$ be a $n \times p$ model matrix of full rank and $\bm{A}$ be an arbitrary $p \times p$ non-singular matrix. Further, let $\bm{P}_{X}$ denote the projection matrix onto model space $C(\bm{X})$ and $\bm{P}_{XA}$ denote the projection matrix onto model space $C(\bm{XA})$. Those projections matrices are unique (see p.34 of the book) and in the context of linear model, they are also called as \textit{hat matrix}.
+
+By using the least square principle, we can obtain the expression for the hat matrix $\bm{P}_{XA}$ and we can write it further to show that $\bm{P}_{XA} = \bm{P}_{X}$:
+\begin{align*}
+\bm{P}_{XA} &= \bm{X}\bm{A}\left((\bm{X}\bm{A})^{\rm T}\bm{X}\bm{A}\right)^{-1}(\bm{X}\bm{A})^{\rm T}\\
+&= \bm{X}\bm{A}\left(\bm{A}^{\rm T}\bm{X}^{\rm T}\bm{X}\bm{A} \right)^{-1}\bm{A}^{\rm T}\bm{X}^{\rm T}\\
+&= \bm{X}\bm{A}\bm{A}^{-1}(\bm{X}^{\rm T}\bm{X})^{-1}(\bm{A}^{\rm T})^{-1}\bm{A}^{\rm T}\bm{X}^{\rm T}\\
+&= \bm{X}(\bm{X}^{\rm T}\bm{X})^{-1}\bm{X}^{\rm T}\\
+&= \bm{P}_{X}
+\end{align*}
+
+And since $\bm{P}_{XA} = \bm{P}_{X}$, we also have $\bm{\eta}_{XA} = \bm{P}_{XA}\cdot\bm{y} = \bm{P}_{X}\cdot\bm{y} = \bm{\eta}_{X}$.

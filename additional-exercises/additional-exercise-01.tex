@@ -1,0 +1,174 @@
+\section*{Additional Exercise 1}
+It's given that
+\begin{align*}
+\bm{\mathrm{a}} = 
+\begin{bmatrix}
+a_1\\
+\vdots\\
+a_p
+\end{bmatrix}
+, \quad
+\bm{\beta} = 
+\begin{bmatrix}
+\beta_1\\
+\vdots\\
+\beta_p
+\end{bmatrix}
+, \quad
+\bm{\mathrm{A}} =
+\begin{bmatrix}
+a_{1,1} & \cdots & a_{1,p} \\
+\vdots & \ddots & \vdots \\
+a_{p,1} & \cdots & a_{p,p} \\
+\end{bmatrix}
+\end{align*}
+and
+\begin{align*}
+\frac{\partial \bm{\mathrm{a}}^{\rm T}\bm{\beta}}{\partial \bm{\beta}}
+=
+\begin{bmatrix}
+\frac{\partial \bm{\mathrm{a}}^{\rm T}\bm{\beta}}{\partial \beta_{1}}\\
+\vdots\\
+\frac{\partial \bm{\mathrm{a}}^{\rm T}\bm{\beta}}{\partial \beta_{p}}\\
+\end{bmatrix}
+, \quad
+\frac{\partial \bm{\beta}^{\rm T}\bm{\mathrm{A}}\bm{\beta}}{\partial \bm{\beta}}
+=
+\begin{bmatrix}
+\frac{\partial \bm{\beta}^{\rm T}\bm{\mathrm{A}}\bm{\beta}}{\partial \beta_{1}}\\
+\vdots\\
+\frac{\partial \bm{\beta}^{\rm T}\bm{\mathrm{A}}\bm{\beta}}{\partial \beta_{p}}\\
+\end{bmatrix}
+.
+\end{align*}
+
+
+\subsection*{(i)}
+
+Since 
+\begin{align*}
+\bm{\mathrm{a}}^{\rm T}\bm{\beta} =
+\sum_{j=1}^{p} a_{j}\beta_{j}
+,
+\end{align*} we have
+\begin{align*}
+\frac{\partial \bm{\mathrm{a}}^{\rm T}\bm{\beta}}{\partial \bm{\beta}}
+=
+\begin{bmatrix}
+\frac{\partial \bm{\mathrm{a}}^{\rm T}\bm{\beta}}{\partial \beta_{1}}\\
+\vdots\\
+\frac{\partial \bm{\mathrm{a}}^{\rm T}\bm{\beta}}{\partial \beta_{p}}\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\frac{\partial \sum_{j=1}^{p} a_{j}\beta_{j}}{\partial \beta_{1}}\\
+\vdots\\
+\frac{\partial \sum_{j=1}^{p} a_{j}\beta_{j}}{\partial \beta_{p}}\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+a_{1}\\
+\vdots\\
+a_{p}\\
+\end{bmatrix}
+=
+\bm{\mathrm{a}}.
+\end{align*}
+
+
+\subsection*{(ii)}
+
+First, we obtain the element-wise expression for the right side term.
+\begin{align*}
+(\bm{\mathrm{A}} + \bm{\mathrm{A}}^{\rm T})\bm{\beta}
+= \bm{\mathrm{A}}\bm{\beta} + \bm{\mathrm{A}}^{\rm T}\bm{\beta}
+= 
+\begin{bmatrix}
+\sum_{j=1}^{p} a_{1,j}\beta_{j}\\
+\vdots\\
+\sum_{j=1}^{p} a_{p,j}\beta_{j}\\
+\end{bmatrix}
++
+\begin{bmatrix}
+\sum_{i=1}^{p} a_{i,1}\beta_{i}\\
+\vdots\\
+\sum_{i=1}^{p} a_{i,p}\beta_{i}\\
+\end{bmatrix}.
+\end{align*}
+
+Then, we show that the left side term is equal to it. Since 
+\begin{align*}
+\bm{\beta}^{\rm T} \bm{\mathrm{A}} \bm{\beta} =
+\begin{bmatrix}
+\beta_{1} \cdots \beta_{p}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+a_{1,1} & \cdots & a_{1,p} \\
+\vdots & \ddots & \vdots \\
+a_{p,1} & \cdots & a_{p,p} \\
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\beta_{1}\\
+\vdots\\
+\beta_{p}
+\end{bmatrix}
+= \sum_{i=1}^{p}\beta_{i} \sum_{j=1}^{p} a_{i,j}\beta_{j}
+= \sum_{i=1}^{p} \sum_{j=1}^{p} a_{i,j} \beta_{i} \beta_{j},
+\end{align*}
+we have
+\begin{align*}
+\frac{\partial \bm{\beta}^{\rm T}\bm{\mathrm{A}}\bm{\beta}}{\partial \bm{\beta}}
+&=
+\begin{bmatrix}
+\frac{\partial \bm{\beta}^{\rm T}\bm{\mathrm{A}}\bm{\beta}}{\partial \beta_{1}}\\
+\vdots\\
+\frac{\partial \bm{\beta}^{\rm T}\bm{\mathrm{A}}\bm{\beta}}{\partial \beta_{p}}\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\frac{\partial \sum_{i=1}^{p} \sum_{j=1}^{p} a_{i,j} \beta_{i} \beta_{j}}{\partial \beta_{1}}\\
+\vdots\\
+\frac{\partial \sum_{i=1}^{p} \sum_{j=1}^{p} a_{i,j} \beta_{i} \beta_{j}}{\partial \beta_{p}}\\
+\end{bmatrix}
+\\
+&=
+\begin{bmatrix}
+\sum_{i=1}^{p} \sum_{j=1}^{p} \frac{ \partial a_{i,j} \beta_{i} \beta_{j}}{\partial \beta_{1}}\\
+\vdots\\
+\sum_{i=1}^{p} \sum_{j=1}^{p} \frac{\partial a_{i,j} \beta_{i} \beta_{j}}{\partial \beta_{p}}\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\sum_{j=1}^{p} a_{1,j} \beta_{j} + \sum_{i=1}^{p} a_{i,1} \beta_{i}\\
+\vdots\\
+\sum_{j=1}^{p} a_{p,j} \beta_{j} + \sum_{i=1}^{p} a_{i,p} \beta_{i}\\
+\end{bmatrix}
+\\
+&= (\bm{\mathrm{A}} + \bm{\mathrm{A}}^{\rm T})\bm{\beta}.
+\end{align*}
+
+\vspace{1cm}
+There are many differentiation rules that will come in handy. You are not likely to take a course covering matrix differentiation, but it is one of the most useful techniques to be acquainted with. An excellent source for formulas in matrix differentiation is \href{https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf}{The Matrix Cookbook} by Kaare Brandt Petersen and Michael Syskind Pedersen. The bible of matrix differentiation is the book by Magnus and Neudecker \cite{Magnus2019-cz}. For the theoretical rationale behind matrix differentiation, take a look at Chapter 6 in Tom Lindstrøm's \href{https://www.uio.no/studier/emner/matnat/math/MAT2400/v16/spaces.pdf}{Mathematical Analysis}.
+
+In particular, you should know the following:
+
+\begin{framed}
+Let the scalar $\alpha$ be defined by $\alpha = \bm{b}^{\rm T}\bm{A}\bm{x}$~~where $\bm{b}$ and $\bm{A}$ are not a function of $\bf{x}$, then
+\begin{align*}
+\frac{\partial \bm{b}^{\rm T}\bm{A}\bm{x}}{\partial \bm{x}} = \bm{A}^{\rm T}\bm{b},\quad
+\frac{\partial \bm{x}^{\rm T}\bm{A}\bm{b}}{\partial \bm{x}} = \bm{A}\bm{b},\quad
+\frac{\partial \bm{x}^{\rm T}\bm{A}\bm{x}}{\partial \bm{x}} = (\bm{A}+\bm{A}^{\rm T})\bm{x}.\\
+\end{align*}
+These three rules are actually a special case of a more general rule:
+
+Let the scalar $\alpha$ be defined by $\alpha = \mathbf{u}^{\rm T}\bm{A}\mathbf{v}$~~where\\
+ $\mathbf{u} = \mathbf{u}(\bm{x}), \mathbf{v} = \mathbf{v}(\bm{x})$ and $\mathbf{u}: \mathbb{R}^m \rightarrow \mathbb{R}^m, \mathbf{v}: \mathbb{R}^n \rightarrow \mathbb{R}^n$, then
+\begin{align*}
+\frac{\partial \mathbf{u}^{\rm T}{\mathbf{A}}\mathbf{v}}{\partial \bm{x}} = 
+\frac{\partial \mathbf{u}}{\partial \bm{x}}{\mathbf{A}}{\mathbf{v}} + \frac{\partial \mathbf{v}}{\partial \bm{x}}\mathbf{A}^{\rm T}\mathbf {u}.
+\end{align*}
+
+Note that there are several conventions in matrix calculus. In this solution, we stick to the \textit{denominator} layout (a.k.a. \textit{Hessian} formulation).
+\end{framed}

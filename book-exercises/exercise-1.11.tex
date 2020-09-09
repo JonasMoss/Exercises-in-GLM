@@ -1,0 +1,14 @@
+\section*{Exercise 1.11}
+The model matrix
+\begin{align*}
+\bm{X} = 
+\begin{bmatrix}
+\bm{1}_{n_{1}} & \bm{1}_{n_{1}} & \bm{0}_{n_{1}} & \cdots & \bm{0}_{n_{1}}\\
+\bm{1}_{n_{2}} & \bm{0}_{n_{2}} & \bm{1}_{n_{2}} & \cdots & \bm{0}_{n_{2}}\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+\bm{1}_{n_{r-1}} & \bm{0}_{n_{r-1}} & \bm{0}_{n_{r-1}} & \cdots & \bm{1}_{n_{r-1}}\\
+\bm{1}_{n_{r}} & -\bm{1}_{n_{r}} & -\bm{1}_{n_{r}} & \cdots & -\bm{1}_{n_{r}}
+\end{bmatrix}
+\end{align*}
+has linearly independent columns (i.e. has full rank). So, $\bm{\beta}$ is identifiable.\\
+(The notation $\bm{0}_{n_{r}}$ and $\bm{1}_{n_{r}}$ are as defined in section 1.3.3 of the book.)

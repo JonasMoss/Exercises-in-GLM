@@ -1,0 +1,58 @@
+\section{Additional Exercise 2}
+Eigendecomposition of $\bm{V}$ gives us $\bm{V} = \bm{Q}\bm{\Lambda}\bm{Q}^{-1}$ with $\bm{\Lambda} = 
+\begin{bmatrix}
+\lambda_{1} & &\\
+ & \ddots & \\
+ &  & \lambda_{p}
+\end{bmatrix}$ where $\lambda_{i}$'s are eigenvalues.\\
+Since $\bm{V}$ is real symmetric matrix, $\bm{Q}$ is orthogonal matrix (i.e. $\bm{Q}^{-1} = \bm{Q}^{\rm T}$, $\bm{Q}^{\rm T}\bm{Q} = \bm{Q}\bm{Q}^{\rm T} = \bm{I}$).
+
+Because $\bm{V}$ is positive definite, all eigenvalues $\lambda_{1}, \cdots, \lambda_{p}$ are positive. We define
+\begin{align*}
+\bm{\Lambda}^{\frac{1}{2}} = 
+\begin{bmatrix}
+\sqrt{\lambda_{1}} & &\\
+ & \ddots & \\
+ &  & \sqrt{\lambda_{p}}
+\end{bmatrix}
+\quad \mbox{and} \quad
+\bm{\Lambda}^{-\frac{1}{2}} = 
+\begin{bmatrix}
+\frac{1}{\sqrt{\lambda_{1}}} & &\\
+ & \ddots & \\
+ &  & \frac{1}{\sqrt{\lambda_{p}}}
+\end{bmatrix}.
+\end{align*}
+Then, $\bm{\Lambda}^{\frac{1}{2}}\bm{\Lambda}^{\frac{1}{2}}  = \bm{\Lambda}$ and $\bm{\Lambda}^{-\frac{1}{2}}\bm{\Lambda}^{-\frac{1}{2}}  = \bm{I}$.\\
+Now we define
+$\bm{V}^{\frac{1}{2}} = \bm{Q}\bm{\Lambda}^{\frac{1}{2}}\bm{Q}^{\rm T}$ and $\bm{V}^{-\frac{1}{2}} = \bm{Q}\bm{\Lambda}^{-\frac{1}{2}}\bm{Q}^{\rm T}$.
+
+
+Note that $\bm{V}^{\frac{1}{2}}$ and $\bm{V}^{-\frac{1}{2}}$ are symmetric, and $\bm{V}^{\frac{1}{2}}\bm{V}^{-\frac{1}{2}} = \bm{I}$. So, $\bm{V}^{-\frac{1}{2}} = \left(\bm{V}^{\frac{1}{2}}\right)^{-1}$. Further, $\bm{V}^{\frac{1}{2}}\bm{V}^{\frac{1}{2}} = \bm{V}$.
+
+\subsection*{(a)}
+We perform variable transformation $\bm{Z} = \bm{V}^{-\frac{1}{2}}(\bm{Y} - \bm{\mu})$ which gives $\bm{Z} \sim N\left(\bm{0}, \bm{V}^{-\frac{1}{2}}\bm{V}\left(\bm{V}^{-\frac{1}{2}}\right)^{\rm T} \right) = N\left(\bm{0}, \bm{I}\right)$.\\
+
+Thus, we have
+\begin{align*}
+(\bm{Y} - \bm{\mu})^{\rm T}\bm{V}^{-1}(\bm{Y} - \bm{\mu})
+&= (\bm{Y} - \bm{\mu})^{\rm T} \left(\bm{V}^{-\frac{1}{2}}\right)^{\rm T}\bm{V}^{-\frac{1}{2}} (\bm{Y} - \bm{\mu})\\
+&= \left(\bm{V}^{-\frac{1}{2}}(\bm{Y} - \bm{\mu})\right)^{\rm T}\left(\bm{V}^{-\frac{1}{2}}(\bm{Y} - \bm{\mu})\right)\\
+&= \bm{Z}^{\rm T}\bm{Z}\\
+&= \sum_{i=1}^{p} Z_{i}^2\\
+&\sim \chi_{p}^2.
+\end{align*}
+
+\subsection*{(b)}
+We perform variable transformation $\bm{Z} = \bm{V}^{-\frac{1}{2}}\bm{Y}$ which gives $\bm{Z} \sim N\left(\bm{V}^{-\frac{1}{2}}\bm{\mu}, \bm{V}^{-\frac{1}{2}}\bm{V}\left(\bm{V}^{-\frac{1}{2}}\right)^{\rm T} \right) = N\left(\bm{V}^{-\frac{1}{2}}\bm{\mu}, \bm{I}\right)$.\\
+
+Thus, we have
+\begin{align*}
+\bm{Y}^{\rm T}\bm{V}^{-1}\bm{Y}
+&= \bm{Y}^{\rm T} \left(\bm{V}^{-\frac{1}{2}}\right)^{\rm T}\bm{V}^{-\frac{1}{2}}\bm{Y}\\
+&= \left(\bm{V}^{-\frac{1}{2}}\bm{Y}\right)^{\rm T}\left(\bm{V}^{-\frac{1}{2}}\bm{Y} \right)\\
+&= \bm{Z}^{\rm T}\bm{Z}\\
+&= \sum_{i=1}^{p} Z_{i}^2\\
+&\sim \chi_{p,\lambda}^2
+\end{align*}
+where $\lambda = \sum_{i=1}^{p} \E[Z_{i}]^2 = \left(\bm{V}^{-\frac{1}{2}}\bm{\mu}\right)^{\rm T}\left(\bm{V}^{-\frac{1}{2}}\bm{\mu} \right) = \bm{\mu}^{\rm T}\bm{V}^{-1}\bm{\mu}$.

@@ -1,0 +1,74 @@
+\section*{Exercise 1.13}
+\subsection*{(a)}
+\begin{align*}
+\bm{X} = 
+\begin{bmatrix}[c|c|cc]
+1 & 0 & 0 & 0\\
+1 & 0 & 0 & 0\\
+1 & 0 & 1 & 0\\
+1 & 0 & 1 & 0\\
+1 & 0 & 0 & 1\\
+1 & 0 & 0 & 1\\
+\hline
+1 & 1 & 0 & 0\\
+1 & 1 & 0 & 0\\
+1 & 1 & 1 & 0\\
+1 & 1 & 1 & 0\\
+1 & 1 & 0 & 1\\
+1 & 1 & 0 & 1
+\end{bmatrix}
+, \quad
+\bm{\beta} =
+\begin{bmatrix}
+\beta_{0}\\
+\beta_{2}\\
+\gamma_{2}\\
+\gamma_{3}
+\end{bmatrix}
+\end{align*}
+
+
+Let $A$ denote the first category and $B$ the second category. The interpretation of the coefficients are: \\
+$\beta_{0}$: $\E\left[Y|A = 1, B = 1\right]$.\\
+$\beta_{i}$: $\E\left[Y|A = i\right] - \E\left[Y|A = 1\right]$.\\
+$\gamma_{j}$: $\E\left[Y|B = j\right] - \E\left[Y|B = 1\right]$.\\
+
+\subsection*{(b)}
+\begin{align*}
+\bm{X} = 
+\begin{bmatrix}[c|c|cc]
+1 & 1 & 1 & 0\\
+1 & 1 & 1 & 0\\
+1 & 1 & 0 & 1\\
+1 & 1 & 0 & 1\\
+1 & 1 & -1 & -1\\
+1 & 1 & -1 & -1\\
+\hline
+1 & -1 & 1 & 0\\
+1 & -1 & 1 & 0\\
+1 & -1 & 0 & 1\\
+1 & -1 & 0 & 1\\
+1 & -1 & -1 & -1\\
+1 & -1 & -1 & -1\\
+\end{bmatrix}
+, \quad
+\bm{\beta} =
+\begin{bmatrix}
+\beta_{0}\\
+\beta_{1}\\
+\gamma_{1}\\
+\gamma_{2}\\
+\end{bmatrix}
+, \quad
+\beta_{2} = -\beta_{1}
+, \quad
+\gamma_{3} = -\gamma_{1} -\gamma_{2}
+\end{align*}
+
+Interpretation:\\
+$\beta_0$: $\E\left[Y\right]$.\\
+$\beta_{i}$: $\E\left[Y|A = i\right] - \E\left[Y\right]$.\\
+$\gamma_{j}$: $\E\left[Y|B = j\right] - \E\left[Y\right]$.\\
+
+\subsection*{(c)}
+In (a) and (b), $\bm{X}$ has full-rank with $\mathrm{rank}(\bm{X}) = r+c-1 = 4$.

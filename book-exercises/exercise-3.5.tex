@@ -1,0 +1,66 @@
+\section*{Exercise 3.5}
+We apply the sum-of-squares decomposition to $(\bm{Y} - \bm{\mu}_{0})$ where $\bm{Y} \sim N(\bm{\mu}, \sigma^2 \bm{I})$, $\bm{\mu_{0}} = \mu_{0}\bm{1}_{n}$, $\bm{\mu} = \mu\bm{1}_{n}$:
+\begin{align*}
+(\bm{Y} - \bm{\mu}_{0})^{\rm T}(\bm{Y} - \bm{\mu}_{0}) = (\bm{Y} - \bm{\mu}_{0})^{\rm T}\bm{P}_{X}(\bm{Y} - \bm{\mu}_{0}) + (\bm{Y} - \bm{\mu}_{0})^{\rm T}\left(\bm{I} - \bm{P}_{X} \right)(\bm{Y} - \bm{\mu}_{0}).
+\end{align*}
+
+Since $\bm{P}_{X} + (\bm{I} -\bm{P}_{X}) = \bm{I}$, Cochran's theorem gives $(\bm{Y} - \bm{\mu}_{0})^{\rm T}\bm{P}_{X}(\bm{Y} - \bm{\mu}_{0}) \independent (\bm{Y} - \bm{\mu}_{0})^{\rm T}\left(\bm{I} - \bm{P}_{X} \right)(\bm{Y} - \bm{\mu}_{0})$ and
+\begin{align*}
+\frac{(\bm{Y} - \bm{\mu}_{0})^{\rm T}\bm{P}_{X}(\bm{Y} - \bm{\mu}_{0})}{\sigma^2} \sim \chi_{r_{1}, \lambda_{1}}^2
+\end{align*}
+\begin{align*}
+\frac{(\bm{Y} - \bm{\mu}_{0})^{\rm T}\left(\bm{I} - \bm{P}_{X} \right)(\bm{Y} - \bm{\mu}_{0})}{\sigma^2} \sim \chi_{r_{2}, \lambda_{2}}^2
+\end{align*}
+
+where $r_{1} = \mathrm{rank}(\bm{P}_{X})$, $\lambda_{1} = \frac{(\bm{\mu} - \bm{\mu}_{0})^{\rm T} \bm{P}_{X} (\bm{\mu} - \bm{\mu}_{0})}{\sigma^2}$ and $r_{2} = \mathrm{rank}(\bm{I} - \bm{P}_{X})$, $\lambda_{2} = \frac{(\bm{\mu} - \bm{\mu}_{0})^{\rm T}\left(\bm{I} - \bm{P}_{X} \right)(\bm{\mu} - \bm{\mu}_{0})}{\sigma^2}$.
+
+
+In case of null model, $\bm{P}_{X} = \frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}$ and we have $\bm{P}_{X}\bm{Y} = \frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}\bm{Y} = \overline{Y}\bm{1}_{n}$, $\bm{P}_{X}\bm{\mu} = \frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}\bm{1}_{n}\mu = \mu\bm{1}_{n} = \bm{\mu}$.\\
+
+Further,
+\begin{align*}
+(\bm{Y} - \bm{\mu}_{0})^{\rm T}\bm{P}_{X}(\bm{Y} - \bm{\mu}_{0}) &= (\bm{Y} - \bm{\mu}_{0})^{\rm T}\bm{P}_{X}^{\rm T}\bm{P}_{X}(\bm{Y} - \bm{\mu}_{0})\\
+&= (\overline{Y}\bm{1}_{n} - \mu_{0}\bm{1}_{n})^{\rm T}(\overline{Y}\bm{1}_{n} - \mu_{0}\bm{1}_{n}) = (\overline{Y} - \mu_{0})^2 \bm{1}_{n}^{\rm T}\bm{1}_{n}\\
+&= n(\overline{Y} - \mu_{0})^2\\
+(\bm{Y} - \bm{\mu}_{0})^{\rm T}\left(\bm{I} - \bm{P}_{X} \right)(\bm{Y} - \bm{\mu}_{0}) &= (\bm{Y} - \bm{\mu}_{0})^{\rm T}\left(\bm{I} - \bm{P}_{X} \right)^{\rm T}\left(\bm{I} - \bm{P}_{X} \right)(\bm{Y} - \bm{\mu}_{0})\\
+&= (\bm{Y} - \overline{Y}\bm{1}_{n})^{\rm T}(\bm{Y} - \overline{Y}\bm{1}_{n})\\
+&= \sum_{i=1}^{n} (Y_{i} - \overline{Y})^{2}
+\end{align*}
+and
+\begin{align*}
+r_{1} &= \mathrm{rank}(\bm{P}_{X}) = \mathrm{rank}(\frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}) = 1\\
+r_{2} &= \mathrm{rank}(\bm{I} - \bm{P}_{X}) = n - 1\\
+\lambda_{1} &= \frac{(\bm{\mu} - \bm{\mu}_{0})^{\rm T} \bm{P}_{X} (\bm{\mu} - \bm{\mu}_{0})}{\sigma^2} = \frac{n(\mu - \mu_{0})^2}{\sigma^2}\\
+\lambda_{2} &= \frac{(\bm{\mu} - \bm{\mu}_{0})^{\rm T}\left(\bm{I} - \bm{P}_{X} \right)(\bm{\mu} - \bm{\mu}_{0})}{\sigma^2} = \frac{\sum_{i=1}^{n} (\mu - \mu)^{2}}{\sigma^2} = 0.
+\end{align*}
+
+
+So, we have 
+\begin{align*}
+\frac{n(\overline{Y} - \mu_{0})^2}{\sigma^2} \sim \chi_{1, \lambda_{1}}^2 ~~\mbox{and}~~ \frac{(n-1)S^2}{\sigma^2} = \frac{\sum_{i=1}^{n} (Y_{i} - \overline{Y})^{2}}{\sigma^2} \sim \chi_{n-1}^2
+\end{align*}
+and they are independent.\\
+
+Then, by the definition of noncentral $F$-distribution,
+\begin{align*}
+F = \frac{n(\overline{Y} - \mu_{0})^2}{S^2} = \frac{n(\overline{Y} - \mu_{0})^2 / 1}{\sum_{i=1}^{n} (Y_{i} - \overline{Y})^{2} / (n-1)} \sim F_{1, n-1, \lambda_{1}}.
+\end{align*}
+$F$ is our test statistic.
+
+Null hypothesis $H_{0}: \mu = \mu_{0}$. Under this $H_{0}$, $\lambda_{1} = \frac{n(\mu_{0} - \mu_{0})^2}{\sigma^2} = 0$. So, our test statistic follows (central) $F$-distribution: $F \sim F_{1, n-1}$.
+
+A level $\alpha$ $F$-test rejects the null hypothesis if  $F > f_{1-\alpha, 1, n-1}$.\\
+\vspace{\baselineskip}
+
+
+Now, we construct a $t$-test.\\
+Since $Y_{i}, \cdots Y_{n} \stackrel{i.i.d.}{\sim} N(\mu, \sigma^2)$, $\overline{Y} \sim N\left(\mu, \frac{\sigma^2}{n} \right)$ and by transformation $\frac{\sqrt{n}(\overline{Y} -\mu_{0})}{\sigma} \sim N\left(\frac{\sqrt{n}(\mu -\mu_{0})}{\sigma}, 1\right)$.
+
+It's well known that $\frac{(n-1)S^2}{\sigma^2} \sim \chi_{n-1}^2$. (You can easily show this by using the result from p.82 of the book.) By combining those results, we have
+\begin{align*}
+T = \frac{\frac{\sqrt{n}(\overline{Y} -\mu_{0})}{\sigma}}{\sqrt{\frac{(n-1)S^2}{\sigma^2}/(n-1)}} = \frac{\sqrt{n}(\overline{Y} - \mu_{0})}{S}  \sim t_{n-1, \sqrt{\lambda_{1}}}.
+\end{align*}
+
+Under $H_{0}: \mu = \mu_{0}$, $\lambda_{1} = \frac{n(\mu_{0} - \mu_{0})^2}{\sigma^2} = 0$. So, our test statistic follows (central) $t$-distribution: $T \sim t_{n-1}$.
+
+A level $\alpha$ two-sided $t$-test rejects the null hypothesis if  $|T| > t_{1-\frac{\alpha}{2}, n-1}$.

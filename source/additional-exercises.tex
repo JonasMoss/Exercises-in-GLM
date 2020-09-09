@@ -1,0 +1,1666 @@
+\documentclass[a4paper]{article}
+
+\usepackage{float}
+\usepackage{fullpage} % Package to use full page
+\usepackage{parskip} % Package to tweak paragraph skipping
+\usepackage{tikz} % Package for drawing
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{framed}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true
+}
+
+\graphicspath{{figures/}}
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Cor}{\mathrm{Cor}}
+
+\title{STK3100 - Introduction to generalized linear models \\
+Solutions to additional exercises}
+\author{Vinnie Ko, University of Oslo}
+\date{\today}
+\setcounter{secnumdepth}{0}
+\begin{document}
+\everymath{\displaystyle}
+\maketitle
+
+\section{Exercise 1}
+It's given that
+\begin{align*}
+\bm{\mathrm{a}} = 
+\begin{bmatrix}
+a_1\\
+\vdots\\
+a_p
+\end{bmatrix}
+, \quad
+\bm{\beta} = 
+\begin{bmatrix}
+\beta_1\\
+\vdots\\
+\beta_p
+\end{bmatrix}
+, \quad
+\bm{\mathrm{A}} =
+\begin{bmatrix}
+a_{1,1} & \cdots & a_{1,p} \\
+\vdots & \ddots & \vdots \\
+a_{p,1} & \cdots & a_{p,p} \\
+\end{bmatrix}
+\end{align*}
+and
+\begin{align*}
+\frac{\partial \bm{\mathrm{a}}^{\rm T}\bm{\beta}}{\partial \bm{\beta}}
+=
+\begin{bmatrix}
+\frac{\partial \bm{\mathrm{a}}^{\rm T}\bm{\beta}}{\partial \beta_{1}}\\
+\vdots\\
+\frac{\partial \bm{\mathrm{a}}^{\rm T}\bm{\beta}}{\partial \beta_{p}}\\
+\end{bmatrix}
+, \quad
+\frac{\partial \bm{\beta}^{\rm T}\bm{\mathrm{A}}\bm{\beta}}{\partial \bm{\beta}}
+=
+\begin{bmatrix}
+\frac{\partial \bm{\beta}^{\rm T}\bm{\mathrm{A}}\bm{\beta}}{\partial \beta_{1}}\\
+\vdots\\
+\frac{\partial \bm{\beta}^{\rm T}\bm{\mathrm{A}}\bm{\beta}}{\partial \beta_{p}}\\
+\end{bmatrix}
+.
+\end{align*}
+
+
+i)\\
+
+Since 
+\begin{align*}
+\bm{\mathrm{a}}^{\rm T}\bm{\beta} =
+\sum_{j=1}^{p} a_{j}\beta_{j}
+,
+\end{align*} we have
+\begin{align*}
+\frac{\partial \bm{\mathrm{a}}^{\rm T}\bm{\beta}}{\partial \bm{\beta}}
+=
+\begin{bmatrix}
+\frac{\partial \bm{\mathrm{a}}^{\rm T}\bm{\beta}}{\partial \beta_{1}}\\
+\vdots\\
+\frac{\partial \bm{\mathrm{a}}^{\rm T}\bm{\beta}}{\partial \beta_{p}}\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\frac{\partial \sum_{j=1}^{p} a_{j}\beta_{j}}{\partial \beta_{1}}\\
+\vdots\\
+\frac{\partial \sum_{j=1}^{p} a_{j}\beta_{j}}{\partial \beta_{p}}\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+a_{1}\\
+\vdots\\
+a_{p}\\
+\end{bmatrix}
+=
+\bm{\mathrm{a}}.
+\end{align*}
+
+
+ii)\\
+
+First, we obtain the element-wise expression for the right side term.
+\begin{align*}
+(\bm{\mathrm{A}} + \bm{\mathrm{A}}^{\rm T})\bm{\beta}
+= \bm{\mathrm{A}}\bm{\beta} + \bm{\mathrm{A}}^{\rm T}\bm{\beta}
+= 
+\begin{bmatrix}
+\sum_{j=1}^{p} a_{1,j}\beta_{j}\\
+\vdots\\
+\sum_{j=1}^{p} a_{p,j}\beta_{j}\\
+\end{bmatrix}
++
+\begin{bmatrix}
+\sum_{i=1}^{p} a_{i,1}\beta_{i}\\
+\vdots\\
+\sum_{i=1}^{p} a_{i,p}\beta_{i}\\
+\end{bmatrix}.
+\end{align*}
+
+Then, we show that the left side term is equal to it. Since 
+\begin{align*}
+\bm{\beta}^{\rm T} \bm{\mathrm{A}} \bm{\beta} =
+\begin{bmatrix}
+\beta_{1} \cdots \beta_{p}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+a_{1,1} & \cdots & a_{1,p} \\
+\vdots & \ddots & \vdots \\
+a_{p,1} & \cdots & a_{p,p} \\
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\beta_{1}\\
+\vdots\\
+\beta_{p}
+\end{bmatrix}
+= \sum_{i=1}^{p}\beta_{i} \sum_{j=1}^{p} a_{i,j}\beta_{j}
+= \sum_{i=1}^{p} \sum_{j=1}^{p} a_{i,j} \beta_{i} \beta_{j},
+\end{align*}
+we have
+\begin{align*}
+\frac{\partial \bm{\beta}^{\rm T}\bm{\mathrm{A}}\bm{\beta}}{\partial \bm{\beta}}
+&=
+\begin{bmatrix}
+\frac{\partial \bm{\beta}^{\rm T}\bm{\mathrm{A}}\bm{\beta}}{\partial \beta_{1}}\\
+\vdots\\
+\frac{\partial \bm{\beta}^{\rm T}\bm{\mathrm{A}}\bm{\beta}}{\partial \beta_{p}}\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\frac{\partial \sum_{i=1}^{p} \sum_{j=1}^{p} a_{i,j} \beta_{i} \beta_{j}}{\partial \beta_{1}}\\
+\vdots\\
+\frac{\partial \sum_{i=1}^{p} \sum_{j=1}^{p} a_{i,j} \beta_{i} \beta_{j}}{\partial \beta_{p}}\\
+\end{bmatrix}
+\\
+&=
+\begin{bmatrix}
+\sum_{i=1}^{p} \sum_{j=1}^{p} \frac{ \partial a_{i,j} \beta_{i} \beta_{j}}{\partial \beta_{1}}\\
+\vdots\\
+\sum_{i=1}^{p} \sum_{j=1}^{p} \frac{\partial a_{i,j} \beta_{i} \beta_{j}}{\partial \beta_{p}}\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\sum_{j=1}^{p} a_{1,j} \beta_{j} + \sum_{i=1}^{p} a_{i,1} \beta_{i}\\
+\vdots\\
+\sum_{j=1}^{p} a_{p,j} \beta_{j} + \sum_{i=1}^{p} a_{i,p} \beta_{i}\\
+\end{bmatrix}
+\\
+&= (\bm{\mathrm{A}} + \bm{\mathrm{A}}^{\rm T})\bm{\beta}.
+\end{align*}
+
+\vspace{1cm}
+For further career in statistics, it is handy to know the following matrix differentiation rules:
+\begin{framed}
+Let the scalar $\alpha$ be defined by $\alpha = \bm{b}^{\rm T}\bm{A}\bm{x}$~~where $\bm{b}$ and $\bm{A}$ are not a function of $\bf{x}$, then
+\begin{align*}
+\frac{\partial \bm{b}^{\rm T}\bm{A}\bm{x}}{\partial \bm{x}} = \bm{A}^{\rm T}\bm{b},\quad
+\frac{\partial \bm{x}^{\rm T}\bm{A}\bm{b}}{\partial \bm{x}} = \bm{A}\bm{b},\quad
+\frac{\partial \bm{x}^{\rm T}\bm{A}\bm{x}}{\partial \bm{x}} = (\bm{A}+\bm{A}^{\rm T})\bm{x}.\\
+\end{align*}
+These three rules are actually a special case of a more general rule:
+
+Let the scalar $\alpha$ be defined by $\alpha = \mathbf{u}^{\rm T}\bm{A}\mathbf{v}$~~where\\
+ $\mathbf{u} = \mathbf{u}(\bm{x}), \mathbf{v} = \mathbf{v}(\bm{x})$ and $\mathbf{u}: \mathbb{R}^m \rightarrow \mathbb{R}^m, \mathbf{v}: \mathbb{R}^n \rightarrow \mathbb{R}^n$, then
+\begin{align*}
+\frac{\partial \mathbf{u}^{\rm T}{\mathbf{A}}\mathbf{v}}{\partial \bm{x}} = 
+\frac{\partial \mathbf{u}}{\partial \bm{x}}{\mathbf{A}}{\mathbf{v}} + \frac{\partial \mathbf{v}}{\partial \bm{x}}\mathbf{A}^{\rm T}\mathbf {u}.
+\end{align*}
+
+Note that there are several conventions in matrix calculus. In this solution, we stick to the \textit{denominator} layout (a.k.a. \textit{Hessian} formulation).
+\end{framed}
+
+
+\newpage
+\section{Exercise 2}
+Eigendecomposition of $\bm{V}$ gives us $\bm{V} = \bm{Q}\bm{\Lambda}\bm{Q}^{-1}$ with $\bm{\Lambda} = 
+\begin{bmatrix}
+\lambda_{1} & &\\
+ & \ddots & \\
+ &  & \lambda_{p}
+\end{bmatrix}$ where $\lambda_{i}$'s are eigenvalues.\\
+Since $\bm{V}$ is real symmetric matrix, $\bm{Q}$ is orthogonal matrix (i.e. $\bm{Q}^{-1} = \bm{Q}^{\rm T}$, $\bm{Q}^{\rm T}\bm{Q} = \bm{Q}\bm{Q}^{\rm T} = \bm{I}$).
+
+Because $\bm{V}$ is positive definite, all eigenvalues $\lambda_{1}, \cdots, \lambda_{p}$ are positive. We define
+\begin{align*}
+\bm{\Lambda}^{\frac{1}{2}} = 
+\begin{bmatrix}
+\sqrt{\lambda_{1}} & &\\
+ & \ddots & \\
+ &  & \sqrt{\lambda_{p}}
+\end{bmatrix}
+\quad \mbox{and} \quad
+\bm{\Lambda}^{-\frac{1}{2}} = 
+\begin{bmatrix}
+\frac{1}{\sqrt{\lambda_{1}}} & &\\
+ & \ddots & \\
+ &  & \frac{1}{\sqrt{\lambda_{p}}}
+\end{bmatrix}.
+\end{align*}
+Then, $\bm{\Lambda}^{\frac{1}{2}}\bm{\Lambda}^{\frac{1}{2}}  = \bm{\Lambda}$ and $\bm{\Lambda}^{-\frac{1}{2}}\bm{\Lambda}^{-\frac{1}{2}}  = \bm{I}$.\\
+Now we define
+$\bm{V}^{\frac{1}{2}} = \bm{Q}\bm{\Lambda}^{\frac{1}{2}}\bm{Q}^{\rm T}$ and $\bm{V}^{-\frac{1}{2}} = \bm{Q}\bm{\Lambda}^{-\frac{1}{2}}\bm{Q}^{\rm T}$.
+
+
+Note that $\bm{V}^{\frac{1}{2}}$ and $\bm{V}^{-\frac{1}{2}}$ are symmetric, and $\bm{V}^{\frac{1}{2}}\bm{V}^{-\frac{1}{2}} = \bm{I}$. So, $\bm{V}^{-\frac{1}{2}} = \left(\bm{V}^{\frac{1}{2}}\right)^{-1}$. Further, $\bm{V}^{\frac{1}{2}}\bm{V}^{\frac{1}{2}} = \bm{V}$.
+
+
+\subsection{a)}
+We perform variable transformation $\bm{Z} = \bm{V}^{-\frac{1}{2}}(\bm{Y} - \bm{\mu})$ which gives $\bm{Z} \sim N\left(\bm{0}, \bm{V}^{-\frac{1}{2}}\bm{V}\left(\bm{V}^{-\frac{1}{2}}\right)^{\rm T} \right) = N\left(\bm{0}, \bm{I}\right)$.\\
+
+Thus, we have
+\begin{align*}
+(\bm{Y} - \bm{\mu})^{\rm T}\bm{V}^{-1}(\bm{Y} - \bm{\mu})
+&= (\bm{Y} - \bm{\mu})^{\rm T} \left(\bm{V}^{-\frac{1}{2}}\right)^{\rm T}\bm{V}^{-\frac{1}{2}} (\bm{Y} - \bm{\mu})\\
+&= \left(\bm{V}^{-\frac{1}{2}}(\bm{Y} - \bm{\mu})\right)^{\rm T}\left(\bm{V}^{-\frac{1}{2}}(\bm{Y} - \bm{\mu})\right)\\
+&= \bm{Z}^{\rm T}\bm{Z}\\
+&= \sum_{i=1}^{p} Z_{i}^2\\
+&\sim \chi_{p}^2.
+\end{align*}
+
+
+\subsection{b)}
+We perform variable transformation $\bm{Z} = \bm{V}^{-\frac{1}{2}}\bm{Y}$ which gives $\bm{Z} \sim N\left(\bm{V}^{-\frac{1}{2}}\bm{\mu}, \bm{V}^{-\frac{1}{2}}\bm{V}\left(\bm{V}^{-\frac{1}{2}}\right)^{\rm T} \right) = N\left(\bm{V}^{-\frac{1}{2}}\bm{\mu}, \bm{I}\right)$.\\
+
+Thus, we have
+\begin{align*}
+\bm{Y}^{\rm T}\bm{V}^{-1}\bm{Y}
+&= \bm{Y}^{\rm T} \left(\bm{V}^{-\frac{1}{2}}\right)^{\rm T}\bm{V}^{-\frac{1}{2}}\bm{Y}\\
+&= \left(\bm{V}^{-\frac{1}{2}}\bm{Y}\right)^{\rm T}\left(\bm{V}^{-\frac{1}{2}}\bm{Y} \right)\\
+&= \bm{Z}^{\rm T}\bm{Z}\\
+&= \sum_{i=1}^{p} Z_{i}^2\\
+&\sim \chi_{p,\lambda}^2
+\end{align*}
+where $\lambda = \sum_{i=1}^{p} \E[Z_{i}]^2 = \left(\bm{V}^{-\frac{1}{2}}\bm{\mu}\right)^{\rm T}\left(\bm{V}^{-\frac{1}{2}}\bm{\mu} \right) = \bm{\mu}^{\rm T}\bm{V}^{-1}\bm{\mu}$.
+
+
+\vspace{\baselineskip}
+\section{Exercise 4}
+\subsection{a)}
+\begin{align*}
+\pi_{i} &= P\left(Y_{i} = 1\right)\\
+&= P\left(Y_{i}^{*} > 0\right)\\
+&= P\left(\sum_{j=1}^{p} \beta_{j}^{*} x_{i,j} + \sigma \epsilon_{i} > 0\right)\\
+&= P\left(\epsilon_{i} > -\sum_{j=1}^{p} \beta_{j} x_{i,j}\right)\\
+&= 1 - P\left(\epsilon_{i} \leq -\sum_{j=1}^{p} \beta_{j} x_{i,j}\right)\\
+&= 1 - F\left(-\sum_{j=1}^{p} \beta_{j} x_{i,j}\right)\\
+&= F\left(\sum_{j=1}^{p} \beta_{j} x_{i,j}\right)
+\end{align*}
+
+
+\subsection{b)}
+Let $\eta_{i} = \sum_{j=1}^{p}\beta_{j} x_{i,j}$, then $\pi_{i} = F\left(\eta_{i}\right)$.\\
+If $\epsilon_{i} \sim N(0,1)$, $\pi_{i} = F\left(\eta_{i}\right) = \Phi\left(\eta_{i}\right)$ where $\eta_{i}$ is a linear predictor. This is equal to probit model. (See p.167 of the book.)
+
+
+\subsection{c)}
+If $F(z) = \frac{e^{z}}{1+e^{z}}$, $\pi_{i} = F\left(\eta_{i}\right) = \frac{e^{\eta_{i}}}{1+e^{\eta_{i}}}$. This is equal to $\log\left(\frac{\pi_{i}}{1-\pi_{i}} \right) = \eta_{i}$, which is logistic regression.
+
+
+\subsection{d)}
+If $\eta_{i} \sim \mathrm{uniform}\left(-\frac{1}{2},\frac{1}{2}\right)$, $\pi_{i} = F\left(\eta_{i}\right) =
+\begin{cases}
+0 & \quad \mbox{if}~ \eta_{i} < -\frac{1}{2}\\
+\eta_{i} +\frac{1}{2} & \quad \mbox{if}~ -\frac{1}{2} \leq \eta_{i} < \frac{1}{2}\\
+1 & \quad \mbox{if}~ \frac{1}{2} \leq \eta_{i}
+\end{cases}.$\\
+This is linear probability model (p.167 of the book).
+
+
+\vspace{\baselineskip}
+\section{Exercise 5}
+\subsection{a)}
+\begin{align*}
+f(y,\lambda) = \frac{\lambda^{y}e^{-\lambda}}{y!} = \exp\left[y\log{\lambda} -\lambda -\log(y!) \right]
+\end{align*}
+So, $\theta = \log\lambda$, $b(\theta) = e^{\theta}$, $a(\phi) = 1$, $c(y,\phi) = -\log(y!)$.
+
+
+\subsection{b)}
+With $\theta = \log\lambda$,
+\begin{align*}
+\E[Y] &= b'(\theta) = e^{\theta} = \lambda\\ \intertext{and}
+\Var(Y) &= b''(\theta) a(\phi) = e^{\theta} = \lambda.
+\end{align*}
+
+\subsection{c)}
+Canonical link function $g(\cdot)$ is a link function such that $\theta = g\left(\E[Y] \right)$.
+In our case, $\theta = \log\lambda  = g(\lambda)$. Thus, the canonical link function for Poission GLM is $g(\mu) = \log\mu$.
+
+
+\vspace{\baselineskip}
+\section{Exercise 6}
+\subsection{a)}
+\begin{align*}
+f(y,\pi) = \pi(1-\pi)^{y} = \exp\left[y \log(1-\pi) + \log\pi\right]
+\end{align*}
+So, $\theta = \log(1-\pi)$, $\pi = 1-e^{\theta}$, $b(\theta) = -\log\left(1-e^{\theta}\right)$, $a(\phi) = 1$, $c(y,\phi) = 0$.
+
+
+\subsection{b)}
+\begin{align*}
+f(y,\pi) = \binom{y+r-1}{r-1}\pi^{r}(1-\pi)^{y} = \exp\left[y \log(1-\pi) + r\log\pi + \log\binom{y+r-1}{r-1}\right]
+\end{align*}
+So, $\theta = \log(1-\pi)$, $\pi = 1 -e^{\theta}$ $b(\theta) =-r\log\left(1-e^{\theta}\right)$, $a(\phi) = 1$, $c(y,\phi) = \log\binom{y+r-1}{r-1}$.\\
+
+\subsection{c)}
+\begin{align*}
+\E[Y] &= b'(\theta) = r\frac{e^{\theta}}{1-e^{\theta}} = r\left(\frac{1}{\pi}-1\right)\\ \intertext{and}
+\Var(Y) &= b''(\theta) a(\phi) = r\frac{e^{\theta}}{\left(1-e^{\theta}\right)^2} = \frac{r}{\pi}\left(\frac{1}{\pi}-1\right).
+\end{align*}
+
+
+\vspace{\baselineskip}
+\section{Exercise 7}
+\subsection{a)}
+i)
+\begin{align*}
+f(y,\lambda) = \lambda e^{-\lambda y} = \exp\left[-\lambda y +\log\lambda\right]
+\end{align*}
+So, $\theta = -\lambda$, $b(\theta) = -\log(-\theta)$, $a(\phi) = 1$, $c(y,\phi) = 0$.\\
+
+ii)
+\begin{align*}
+\E[Y] &= b'(\theta) = -\frac{1}{\theta} = \frac{1}{\lambda}\\ \intertext{and}
+\Var(Y) &= b''(\theta) a(\phi) = \frac{1}{\theta^{2}} = \frac{1}{\lambda^{2}}.
+\end{align*}
+
+
+\subsection{b)}
+i)
+\begin{align*}
+f(y,\pi) &= \frac{\left(\frac{k}{\mu}\right)^{k}}{\Gamma(k)}y^{k-1}e^{-\frac{k}{\mu}y}\\
+&= \exp\left[-\frac{k}{\mu}y +k\log\frac{k}{\mu} +(k-1)\log y -\log\Gamma(k)\right]\\
+&= \exp\left[\frac{\left(-\frac{1}{\mu}y -\log\mu\right)}{\frac{1}{k}} +(k-1)\log y -\log\Gamma(k) +k\log k\right]
+\end{align*}
+So, $\theta = -\frac{1}{\mu}$, $\mu = -\frac{1}{\theta}$, $b(\theta) = -\log(-\theta)$, $a(\phi) = \frac{1}{k}$, $c(y,\phi) = (k-1)\log y -\log\Gamma(k)$.\\
+
+ii)
+\begin{align*}
+\E[Y] &= b'(\theta) = -\frac{1}{\theta} = \mu\\ \intertext{and}
+\Var(Y) &= b''(\theta) a(\phi) = \frac{1}{k\theta^{2}} = \frac{\mu^{2}}{k}.
+\end{align*}
+
+
+\vspace{\baselineskip}
+\section{Exercise 8}
+\subsection{a)}
+The moment generating function is defined as
+\begin{align*}
+M_{Y}(t) = \E\left[e^{Yt}\right] = 
+\begin{cases}
+\sum e^{yt} f(y) & \quad \mbox{if $Y$ is discrete}\\
+\int e^{yt} f(y) )\,dy & \quad \mbox{if $Y$ is continuous}
+\end{cases}.
+\end{align*}
+When $t = 0$,
+\begin{align*}
+M_{Y}(0) = \E\left[1\right] = 
+\begin{cases}
+\sum f(y) = 1 & \quad \mbox{if $Y$ is discrete}\\
+\int f(y) )\, dy =1 & \quad \mbox{if $Y$ is continuous}
+\end{cases}.
+\end{align*}
+And if we differentiate $M_{Y}(t)$ with respect to $t$,
+\begin{align*}
+M_{Y}^{(r)}(t) = \frac{d^{r}}{d t^{r}}M_{Y}(t) = \E\left[Y^{r}e^{Yt}\right] = 
+\begin{cases}
+\sum e^{yt} y^{r} f(y) & \quad \mbox{if $Y$ is discrete}\\
+\int e^{yt} y^{r} f(y) )\,dy & \quad \mbox{if $Y$ is continuous}
+\end{cases}.
+\end{align*}
+When $t = 0$, this becomes
+\begin{align*}
+M_{Y}^{(r)}(0) = \frac{d^{r}}{d t^{r}}M_{Y}(0) = \E\left[Y^{r}\right] = 
+\begin{cases}
+\sum y^{r} f(y) & \quad \mbox{if $Y$ is discrete}\\
+\int y^{r} f(y) )\,dy & \quad \mbox{if $Y$ is continuous}
+\end{cases}.
+\end{align*}
+When $r = 1$, we have $M_{Y}'(0) = \E\left[Y\right]$ and when  $r = 2$, we have $M_{Y}''(0) = \E\left[Y^{2}\right]$.
+
+\subsection{b)}
+\begin{align*}
+R_{Y}'(t) &= \frac{d \log M_{Y}(t)}{d M_{Y}(t)} \cdot \frac{d M_{Y}(t)}{d t} = \frac{M_{Y}'(t)}{M_{Y}(t)}\\
+R_{Y}''(t) &= \frac{d}{d t} \left(\frac{M_{Y}'(t)}{M_{Y}(t)} \right) = \frac{M_{Y}''(t) M_{Y}(t) - M_{Y}'(t)^2}{M_{Y}(t)^2}
+\end{align*}
+When $t = 0$, $R_{Y}'(0) = \frac{M_{Y}'(0)}{M_{Y}(0)} = \E\left[Y\right]$ and $R_{Y}''(0) = \frac{M_{Y}''(0) M_{Y}(0) - M_{Y}'(0)^2}{M_{Y}(0)^2} = \E\left[Y^{2}\right] - \E\left[Y\right]^{2} = \Var(Y)$.
+
+
+\vspace{\baselineskip}
+\section{Exercise 9}
+\subsection{a)}
+Example 1: Bernoulli distribution\\
+Example 2: Poisson distribution\\
+
+\subsection{b)}
+Exponential dispersion family: $f(y) = \exp\left[\frac{\theta y - b(\theta)}{a(\phi)} + c(y,\phi)\right]$\\
+If we set $a(\phi) = 1$ and $c(y,\phi) = \log h(y)$, we get $f(y) = h(y)\exp\left[\theta y -b(\theta)\right]$, which is density of natural exponential family.
+
+
+\subsection{c)}
+First, note that $1 = \int f(y) \,dy = \int h(y)\exp\left[\theta y -b(\theta)\right] \,dy$. Now we write
+\begin{align*}
+M_{Y}(t) &= \E\left[e^{Yt}\right]\\
+&= \int e^{ty} f(y) \,dy\\
+&= \int e^{ty} h(y)\exp\left[\theta y -b(\theta)\right] \,dy\\
+&= \int e^{ty} h(y)\exp\left[\theta y + b(\theta + t) - b(\theta + t) -b(\theta)\right] \,dy\\
+&= e^{b(\theta + t) -b(\theta)}\int e^{ty} h(y)\exp\left[\theta y -b(\theta + t)\right] \,dy\\
+&= e^{b(\theta + t) -b(\theta)}\int h(y)\exp\left[(\theta +t)y -b(\theta + t)\right] \,dy\\
+&= e^{b(\theta + t) -b(\theta)}
+\end{align*}
+Further, $R_{Y}(t) = \log M_{Y}(t) = b(\theta + t) -b(\theta)$.\\
+In discrete case, replace the integral by a sum. The result stays same.
+
+\subsection{d)}
+From previous part, we have $R_{Y}(t) = b(\theta + t) -b(\theta)$.
+So, $R_{Y}'(t) = b'(\theta + t)$ and $R_{Y}''(t) = b''(\theta + t)$. By combining this with the fact that $\E[Y] = R_{Y}'(0)$ and $\Var[Y] = R_{Y}''(0)$, we get $\E[Y] = b'(\theta)$ and  $\Var[Y] = b''(\theta)$.
+
+
+\vspace{\baselineskip}
+\section{Exercise 10}
+
+\subsection{a)}
+First, note that $1 = \int f(y) \,dy = \int\exp\left[\frac{\theta y - b(\theta)}{a(\phi)} + c(y,\phi)\right] \,dy$. Now we write
+\begin{align*}
+M_{Y}(t) &= \E\left[e^{Yt}\right]\\
+&= \int e^{ty} f(y)\,dy\\
+&= \int e^{ty} \exp\left[\frac{\theta y - b(\theta)}{a(\phi)} + c(y,\phi)\right] \,dy\\
+&= \int e^{ty} \exp\left[\frac{\theta y +b(\theta +ta(\phi)) -b(\theta +ta(\phi)) - b(\theta)}{a(\phi)} + c(y,\phi)\right] \,dy\\
+&= \exp\left[ \frac{b(\theta +ta(\phi)) -b(\theta)}{a(\phi)} \right]\int e^{ty} \exp\left[\frac{\theta y -b(\theta +ta(\phi))}{a(\phi)} + c(y,\phi)\right] \,dy\\
+&= \exp\left[ \frac{b(\theta +ta(\phi)) -b(\theta)}{a(\phi)} \right]\int \exp\left[\frac{(\theta + ta(\phi))y -b(\theta +ta(\phi))}{a(\phi)} + c(y,\phi)\right] \,dy\\
+%%
+&= \exp\left[\frac{b(\theta + t a(\phi)) -b(\theta)}{a(\phi)}\right]
+\end{align*}
+Further, $R_{Y}(t) = \log M_{Y}(t) = \frac{b(\theta + t a(\phi)) -b(\theta)}{a(\phi)}$.\\
+
+\subsection{b)}
+From previous part, we have $R_{Y}(t) =\frac{b(\theta + t a(\phi)) -b(\theta)}{a(\phi)}$.
+So, $R_{Y}'(t) = b'(\theta + t a(\phi))$ and $R_{Y}''(t) = b''(\theta + t a(\phi)) a(\phi)$. By combining this with the fact that $\E[Y] = R_{Y}'(0)$ and $\Var[Y] = R_{Y}''(0)$, we get $\E[Y] = b'(\theta)$ and  $\Var[Y] = b''(\theta) a(\phi)$.
+
+
+\vspace{\baselineskip}
+\section{Exercise 12}
+\subsection{a)}
+Let $a_{1}$ be a normalizing constant.
+Since $f_{Y}(y,\theta)$ is a pdf, it should satisfy  $\int_{-\infty}^{\infty}f_{Y}(y,\theta) \,dy = \int_{-\infty}^{\infty}a_{1}e^{\theta y}f_{0}(y) \,dy = 1$.\\
+We then have
+\begin{align*}
+a_{1}\int_{-\infty}^{\infty}e^{\theta y}f_{0}(y) \,dy = a_{1}\E_{f_{0}}\left[e^{\theta Y}\right] = a_{1} M_{0}(\theta) = a_{1} e^{b(\theta)} = 1.
+\end{align*}
+Thus, $a_{1} = e^{-b(\theta)}$.
+
+The pdf 
+\begin{align*}
+f_{Y}(y,\theta) = e^{\theta y - b(\theta)}f_{0}(y) = f_{0}(y)\exp\left[\theta y -b(\theta)\right]
+\end{align*}
+is therefore the natural exponential family with $h(y) = f_{0}(y)$.
+
+
+\subsection{b)}
+Let $a_{0}$ be a normalizing constant. Then, $\sum_{y=0}^{\infty} a_{0} f_{0}(y) = a_{0}\sum_{y=0}^{\infty} \frac{1}{y!} = a_{0} e = 1$. So, $a_{0} = e^{-1}$ and $f_{0}(y) = \frac{e^{-1}}{y!}$.\\
+Further, 
+\begin{align*}
+M_{0}(t) = \E_{f_{0}}\left[e^{t Y}\right] = \sum_{y=0}^{\infty}e^{t y -1}\frac{1}{y!} = e^{-1}\sum_{y=0}^{\infty}\frac{(e^{t})^{y}}{y!} = e^{-1}\exp\left[e^{t}\right] = \exp\left[e^{t} -1\right].
+\end{align*}
+This gives $b(\theta) = e^{\theta}-1$.\\
+From (a), we have $f_{Y}(y,\theta) = e^{\theta y - b(\theta)}f_{0}(y) = f_{0}(y)\exp\left[\theta y -b(\theta)\right]$. So,
+\begin{align*}
+f_{Y}(y,\theta) = f_{0}(y)\exp\left[\theta y -b(\theta)\right] = \frac{e^{-1}}{y!}\exp\left[\theta y -e^{\theta}-1\right] = \frac{1}{y!}\exp\left[\theta y -e^{\theta}\right] = \frac{\left(e^{\theta}\right)^{y} }{y!}e^{-e^{\theta}} = \frac{\lambda^{y}}{y!}e^{-\lambda}
+\end{align*}
+where $\lambda = e^{\theta}$.\\
+$f_{Y}(y,\theta)$ is pdf of $\mathrm{Poisson}(e^{\theta})$. 
+
+
+\vspace{\baselineskip}
+\section{Exercise 13}
+\subsection{a)}
+\begin{align*}
+M_{\overline{Y}}(t) &= \E\left[e^{t \overline{Y}}\right]\\
+&= \E\left[e^{\frac{t}{n} \sum_{i=1}^{n}Y_{i}}\right]\\
+&= \E\left[\prod_{i=1}^{n} e^{\frac{t}{n} Y_{i}}\right]\\
+&= \prod_{i=1}^{n}\E\left[e^{\frac{t}{n} Y_{i}}\right]\\
+&= \left(\E\left[e^{\frac{t}{n} Y_{i}}\right]\right)^{n}\\
+&= \left(M_{Y}\left(\frac{t}{n}\right)\right)^{n}\\
+&= \left(\exp\left[\frac{b(\theta + \frac{t}{n} a(\phi)) -b(\theta)}{a(\phi)}\right]\right)^{n}\\
+&= \exp\left[\frac{b(\theta + \frac{t}{n} a(\phi)) -b(\theta)}{\frac{1}{n}a(\phi)}\right]\\
+&= \exp\left[\frac{b(\theta + t a^{*}(\phi)) -b(\theta)}{a^{*}(\phi)}\right]
+\end{align*}
+where $a^{*}(\phi) = \frac{1}{n}a(\phi)$.
+So, $\overline{Y}$ has a distribution within the exponential dispersion family.
+
+
+\subsection{b)}
+Note that a distribution within the exponential dispersion family is determined by $b(\theta)$ and $a(\phi)$. (e.g. see extra exercise 10.a))\\
+The function $c(y,\phi)$ is then given by the fact that pdf/pmf should integrate/sum to $1$.\\
+
+It's given that $Y_{1}, \cdots, Y_{n} \stackrel{i.i.d.}{\sim} \mathrm{Bin}(1,\pi)$. We can then rewrite the pmf:
+\begin{align*}
+f_{Y} &= \binom{1}{y}\pi^{y}(1-\pi)^{1-y}\\
+&= \exp\left[\log\binom{1}{y} + y\log \pi +(1-y)\log(1-\pi) \right]\\
+&= \exp\left[y\log \pi +(1-y)\log(1-\pi) \right]\\
+&= \exp\left[y\log\frac{\pi}{1-\pi} +\log(1-\pi)\right]\\
+&= \exp\left[\theta y -\log(1+e^{\theta})\right].
+\end{align*}
+So, $f_{Y}$ is within the exponential dispersion family with $\theta = \log\frac{\pi}{1-\pi}$, $b(\theta) = \log(1+e^{\theta})$, $a(\phi) = 1$ and $c(y,\phi) = 0$.\\
+
+ 
+By using the result from a), we have
+\begin{align*}
+f_{\overline{Y}}(y,\theta) &= \exp\left[\frac{\theta y - b(\theta)}{a^{*}(\phi)} + c^{*}(y,\phi)\right]\\
+&= \exp\left[\frac{\theta ny - n b(\theta)}{a(\phi)} +c^{*}(y,\phi)\right]\\
+&= \exp\left[\theta ny -n\log(1+e^{\theta}) +c^{*}(y,\phi)\right]\\
+&= \left(e^{\theta}\right)^{ny}\left(1+e^{\theta}\right)^{-n}\exp\left[c^{*}(y,\phi)\right]\\
+&= \left(\frac{\pi}{1-\pi}\right)^{ny}\left(\frac{1}{1-\pi}\right)^{-n}\exp\left[c^{*}(y,\phi)\right]\\
+&= \pi^{ny}(1-\pi)^{n(1-y)} \exp\left[c^{*}(y,\phi)\right].
+\end{align*}
+
+Note that the possible values of $\overline{Y}$ are: $0, \frac{1}{n}, \frac{2}{n}, \cdots ,\frac{n-1}{n}, 1$. So, by the definition of pmf:
+\begin{align*}
+\sum_{y} f_{\overline{Y}}(y,\theta) = \sum_{y} \pi^{ny}(1-\pi)^{n(1-y)}\exp\left[c^{*}(y,\phi)\right] = 1
+\end{align*}
+where $\sum_{y}$ indicates the sum over $y = 0, \frac{1}{n}, \frac{2}{n}, \cdots ,\frac{n-1}{n}, 1$.
+
+
+
+Recall that the \textit{binomial formula} is: $(x+y)^{n}=\sum_{k=0}^{n}\binom{n}{k}x^{k}y^{n-k}$.
+So, we have
+\begin{align*}
+\sum_{y} \binom{n}{ny}\pi^{ny}(1-\pi)^{n-ny} = 1.
+\end{align*}
+We can see that $c^{*}(y,\phi) = \log\left(\binom{n}{ny}\right)$.
+
+So, 
+\begin{align*}
+f_{\overline{Y}}(y,\theta) = \binom{n}{ny}\pi^{ny}(1-\pi)^{n(1-y)}.
+\end{align*}
+
+
+
+\vspace{\baselineskip}
+\section{Exercise 14}
+Note that we stick to the notation of the book
+$L(\bm{\beta}) = \sum_{i=1}^{n} \log f(Y_{i},\bm{\beta}) = \log \prod_{i=1}^{n} f(Y_{i},\bm{\beta}) =  \log \ell(\bm{\beta})$, which is the opposite of the usual notation $\ell(\bm{\beta}) = \sum_{i=1}^{n} \log f(Y_{i},\bm{\beta}) = \log \prod_{i=1}^{n} f(Y_{i},\bm{\beta}) =  \log L(\bm{\beta})$.\\
+
+i)\\
+
+\textit{Lemma 1}\\
+For arbitrary $i$ and $h$,
+\begin{align*}
+\E\left[S_{i,h}(\bm{\beta})\right] &= \int S_{i,h}(\bm{\beta}) f_{Y_{i}} \,dy\\
+&= \int \frac{\partial \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h}} f_{Y_{i}} \,dy\\
+&= \int \frac{1}{f_{Y_{i}}(y_{i},\bm{\beta})}\frac{\partial f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h}} f_{Y_{i}} \,dy\\
+&= \int \frac{\partial f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h}} \,dy\\
+&= \frac{\partial}{\partial \beta_{h}} \int f_{Y_{i}}(y_{i},\bm{\beta}) \,dy\\
+&= \frac{\partial 1}{\partial \beta_{h}}\\
+&= 0.
+\end{align*}
+So,
+\begin{align*}
+\E\left[S_{h}(\bm{\beta})\right] = \sum_{i=1}^{n}\E\left[S_{i,h}(\bm{\beta})\right] = \sum_{i=1}^{n} 0 = 0.
+\end{align*}
+\hfill\ensuremath{\square}\\
+
+\textit{Lemma 2 (a.k.a information matrix equality)}\\
+First, note that for an arbitrary function $g(x)$, $\frac{\partial g(x)}{\partial x} = g(x)\frac{\partial \log g(x)}{\partial x}$.\\
+Then, for an arbitrary $i$, $h$ and $j$,
+\begin{align*}
+0 &= \frac{\partial \E\left[S_{i,h}(\bm{\beta})\right]}{\partial \beta_{j}}\\
+&= \frac{\partial}{\partial \beta_{j}} \int \frac{\partial \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h}} f_{Y_{i}} \,dy\\
+&= \int \frac{\partial^{2} \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h} \partial \beta_{j}}f_{Y_{i}} +\frac{\partial \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h}}\frac{\partial f_{Y_{i}}}{\partial \beta_{j}} \,dy\\
+&= \int \frac{\partial^{2} \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h} \partial \beta_{j}}f_{Y_{i}} +\frac{\partial \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h}}\frac{\partial \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{j}}f_{Y_{i}} \,dy\\
+&= -\mathcal{J}_{i,h,j}(\bm{\beta}) + \E\left[S_{i,h}(\bm{\beta})S_{i,j}(\bm{\beta})\right].
+\end{align*}
+So, $\mathcal{J}_{i,h,j}(\bm{\beta}) = \E\left[S_{i,h}(\bm{\beta})S_{i,j}(\bm{\beta})\right]$.
+\hfill\ensuremath{\square}\\
+
+Finally, we have
+\begin{align*}
+\Cov\left(S_{h}(\bm{\beta}), S_{j}(\bm{\beta})\right) &= \Cov\left(\sum_{i=1}^{n}S_{i,h}(\bm{\beta}),~ \sum_{i=1}^{n}S_{i,j}(\bm{\beta})\right)\\
+&= \sum_{i=1}^{n} \Cov\left(S_{i,h}(\bm{\beta}) \cdot S_{i,j}(\bm{\beta})\right) \tag{$\because$ independence}\\
+&= \sum_{i=1}^{n} \left[\E\left[S_{i,h}(\bm{\beta}) \cdot S_{i,j}(\bm{\beta})\right] - \E\left[S_{i,h}(\bm{\beta})\right] \E\left[S_{i,j}(\bm{\beta})\right]\right]\\
+&= \sum_{i=1}^{n}\E\left[S_{i,h}(\bm{\beta}) \cdot S_{i,j}(\bm{\beta})\right] \tag{by lemma 1}\\
+&= \sum_{i=1}^{n} \mathcal{J}_{i,h,j}(\bm{\beta}) \tag{by lemma 2}\\
+&= \mathcal{J}_{h,j}(\bm{\beta})
+\end{align*}
+where $\mathcal{J}_{h,j}(\bm{\beta}) = \E\left[-\frac{\partial^{2} L(\bm{\beta})}{\partial \beta_{h} \partial \beta_{j}} \right]$.\\
+
+ii)
+\begin{align*}
+\bm{\mathcal{J}}(\bm{\beta}) &= \Cov\left(\bm{S}(\bm{\beta}),\bm{S}(\bm{\beta})\right)\\
+&= \E\left[\bm{S}(\bm{\beta}) \bm{S}(\bm{\beta})^{\rm T}\right]
+\end{align*}
+Let $\bm{a}$ be a arbitrary non-zero vector, then
+\begin{align*}
+\bm{a}^{\rm T}\bm{\mathcal{J}}(\bm{\beta})\bm{a} &= \bm{a}^{\rm T}\Cov\left(\bm{S}(\bm{\beta}),\bm{S}(\bm{\beta})\right)\bm{a}\\
+&= \Cov\left(\bm{a}^{\rm T}\bm{S}(\bm{\beta}),\bm{a}^{\rm T}\bm{S}(\bm{\beta})\right)\\
+&= \Var\left(\bm{a}^{\rm T}\bm{S}(\bm{\beta})\right)\\
+&\geq 0.
+\end{align*}
+So, $\bm{\mathcal{J}}(\bm{\beta})$ is positive semi-definite.
+
+
+
+\vspace{\baselineskip}
+\section{Exercise 15}
+i)\\
+We know that $\mathrm{logit}(\pi) = \beta_{0} + \beta_{1}x$. So, $x = \frac{\mathrm{logit}(\pi) - \beta_{0}}{\beta_{1}}$ and $LD50 = \frac{\mathrm{logit}\left(\frac{1}{2}\right) - \beta_{0}}{\beta_{1}} = -\frac{\beta_{0}}{\beta_{1}}$. The estimated version is $\widehat{LD50} = -\frac{\widehat{\beta}_{0}}{\widehat{\beta}_{1}} = 1.7716$
+
+\begin{lstlisting}
+> # Read data.
+> Beetle = read.table("http://www.stat.ufl.edu/~aa/glm/data/Beetles2.dat", header = T)
+> head(Beetle)
+  logdose  n dead
+1   1.691 59    6
+2   1.724 60   13
+3   1.755 62   18
+4   1.784 56   28
+5   1.811 63   52
+6   1.837 59   53
+> 
+> # Fit logistic regression
+> Beetle.model.1 = glm(cbind(dead,n-dead) ~ logdose, family = binomial, data = Beetle)
+> summary(Beetle.model.1)
+
+Call:
+glm(formula = cbind(dead, n - dead) ~ logdose, family = binomial, 
+    data = Beetle)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.5878  -0.4085   0.8442   1.2455   1.5860  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -60.740      5.182  -11.72   <2e-16 ***
+logdose       34.286      2.913   11.77   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 284.202  on 7  degrees of freedom
+Residual deviance:  11.116  on 6  degrees of freedom
+AIC: 41.314
+
+Number of Fisher Scoring iterations: 4
+
+> 
+> # Estimation of LD50
+> LD50 = -as.numeric(Beetle.model.1$coef[1])/as.numeric(Beetle.model.1$coef[2])
+> show(LD50)
+[1] 1.771576
+\end{lstlisting}
+
+
+ii)\\
+From exercise 5.10 of the book, we have that a 95{\%} confidence interval for LD50 is given by all $x$ that satisfy the inequality
+%
+\begin{align*}
+\left| \frac{\widehat{\beta}_0+\widehat{\beta}_1 x-{\rm logit}(0.50)}{\sqrt{\widehat{\Var}(\widehat{\beta}_0)+x^{2} \, \widehat{\Var}(\widehat{\beta}_1)+
+2x\, \widehat{\Cov}(\widehat{\beta}_0,\widehat{\beta}_1)}}\right| < 1.96
+\end{align*}
+or equivalently
+\[
+\left(\widehat{\beta}_{0}+\widehat{\beta}_{1} x \right)^{2} < 1.96^{2}\cdot \left(\widehat{\Var}(\widehat{\beta}_{0}) + {x}^{2} \, \widehat{\Var}(\widehat{\beta}_{1}) + 2x \, \widehat{\Cov}(\widehat{\beta}_{0},\widehat{\beta}_{1})\right)\]
+\[
+\left(\widehat{\beta}_{1}^{2} -1.96^{2}\cdot \widehat{\Var}(\widehat{\beta}_{1})\right) x^{2} + 2\left(\widehat{\beta}_{0} \widehat{\beta}_{1} -1.96^{2} \widehat{\Cov}(\widehat{\beta}_{0},\widehat{\beta}_{1})\right) x + \widehat{\beta}_{0}^{2} -1.96^{2}\cdot \widehat{\Var}(\widehat{\beta}_{0}) < 0
+\]
+Thus, the confidence interval is all $x$ that satisfy the second degree inequality
+\begin{align*}
+ax^2+bx+c<0
+\end{align*}
+where
+\begin{align*}
+a &= \widehat{\beta}_{1}^{2} -1.96^{2}\cdot \widehat{\Var}(\widehat{\beta}_{1})\\
+b &= 2\widehat{\beta}_{0} \widehat{\beta}_{1} -2\cdot 1.96^{2} \widehat{\Cov}(\widehat{\beta}_{0},\widehat{\beta}_{1})\\
+c &= \widehat{\beta}_{0}^{2} -1.96^{2}\cdot \widehat{\Var}(\widehat{\beta}_{0}).
+\end{align*}
+By solving the inequality, we obtain the confidence interval
+\begin{align*}
+\left(\frac{-b-\sqrt{b^2 -4ac}}{2a} \, , \, \frac{-b+\sqrt{b^2 -4ac}}{2a}\right)
+\end{align*}
+
+\begin{lstlisting}
+> # 95% confidence interval of LD50
+> alpha = 0.05
+> z.value = qnorm(1 - alpha/2)
+> 
+> beta.hat = as.numeric(Beetle.model.1$coeff)
+> beta.hat.cov.mat = vcov(Beetle.model.1) 
+> 
+> a.val = beta.hat[2]^2 - (z.value^2)*beta.hat.cov.mat[2,2]
+> b.val = 2*beta.hat[1]*beta.hat[2] - 2*(z.value^2)*beta.hat.cov.mat[1,2]
+> c.val = beta.hat[1]^2 - (z.value^2)*beta.hat.cov.mat[1,1]
+> 
+> LD50.CI95 = c(
++   (-b.val -sqrt(b.val^2 -4*a.val*c.val))/(2*a.val),
++   (-b.val +sqrt(b.val^2 -4*a.val*c.val))/(2*a.val)
++ )
+> show(LD50.CI95)
+[1] 1.763722 1.779054
+\end{lstlisting}
+
+
+
+\vspace{\baselineskip}
+\section{Exercise 16}
+\subsection{a)}
+We are given that
+\begin{align*}
+Y_{i} = \beta_{1}x_{i,1} + \cdots + \beta_{p}x_{i,p} + \varepsilon_{i}
+\end{align*}
+where $\varepsilon_{i} \sim N\left(0,\frac{\sigma^{2}}{w_{i}}\right)$.\\
+By multiplying with $\sqrt{w_{i}}$ on both sides we get
+\begin{align*}
+\sqrt{w_{i}}Y_{i} &= \beta_{1}\sqrt{w_{i}}x_{i,1} + \cdots + \beta_{p}\sqrt{w_{i}}x_{i,p} + \sqrt{w_{i}}\varepsilon_{i}\\
+Y_{i}^{*} &= \beta_{1}x_{i,1}^{*} + \cdots + \beta_{p}x_{i,p}^{*} + \varepsilon_{i}^{*}
+\end{align*}
+where $\varepsilon_{i}^{*} = \sqrt{w_{i}}\varepsilon_{i} \sim \sqrt{w_{i}}N\left(0,\frac{\sigma^{2}}{w_{i}}\right) = N\left(0,\sigma^{2}\right)$
+
+
+\vspace{\baselineskip}
+\subsection{b)}
+By using normal equation, we obtain
+\begin{align*}
+\widehat{\bm{\beta}} &= \left(\left(\bm{X}^{*}\right)^{\rm T}\bm{X}^{*}\right)^{-1}\left(\bm{X}^{*}\right)^{\rm T}\bm{Y}^{*}.
+\end{align*}
+
+Let $\bm{W}^{\frac{1}{2}} = \mathrm{diag}\left\{\sqrt{w_{i}}\right\}$, then
+\begin{align*}
+\widehat{\bm{\beta}} &= \left(\left(\bm{X}^{*}\right)^{\rm T}\bm{X}^{*}\right)^{-1}\left(\bm{X}^{*}\right)^{\rm T}\bm{Y}^{*}\\
+&= \left(\left(\bm{W}^{\frac{1}{2}}\bm{X}\right)^{\rm T}\bm{W}^{\frac{1}{2}}\bm{X}\right)^{-1}\left(\bm{W}^{\frac{1}{2}}\bm{X}\right)^{\rm T}\bm{W}^{\frac{1}{2}}\bm{Y}\\
+&= \left(\bm{X}^{\rm T}\bm{W}^{\frac{1}{2}}\bm{W}^{\frac{1}{2}}\bm{X}\right)^{-1}\bm{X}^{\rm T}\bm{W}^{\frac{1}{2}}\bm{W}^{\frac{1}{2}}\bm{Y}\\
+&= \left(\bm{X}^{\rm T}\bm{W}\bm{X}\right)^{-1}\bm{X}^{\rm T}\bm{W}\bm{Y}.
+\end{align*}
+
+
+
+\vspace{\baselineskip}
+\section{Exercise 17}
+\subsection{a)}
+
+\begin{align*}
+f(y) &= \frac{1}{\sigma\sqrt{2\pi y^{3}}}\exp\left[-\frac{1}{2y}\left(\frac{y-\mu}{\mu\sigma}\right)^{2}\right]\\
+&= \exp\left[-\frac{1}{2}\left(\frac{y}{\mu^{2}\sigma^{2}} -\frac{2}{\mu\sigma^{2}} + \frac{1}{y\sigma^{2}}\right) -\log\left(\sigma\sqrt{2\pi y^{3}}\right)\right]\\
+&= \exp\left[-\frac{1}{2}\left(\frac{y}{\mu^{2}\sigma^{2}} -\frac{2}{\mu\sigma^{2}}\right) -\frac{1}{2y\sigma^{2}} -\log\left(\sigma\sqrt{2\pi y^{3}}\right)\right]\\
+&= \exp\left[\frac{-\frac{y}{2\mu^{2}} +\frac{1}{\mu}}{\sigma^{2}} -\frac{1}{2y\sigma^{2}} -\log\left(\sigma\sqrt{2\pi y^{3}}\right)\right]\\
+&= \exp\left[\frac{\theta y - b(\theta)}{a(\phi)} + c(y,\phi)\right]
+\end{align*}
+where $\theta = -\frac{1}{2\mu^{2}}$, $b(\theta) = -\sqrt{-2\theta}  = -\frac{1}{\mu}$, $a(\phi) = \phi = \sigma^{2}$, $c(y,\phi) = -\frac{1}{2y\phi} -\log\left(\sqrt{2\pi y^{3}\phi}\right) = -\frac{1}{2y\sigma^{2}} -\log\left(\sigma\sqrt{2\pi y^{3}}\right)$.\\
+So, $f(y)$ is within the exponential dispersion family.\\
+
+
+\subsection{b)}
+\begin{align*}
+\E[Y] &= b'(\theta) = \frac{1}{\sqrt{-2\theta}} = \mu\\
+\Var(Y) &= b''(\theta)a(\phi) = -\frac{-2}{2}(-2\theta)^{-\frac{3}{2}}\phi = (-2\theta)^{-\frac{3}{2}}\phi = \mu^{3}\sigma^{2}\\
+\end{align*}
+
+
+\subsection{c)}
+Canonical link function $g(\cdot)$ is a link function such that $\theta = g\left(\E[Y] \right)$. (p.123 of the book).
+\begin{align*}
+\theta = -\frac{1}{2\mu^{2}} = g(\mu)
+\end{align*}
+Thus, the canonical link function for inverse Gaussian distribution is $g(\mu) = -\frac{1}{2\mu^{2}}$.
+
+\subsection{d)}
+The log-likelihood function is
+\begin{align*}
+L(\bm{y},\widehat{\bm{\mu}},\bm{\sigma}^{2}) &= -\frac{1}{2}\sum_{i=1}^{n}\log\left(2\pi\sigma^{2}y_{i}^{3}\right) -\frac{1}{2}\sum_{i=1}^{n}\frac{1}{y_{i}}\left(\frac{y_{i}-\mu_{i}}{\mu_{i}\sigma}\right)^{2}.
+\end{align*}
+So, the scaled deviance is
+\begin{align*}
+\frac{D(\bm{y},\widehat{\bm{\mu}})}{\phi} &= -2\left(L\left(\widehat{\bm{\mu}},\bm{y}\right) - L\left(\bm{y},\bm{y}\right)\right)\\
+&= -2\left(-\frac{1}{2}\sum_{i=1}^{n}\log\left(2\pi\sigma^{2}y_{i}^{3}\right) -\frac{1}{2}\sum_{i=1}^{n}\frac{1}{y_{i}}\left(\frac{y_{i}-\widehat{\mu}_{i}}{\widehat{\mu}_{i}\sigma}\right)^{2} + \frac{1}{2}\sum_{i=1}^{n}\log\left(2\pi\sigma^{2}y_{i}^{3}\right)\right)\\
+&= \sum_{i=1}^{n}\frac{1}{y_{i}}\left(\frac{y_{i}-\widehat{\mu}_{i}}{\widehat{\mu}_{i}\sigma}\right)^{2}\\
+&= \frac{1}{\sigma^{2}}\sum_{i=1}^{n}\frac{1}{y_{i}}\left(\frac{y_{i}-\widehat{\mu}_{i}}{\widehat{\mu}_{i}}\right)^{2}.\\
+\end{align*}
+Hence, the deviance is
+\begin{align*}
+D(\bm{y},\widehat{\bm{\mu}}) = \sum_{i=1}^{n}\frac{1}{y_{i}}\left(\frac{y_{i}-\widehat{\mu}_{i}}{\widehat{\mu}_{i}}\right)^{2}.
+\end{align*}
+
+
+
+
+
+\vspace{\baselineskip}
+\section{Exercise 19}
+\subsection{a)}
+
+i)\\
+It's given that $A \sim \mathrm{Bin}(A+C,\pi(1))$. So, the pmf is $f(A) = \binom{A+C}{A}\pi(1)^{A} (1-\pi(1))^{A+C-A}$. Then the log-likelihood is
+\begin{align*}
+L(\pi(1)) &= \log\binom{A+C}{A} + A\log\pi(1) + C\log(1-\pi(1))
+\end{align*}
+We find the MLE of $\pi(1)$
+\begin{align*}
+\frac{\partial L(\pi(1))}{\partial \pi(1)} = \frac{A}{\pi(1)} -\frac{C}{1-\pi(1)} = 0
+\end{align*}
+So, $\widehat{\pi}(1) = \frac{A}{A+C}$.\\
+
+By repeating the same for $B \sim \mathrm{Bin}(B+D,\pi(1))$, we obtain $\widehat{\pi}(0) = \frac{B}{B+D}$.\\
+
+
+ii)\\
+Now we obtain MLE of odds ratio by using the `plug-in principle' of MLE
+\begin{align*}
+\widehat{\mathrm{OR}} = \frac{\frac{\widehat{\pi}(1)}{1-\widehat{\pi}(1)}}{\frac{\widehat{\pi}(0)}{1-\widehat{\pi}(0)}} = \frac{\widehat{\pi}(1)}{\widehat{\pi}(0)} \cdot \frac{1-\widehat{\pi}(0)}{1-\widehat{\pi}(1)} = \frac{A(B+D)}{B(A+C)}\cdot\frac{D(A+C)}{C(B+D)} = \frac{AD}{BC}.\\
+\end{align*}
+
+\vspace{\baselineskip}
+\subsection{b)}
+
+i)\\
+This follows directly from the `plug-in principle' of MLE.
+
+
+ii)\\
+
+By CLT, we know that
+\begin{align*}
+\widehat{\pi}(j) ~\overset{d}{\to}~ N\left(\pi(j), \, \mathcal{I}_{\pi(j)}^{-1}\right)
+\end{align*}
+where
+\begin{align*}
+\mathcal{I}_{\pi(j)} = \E\left[-\frac{\partial^{2} L(\pi(j))}{\partial \pi(j)^2}\right] =
+\begin{cases}
+\E\left[\frac{B}{\pi(0)^{2}} + \frac{D}{(1-\pi(0))^{2}}\right] & \text{if}~ j = 0\\
+\\
+\E\left[\frac{A}{\pi(1)^{2}} + \frac{C}{(1-\pi(1))^{2}}\right] & \text{if}~ j = 1
+\end{cases}.
+\end{align*}
+
+\vspace{0.5cm}
+\begin{framed}
+\textit{Multivariate Delta method}\\
+
+Suppose that
+\begin{align*}
+\sqrt{n}(\bm{X}_{n} - \bm{\eta}) ~\overset{d}{\to}~ N_{r}\left(\bm{0}, \bm{\Sigma}\right),
+\end{align*}
+for some $r$-dimensional random vector $\bm{X}_{n}$ depending on $n$. If $S$ is a function $\mathbb{R}^{r} \to \mathbb{R}^{s}$ which is once differentiable at $\bm{\eta}$ and has Jacobian matrix $\dot{\bm{S}}(\bm{\eta})$, then
+\begin{align*}
+\sqrt{n}\left(S(\bm{X}_{n}) - S(\bm{\eta})\right) ~\overset{d}{\to}~ N_{s}\left(\bm{0},~ \dot{\bm{S}}(\bm{\eta})^{\rm T} \, \bm{\Sigma} \, \dot{\bm{S}}(\bm{\eta})\right),
+\end{align*}
+provided that $\dot{\bm{S}}(\bm{\eta})^{\rm T} \, \bm{\Sigma} \, \dot{\bm{S}}(\bm{\eta})$ is positive definite.
+\end{framed}
+
+Applying delta method with $\theta(j) = \log\left(\frac{\pi(j)}{1-\pi(j)}\right)$ gives
+\begin{align*}
+\widehat{\theta}(j) ~&\overset{d}{\to}~ N\left(\theta(j), \, \left(\frac{\partial \theta(j)}{\partial \pi(j)}\right)^{2} \mathcal{I}_{\pi(j)}^{-1}\right)\\
+&= N\left(\theta(j), \, \left(\mathcal{I}_{\pi(j)}\pi(j)^{2}\left(1-\pi(j)\right)^{2}\right)^{-1}\right).\\
+\end{align*}
+
+We can estimate $\left(\mathcal{I}_{\pi(j)}\pi(j)^{2}\left(1-\pi(j)\right)^{2}\right)^{-1}$ by replacing $\pi(j)$ with $\widehat{\pi}(j)$ and $\mathcal{I}_{\pi(j)}$ by $\mathcal{J}_{\pi(j)}$ (observed information).\\
+
+When $j = 0$,
+\begin{align*}
+\widehat{\Var}\left(\widehat{\theta}(0)\right) &= \left(\mathcal{J}_{\widehat{\pi}(0)}\widehat{\pi}(0)^{2}\left(1-\widehat{\pi}(0)\right)^{2}\right)^{-1}\\
+&= \left(\left(\frac{B}{\widehat{\pi}(0)^{2}} + \frac{D}{(1-\widehat{\pi}(0))^{2}}\right)\cdot \widehat{\pi}(0)^{2}\left(1-\widehat{\pi}(0)\right)^{2} \right)^{-1}\\
+&= \left(B\left(1-\widehat{\pi}(0)\right)^{2} + D \, \widehat{\pi}(0)^{2}\right)^{-1}\\
+&= \left(\frac{BD^{2}}{(B+D)^{2}} + \frac{B^{2}D}{(B+D)^{2}}\right)^{-1}\\
+&= \left(\frac{BD}{B+D}\right)^{-1}\\
+&= \frac{B+D}{BD}\\
+&= \frac{1}{B} + \frac{1}{D}.
+\end{align*}
+
+Similarly, when $j = 1$,
+\begin{align*}
+\widehat{\Var}\left(\widehat{\theta}(1)\right) &= \frac{1}{A} + \frac{1}{C}.
+\end{align*}
+
+\vspace{\baselineskip}
+\subsection{c)}
+
+i)
+\begin{align*}
+\mathrm{SE}\left(\log\widehat{\mathrm{OR}}\right)^{2} &= \widehat{\Var}\left(\log\widehat{\mathrm{OR}}\right)\\
+&= \widehat{\Var}\left(\widehat{\theta}(1) - \widehat{\theta}(0)\right)\\
+&= \widehat{\Var}\left(\widehat{\theta}(1)\right) + \widehat{\Var}\left(\widehat{\theta}(0)\right) \tag{$\because A \independent B$}\\
+&= \frac{1}{A} + \frac{1}{C} + \frac{1}{B} + \frac{1}{D}\\
+&= \frac{1}{A} + \frac{1}{B} + \frac{1}{C} + \frac{1}{D}\\
+\end{align*}
+
+ii)\\
+A $95\%$ confidence interval of $\log\mathrm{OR}$:
+\begin{align*}
+\log\widehat{\mathrm{OR}} \pm z_{0.975}\cdot\mathrm{SE}\left(\log\widehat{\mathrm{OR}}\right).
+\end{align*}
+By taking $exp$ on the both side we obtain a $95\%$ confidence interval of $\mathrm{OR}$:
+\begin{align*}
+\widehat{\mathrm{OR}} \cdot \exp\left[\pm z_{0.975}\cdot\mathrm{SE}\left(\log\widehat{\mathrm{OR}}\right)\right].
+\end{align*}
+
+\vspace{\baselineskip}
+\subsection{d)}
+\begin{lstlisting}
+> # Enter the data
+> diabetes = as.data.frame(matrix(c(377, 17864, 336, 20099), 2, 2))
+> rownames(diabetes) = c("diseased","healthy")
+> colnames(diabetes) = c("male","female")
+> show(diabetes)
+          male female
+diseased   377    336
+healthy  17864  20099
+> 
+> # Perform chi-square test
+> chisq.test(diabetes)
+
+	Pearson's Chi-squared test with Yates' continuity correction
+
+data:  diabetes
+X-squared = 9.277, df = 1, p-value = 0.00232
+\end{lstlisting}
+
+p-value: $0.00232 < 0.05$. So, we conclude that there is significance difference between the occurrence of diabetes between men and women.
+
+
+\vspace{\baselineskip}
+\subsection{e)}
+By using the result from c), we obtain the $95\%$ confidence interval of odds ratio for diabetes between men and women.
+
+\begin{lstlisting}
+> # Estimated odds ratio
+> OR.hat = diabetes[1,1]*diabetes[2,2]/(diabetes[1,2]*diabetes[2,1])
+> show(OR.hat)
+[1] 1.262402
+> # Standard error of log of odds ratio
+> std.error = sqrt(sum(1/diabetes))
+> 
+> # 95% confidence interval of odds ratio
+> low.CI = OR.hat*exp(-qnorm(0.975)*std.error)
+> upp.CI = OR.hat*exp(qnorm(0.975)*std.error)
+> c(low.CI, upp.CI)
+[1] 1.088277 1.464387
+\end{lstlisting}
+
+Thus, $\widehat{\mathrm{OR}} = 1.2624$ and $95\%$ confidence interval of $\mathrm{OR}$: $[1.0883, \, 1.4644]$.
+
+\vspace{\baselineskip}
+\subsection{f)}
+
+i)\\
+$\mathrm{OR} = 1 \iff \pi(0) = \pi(1)$.
+
+ii)\\
+$H_{0}: \pi(0) = \pi(1)$. and we know $\widehat{\pi}(j) ~\overset{\mathrm{approx}}{\sim}~ N\left(\pi(j), \, \mathcal{I}_{\pi(j)}^{-1}\right)$.\\
+
+Since $\mathrm{OR} = 1 \iff \pi(0) = \pi(1)$, we can check whether 1 is in the $95\%$ confidence interval of OR from e):
+\begin{align*}
+1 \notin [1.0883, \, 1.4644].
+\end{align*}
+So, we reject the null hypothesis and conclude that there is significance difference between the occurrence of diabetes between men and women.
+
+
+\vspace{\baselineskip}
+\subsection{g)}
+If we fit logistic regression with \texttt{sex} as covariate, we have
+\begin{align*}
+\log\widehat{\mathrm{OR}} = \log\left(\frac{\frac{\widehat{\pi}(1)}{1-\widehat{\pi}(1)}}{\frac{\widehat{\pi}(0)}{1-\widehat{\pi}(0)}}\right) = \log\left(\frac{\widehat{\pi}(1)}{1-\widehat{\pi}(1)}\right) - \log\left(\frac{\widehat{\pi}(0)}{1-\widehat{\pi}(0)}\right)= \widehat{\beta}_{1}.
+\end{align*}
+We can use this relationship to convert the confidence interval of $\widehat{\beta}_{1}$ into the confidence interval of $\widehat{\mathrm{OR}}$.
+
+\begin{lstlisting}
+> # Modify data such that it's suitable for logistic regression
+> diabetes.glm.form = data.frame(
++   y = as.numeric(diabetes["diseased",]),
++   n = as.numeric(colSums(diabetes)),
++   sex = c(1,0))
+> diabetes.glm.form[,"sex"] = as.factor(diabetes.glm.form[,"sex"])
+> head(diabetes.glm.form)
+    y     n sex
+1 377 18241   1
+2 336 20435   0
+> 
+> # Fit logistic regerssion
+> diabetes.model.1 = glm(cbind(y, n - y) ~ sex, family = binomial(link = "logit"), data = diabetes.glm.form)
+> summary(diabetes.model.1)
+
+Call:
+glm(formula = cbind(y, n - y) ~ sex, family = binomial(link = "logit"), 
+    data = diabetes.glm.form)
+
+Deviance Residuals: 
+[1]  0  0
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -4.09131    0.05501 -74.376  < 2e-16 ***
+sex1         0.23302    0.07573   3.077  0.00209 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance:  9.4891e+00  on 1  degrees of freedom
+Residual deviance: -2.7651e-12  on 0  degrees of freedom
+AIC: 19.389
+
+Number of Fisher Scoring iterations: 2
+
+> 
+> 
+> # Confidence interval based on logistic regression
+> beta.1.hat = summary(diabetes.model.1)$coefficients["sex1","Estimate"]
+> std.error.beta.1 = summary(diabetes.model.1)$coefficients["sex1","Std. Error"]
+> low.CI = exp(beta.1.hat - qnorm(0.975)*std.error.beta.1)
+> upp.CI = exp(beta.1.hat + qnorm(0.975)*std.error.beta.1)
+> c(low.CI, upp.CI)
+[1] 1.088278 1.464387
+\end{lstlisting}
+
+As expected, this matches the confidence interval we obtained from e).\\
+
+\vspace{\baselineskip}
+\subsection{h)}
+Repeat d) - g) with the new data.
+
+
+
+\vspace{\baselineskip}
+\section{Exercise 20}
+\subsection{a)}
+$y \in \{0,1\}$: death by SIDS\\
+$x_{1} \in \{1,2,3,4,5\}$: \texttt{kohort}\\
+$x_{2} \in \{1,2\}$: \texttt{kj{\o}nn}\\
+$x_{3} \in \mathbb{R}^{+}$: \texttt{vekt}\\
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l|l|l|l|l|l|l|}
+\cline{2-7}
+\multicolumn{1}{c|}{} & Additional parameters & \multicolumn{1}{c|}{Df} & \multicolumn{1}{c|}{Deviance} & \multicolumn{1}{c|}{Resid. Df} & \multicolumn{1}{c|}{Resid. Dev} & P($\vert$Chi$\vert$) \\ \hline
+%
+\multicolumn{1}{|l|}{NULL} & $\beta_{0}$ & & & {\color[HTML]{3531FF} $570 (=n-1)$} & {\color[HTML]{3531FF} 1101.92} & \\ \hline
+\multicolumn{1}{|l|}{vekt} & $\beta_{3}$ & 1 & $259.59$ & {\color[HTML]{3531FF} $569 (=n-2)$} & {\color[HTML]{3531FF} 842.33} & $< 0.001$ \\ \hline
+\multicolumn{1}{|l|}{factor(kohort)} & $\beta_{1,1}, \cdots, \beta_{1,4}$ & 4 & 314.59 & $565 (=n-6)$ & {\color[HTML]{3531FF} 527.74} & $< 0.001$ \\ \hline
+\multicolumn{1}{|l|}{kjonn} & $\beta_{2}$ & 1 & 92.81 & $564 (=n-7)$ & {\color[HTML]{3531FF} 434.93} & $< 0.001$ \\ \hline
+\multicolumn{1}{|l|}{vekt:factor(kohort)} & $\beta_{3:1,1}, \cdots, \beta_{3:1,4}$ & 4 & 6.37 & $560 (=n-11)$ & {\color[HTML]{3531FF} 428.56} & $0.1732$ \\ \hline
+\multicolumn{1}{|l|}{vekt:kjonn} & $\beta_{3:2}$ & 1 & 0.19 & $559 (=n-12)$ & {\color[HTML]{3531FF} 428.37} & $0.6630$ \\ \hline
+\multicolumn{1}{|l|}{factor(kohort):kjonn} & $\beta_{2:1,1}, \cdots, \beta_{2:1,4}$ & 4 & 15.32 & $555 (=n-16)$ & {\color[HTML]{3531FF} 413.05} & {\color[HTML]{3531FF} 0.0041} \\ \hline
+\multicolumn{1}{|l|}{vekt:factor(kohort):kjonn} & $\beta_{3:2:1,1}, \cdots, \beta_{3:2:1,4}$ & 4 & 5.25 & $549 (=n-20)$ & {\color[HTML]{3531FF} 407.80} & $0.2626$\\ \hline
+\end{tabular}
+\end{table}
+
+The deviance table can be used for Likelihood ratio test of model parameters. For example, if we want to test the significance of parameter $\beta_{2}$ (for the variable \texttt{kj{\o}nn}). We can read off from the deviance table:
+\begin{align*}
+-2\log\left(\frac{\mathrm{max}_{H_{0}}\ell\left(\beta_{0}, \beta_{1,1}, \cdots, \beta_{1,4}, \beta_{2}, \beta_{3}\right)}{\mathrm{max}_{\mathrm{full}}\ell\left(\beta_{0}, \beta_{1,1}, \cdots, \beta_{1,4}, \beta_{2}, \beta_{3}\right)}\right)
+&= -2\log\left(\frac{\mathrm{max~}\ell\left(\beta_{0}, \beta_{1,1}, \cdots, \beta_{1,4}, \beta_{3}\right)}{\mathrm{max~}\ell\left(\beta_{0}, \beta_{1,1}, \cdots, \beta_{1,4}, \beta_{2}, \beta_{3}\right)}\right)\\
+&= 527.74 - 424.93\\
+&= 92.81\\
+&> \chi_{1,0.95}^{2}\\
+&= 3.84
+\end{align*}
+
+
+\vspace{\baselineskip}
+\subsection{b)}
+i)\\
+This is similar to what we have done in  Problem 1, c) of mandatory assignment 1.\\
+Interpretation of $\beta_{j}$: log of odds ratio when variable $j$ has increased by 1 unit.
+
+ii)\\
+$95\%$ confidence interval for odds ratio can be obtained by:\\
+$\exp\left[\widehat{\beta}_{j}\right] \cdot \exp\left[\pm z_{0.975}\cdot SE(\widehat{\beta}_{j})\right]$
+
+For example, for $\beta_{3}$ (\texttt{vekt}):
+\begin{align*}
+\exp\left[\widehat{\beta}_{3}\right] \cdot \exp\left[\pm z_{0.975}\cdot SE(\widehat{\beta}_{3})\right] = \exp\left[-0.6711\right] \cdot \exp\left[\pm 1.96\cdot 0.03758\right] = [0.4749, 0.5502]
+\end{align*}
+
+
+\vspace{\baselineskip}
+\subsection{c)}
+i)\\
+Consider a child with covariate vector $\bm{x}_i$, and let $y_{i,j} = 1$ if the child dies of cause $j$ $(j = 1, \cdots, J)$, and $y_{i,j} = 0$ otherwise. Let $y_{i,0} = 1$ if the child survives, and $y_{i,0} = 0$ if she/he dies. Thus, $\pi_{i,j} = P(y_{i,j} = 1)$.\\
+
+Now, we let $j=1$ correspond to SIDS. To only consider those who dies of SIDS and survive, we ignore the irrelevant part of the model and condition only on $\{y_{i,0} = 1$ \mbox{~or~} $y_{i,1} = 1\}$. This gives:
+\begin{align*}
+P(y_{i,1} = 1 | y_{i,0} = 1 \mbox{~or~} y_{i,1} = 1) = \frac{P(y_{i,1} = 1)}{P(y_{i,0} = 1) + P(y_{i,1} = 1)} = \frac{\pi_{i,1}}{\pi_{i,0}+\pi_{i,1}} = \frac{\exp\left[\bm{x}_{i}\bm{\beta}_{1}\right]}{1+\exp\left[\bm{x}_{i}\bm{\beta}_{1}\right]}
+\end{align*}
+which is a logistic regression model with the same $\bm{\beta}_{1}$ as in the multinomial logit model.\\
+(See p.203 of the book.)\\
+
+ii)\\
+The advantage of using separate logistic regression for each cause, is simplicity.\\
+The disadvantage is that there is no guarantee that $\sum_{j=0}^{J} \widehat{\pi}_{i,j} = 1$.
+
+
+\vspace{\baselineskip}
+\section{Exercise 21}
+\subsection{a)}
+Law of total expectation:
+\begin{align*}
+\E\left[\E\left[Y|X\right]\right] &= \E\left[\int_{-\infty}^{\infty} yf(y|X)\, dy \right]\\
+&= \int_{-\infty}^{\infty} \left(\int_{-\infty}^{\infty} yf(y|x)\, dy\right) f(x) \, dx\\
+&= \int_{-\infty}^{\infty} \left(\int_{-\infty}^{\infty} y\frac{f(x,y)}{f(x)}f(x) \, dy\right)\, dx\\
+&= \int_{-\infty}^{\infty} \left(\int_{-\infty}^{\infty} y f(x,y) \, dy\right)\, dx\\
+&= \int_{-\infty}^{\infty} \left(\int_{-\infty}^{\infty} y f(x,y) \, dx\right)\, dy\\
+&= \int_{-\infty}^{\infty} y\left(\int_{-\infty}^{\infty} f(x,y) \, dx\right)\, dy\\
+&= \int_{-\infty}^{\infty} y \, f(y)\, dy\\
+&= \E\left[Y\right]
+\end{align*}
+
+
+\vspace{\baselineskip}
+\subsection{b)}
+Law of total variance:
+\begin{align*}
+\Var(Y) &= \E\left[Y^{2}\right] - \E\left[Y\right]^{2}\\
+&= \E\left[\E\left[Y^{2}|X\right]\right] - \left(\E\left[\E\left[Y|X\right]\right]\right)^{2}\\
+&= \E\left[\Var\left(Y|X\right) + \left(\E\left[Y|X\right]\right)^{2}\right] - \left(\E\left[\E\left[Y|X\right]\right]\right)^{2}\\
+&= \E\left[\Var\left(Y|X\right)\right] + \E\left[\left(\E\left[Y|X\right]\right)^{2}\right] - \left(\E\left[\E\left[Y|X\right]\right]\right)^{2}\\
+&= \E\left[\Var\left(Y|X\right)\right] + \Var\left(\E\left[Y|X\right]\right)
+\end{align*}
+
+
+\vspace{\baselineskip}
+\section{Exercise 22}
+
+\begin{lstlisting}
+> # Enter the data
+> lung.cancer.data = data.frame(
++   city = rep(1:4, each = 5),
++   age = rep(1:5, times = 4),
++   cases = c(11,11,11,10,11,13,6,15,10,12,4,8,7,11,9,5,7,10,14,8),
++   number = c(3059,800,710,581,509,2879,1083,923,834,634,3142,
++          1050,895,702,535,2520,878,839,631,539)
++   )
+> lung.cancer.data[,"age"] = as.factor(lung.cancer.data[,"age"])
+> lung.cancer.data[,"city"] = as.factor(lung.cancer.data[,"city"])
+> head(lung.cancer.data)
+  city age cases number
+1    1   1    11   3059
+2    1   2    11    800
+3    1   3    11    710
+4    1   4    10    581
+5    1   5    11    509
+6    2   1    13   2879
+\end{lstlisting}
+
+
+\subsection{a)}
+The expected value of the response variable (\texttt{cases}) is proportional to the total number of male inhabitants (\texttt{number}). We here model the rate, i.e. $\frac{y_{i,j}}{n_{i,j}}$, where $y_{i,j}$ and $n_{i,j}$ are the number of cases and the number of inhabitants in city $i$ and age group $j$. The model $\E\left[\frac{Y_{i,j}}{n_{i,j}}\right] = e^{\eta_{i,j}}$ for a linear predictor $\eta_{i,j}$ hence corresponds to $\E\left[Y_{i,j}\right] = e^{\log n_{i,j} + \eta_{i,j}}$. So, we have to add $\log n_{i,j}$ as an offset to the linear predictor.
+
+
+\vspace{\baselineskip}
+\subsection{b)}
+
+\begin{lstlisting}
+> Poisson.model = glm(cases ~ offset(log(number)) + age + city, family = poisson, data = lung.cancer.data)
+> summary(Poisson.model)
+
+Call:
+glm(formula = cases ~ offset(log(number)) + age + city, family = poisson, 
+    data = lung.cancer.data)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.20728  -0.59302  -0.09784   0.58493   1.46574  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -5.6455     0.2049 -27.555  < 2e-16 ***
+age2          1.0961     0.2483   4.414 1.02e-05 ***
+age3          1.5138     0.2317   6.534 6.39e-11 ***
+age4          1.7584     0.2295   7.662 1.83e-14 ***
+age5          1.8486     0.2354   7.855 4.01e-15 ***
+city2        -0.1907     0.1910  -0.999   0.3180    
+city3        -0.4791     0.2103  -2.279   0.0227 *  
+city4        -0.2534     0.2033  -1.247   0.2125    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 115.434  on 19  degrees of freedom
+Residual deviance:  11.598  on 12  degrees of freedom
+AIC: 109.07
+
+Number of Fisher Scoring iterations: 4
+\end{lstlisting}
+The interpretation of $\widehat{\beta}$ can be done in the same way as in exercise 7.31 a) from the book.
+
+\vspace{\baselineskip}
+\subsection{c)}
+\begin{lstlisting}
+> lung.cancer.data[,"Fredericia"] = as.factor(as.numeric(lung.cancer.data[,"city"] == 1))
+> head(lung.cancer.data)
+  city age cases number Fredericia
+1    1   1    11   3059          1
+2    1   2    11    800          1
+3    1   3    11    710          1
+4    1   4    10    581          1
+5    1   5    11    509          1
+6    2   1    13   2879          0
+> # Fit Poisson GLM
+> Poisson.model.2 = glm(cases ~ offset(log(number)) + age + Fredericia, family = poisson, data = lung.cancer.data)
+> summary(Poisson.model.2)
+
+Call:
+glm(formula = cases ~ offset(log(number)) + age + Fredericia, 
+    family = poisson, data = lung.cancer.data)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.62564  -0.59506  -0.03471   0.17297   1.81669  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -5.9502     0.1818 -32.736  < 2e-16 ***
+age2          1.0997     0.2483   4.429 9.47e-06 ***
+age3          1.5187     0.2316   6.556 5.51e-11 ***
+age4          1.7671     0.2294   7.704 1.32e-14 ***
+age5          1.8582     0.2352   7.899 2.82e-15 ***
+Fredericia1   0.2991     0.1606   1.863   0.0624 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 115.434  on 19  degrees of freedom
+Residual deviance:  13.663  on 14  degrees of freedom
+AIC: 107.14
+
+Number of Fisher Scoring iterations: 4
+
+> 
+> # Likelihood ratio test.
+> anova(Poisson.model.2, Poisson.model.1)
+Analysis of Deviance Table
+
+Model 1: cases ~ offset(log(number)) + age + Fredericia
+Model 2: cases ~ offset(log(number)) + age + city
+  Resid. Df Resid. Dev Df Deviance
+1        14     13.663            
+2        12     11.598  2   2.0658
+> 1 - pchisq(anova(Poisson.model.2, Poisson.model.1)$Deviance[2], df = 1)
+[1] 0.1506362
+\end{lstlisting}
+
+The two models are nested. So, we use the likelihood ratio test.\\
+p = $0.1506 > 0.05$. So, we keep the null hypothesis and conclude that the model with simplified city effect is a better model.
+
+
+\vspace{\baselineskip}
+\subsection{d)}
+Rate ratio of new lung cancer cases in Fredericia compared to the three other cities:
+$\frac{\E\left[Y|x_{\mathrm{Fredericia}} = 1\right]}{\E\left[Y|x_{\mathrm{Fredericia}} = 0\right]} = \exp\left[\beta_{\mathrm{Fredericia}}\right]$.
+
+\begin{lstlisting}
+> # Estimated rate ratio
+> exp(summary(Poisson.model.2)$coefficients["Fredericia1","Estimate"])
+[1] 1.348685
+> # 95% confidence interval of rate ratio
+> exp(confint.default(Poisson.model.2))["Fredericia1",]
+    2.5 %    97.5 % 
+0.9845689 1.8474606 
+\end{lstlisting}
+
+
+\vspace{\baselineskip}
+\subsection{e)}
+\begin{lstlisting}
+> # Numeric version of variable age
+> lung.cancer.data[,"age.numeric"] = rep(
++   c(mean(40,55), mean(55,60), mean(60,65), mean(65,70), mean(70,75)),
++   times = 4
++   )
+> # Fit Poisson GLM
+> Poisson.model.3 = glm(cases ~ offset(log(number)) + I(age.numeric-40) + Fredericia, family = poisson, data = lung.cancer.data)
+> summary(Poisson.model.3)
+
+Call:
+glm(formula = cases ~ offset(log(number)) + I(age.numeric - 40) + 
+    Fredericia, family = poisson, data = lung.cancer.data)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.8683  -0.6997  -0.1695   0.3869   1.6274  
+
+Coefficients:
+                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)         -5.857611   0.158061 -37.059   <2e-16 ***
+I(age.numeric - 40)  0.064311   0.006945   9.261   <2e-16 ***
+Fredericia1          0.290371   0.160441   1.810   0.0703 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 115.434  on 19  degrees of freedom
+Residual deviance:  16.141  on 17  degrees of freedom
+AIC: 103.61
+
+Number of Fisher Scoring iterations: 4
+
+> 
+> # Likelihood ratio test.
+> anova(Poisson.model.3, Poisson.model.2)
+Analysis of Deviance Table
+
+Model 1: cases ~ offset(log(number)) + I(age.numeric - 40) + Fredericia
+Model 2: cases ~ offset(log(number)) + age + Fredericia
+  Resid. Df Resid. Dev Df Deviance
+1        17     16.141            
+2        14     13.663  3   2.4776
+> 1 - pchisq(anova(Poisson.model.3, Poisson.model.2)$Deviance[2], df = 1)
+[1] 0.1154789
+\end{lstlisting}
+
+The two models are nested. So, we use the likelihood ratio test.\\
+p = $0.1155 > 0.05$. So, we keep the null hypothesis and conclude that the model with numerified age effect is a better model.
+
+The interpretation of $\widehat{\beta}_{\mathrm{age~numeric}}$: log rate ratio of one unit increase in \texttt{age numeric}.
+
+
+
+
+\vspace{\baselineskip}
+\section{Exercise 23}
+\subsection{a)}
+We already did this many times in earlies exercises.
+
+
+\vspace{\baselineskip}
+\subsection{b)}
+i)\\
+$\exp\left[\beta_{\mathrm{\texttt{badh}}}\right] = \frac{\E\left[Y|x_{\mathrm{\texttt{badh}}} = 1\right]}{\E\left[Y|x_{\mathrm{\texttt{badh}}} = 0\right]}$.\\
+
+So, the estimate of rate ratio is
+\begin{align*}
+\exp\left[\widehat{\beta}_{\mathrm{\texttt{badh}}}\right] = \exp\left[1.1409\right] = 3.1296.
+\end{align*}
+
+$95\%$ confidence interval for this rate ratio is
+\begin{align*}
+&\left[\exp\left[\widehat{\beta}_{\mathrm{\texttt{badh}}} - z_{0.975} \cdot \mathrm{SE}(\widehat{\beta}_{\mathrm{\texttt{badh}}})\right],~\exp\left[\widehat{\beta}_{\mathrm{\texttt{badh}}} + z_{0.975} \cdot \mathrm{SE}(\widehat{\beta}_{\mathrm{\texttt{badh}}})\right] \right]\\
+&= \left[\exp[1.1409 - 1.96 \cdot 0.0399], \exp[1.1409 + 1.96 \cdot 0.0399]\right]\\
+&= \left[\exp[1.0628], \exp[1.2190]\right]\\
+&= [2.8944, 3.3839]
+\end{align*}
+
+ii)\\
+$\exp\left[10\beta_{\mathrm{\texttt{age}}}\right] = \frac{\E\left[Y|x_{\mathrm{\texttt{age}}} = 50\right]}{\E\left[Y|x_{\mathrm{\texttt{age}}} = 40\right]}$.\\
+
+So, the estimate of rate ratio is
+\begin{align*}
+\exp\left[10\cdot\widehat{\beta}_{\mathrm{\texttt{age}}}\right] = \exp\left[0.0556\right] = 1.0571.
+\end{align*}
+
+$95\%$ confidence interval for this rate ratio is
+\begin{align*}
+&\left[\exp\left[10\cdot\widehat{\beta}_{\mathrm{\texttt{age}}} - 10\cdot z_{0.975} \cdot \mathrm{SE}(\widehat{\beta}_{\mathrm{\texttt{age}}})\right],~\exp\left[10\cdot\widehat{\beta}_{\mathrm{\texttt{age}}} + 10\cdot z_{0.975} \cdot \mathrm{SE}(\widehat{\beta}_{\mathrm{\texttt{age}}})\right] \right]\\
+&= [\exp[0.0556 - 1.96 \cdot 0.0168], \exp[0.0556 + 1.96 \cdot 0.0168]]\\
+&= \left[\exp[0.0227], \exp[0.0884]\right]\\
+&= [1.0230, 1.0924]
+\end{align*}
+
+iii)\\
+$\{\widehat{\mu}|\texttt{age} = 40, \texttt{badh} = 0\} = \exp\left[\widehat{\beta}_{0} + \widehat{\beta}_{\texttt{age}}\cdot40 + \widehat{\beta}_{\texttt{badh}}\cdot0\right] = \exp\left[0.5888 + 0.0056*40\right] = \exp\left[0.810971\right] = 2.2501$
+
+The confidence interval of this rate ratio is equal to the confidence interval of $e^{\eta}$ where $\eta = \beta_{0} + \beta_{\texttt{age}}\cdot40$. We would then first find a confidence interval of $\eta$. This takes the form $\widehat{\eta} \pm z_{1-\frac{\alpha}{2}}\cdot \mathrm{SE}(\widehat{\eta})$, where $\mathrm{SE}(\widehat{\eta}) = \sqrt{\widehat{\Var}(\widehat{\beta}_{0}) + 40^{2}\widehat{\Var}(\widehat{\beta}_{\texttt{age}}) + 2\cdot40\cdot \widehat{\Cov}\left(\widehat{\beta}_{0}, \widehat{\beta}_{\texttt{age}}\right)}$. So, we would need $\Cov\left(\widehat{\beta}_{0}, \widehat{\beta}_{\texttt{age}}\right)$.
+
+
+\vspace{\baselineskip}
+\subsection{c)}
+
+i)\\
+We estimate parameters by solving quasi-likelihood equations instead of the likelihood equations. However, since $\phi$ will cancel, the estimates are the same as for the Poisson model.
+
+ii)\\
+We compute the Pearson statistic $X^{2} = \sum_{i=1}^{n} \frac{(y_{i} - \widehat{\mu}_{i})^{2}}{\widehat{\mu}_{i}}$ for the Poisson model, and estimate $\phi$ by $\widehat{\phi} = \frac{X^{2}}{n-p}$ where $p = 3$.
+
+
+
+\vspace{\baselineskip}
+\section{Exercise 25}
+\subsection{a)}
+
+\textbf{\large Approach 1:}\\
+It's given that $Y_{1}, \cdots, Y_{n} \stackrel{i.i.d.}{\sim} N(\mu, \sigma^2)$, and $Y_{i}^{*} = Y_{i} -\overline{Y}$ for
+$i=1,\ldots,n-1$,  where $\overline{Y}=\frac{1}{n}\sum_{k=1}^{n} Y_{k}$.\\
+Then the elements of the covariance matrix of $\bm{Y}^{*} = (Y_{1}^{*}, \ldots, Y_{n-1}^{*})^{\rm T}$ are given by
+%
+\begin{align*}
+\Cov(Y_{i}^{*},Y_{j}^{*})&=\Cov(Y_{i}-\overline{Y},Y_{j}-\overline{Y})\\
+&=\Cov(Y_{i},Y_{j})-\Cov(Y_{i},\overline{Y})-\Cov(\overline{Y},Y_{j})+\Cov(\overline{Y},\overline{Y})\\
+&=\Cov(Y_{i},Y_{j})-\frac{1}{n}\sum_{k=1}^{n} \Cov\left(Y_{i}, Y_{k}\right)-\frac{1}{n}\sum_{k=1}^n\Cov\left(Y_{k},Y_{j}\right)
++\Var(\overline{Y})\\
+&= \delta_{i,j}\sigma^{2} - \frac{\sigma^2}{n} -\frac{\sigma^2}{n} +\frac{\sigma^2}{n}\\
+& = \sigma^2\left(\delta_{i,j} - \frac{1}{n}\right),
+\end{align*}
+%
+where $\delta_{i,j}=1$ if $i=j$ and $\delta_{i,j}=0$ if $i \ne j$.\\[0.3cm]
+%
+On matrix form the covariance matrix may be written
+\[
+\bm{\Sigma}_{*}= \sigma^2(\bm{I}_{n-1}- \frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}).
+\]
+
+
+\vspace{\baselineskip}
+\textbf{\large Approach 2:}\\
+It's given that $Y_{1}, \cdots, Y_{n} \stackrel{i.i.d.}{\sim} N(\mu, \sigma^2)$. So, $\bm{Y} = \begin{bmatrix} Y_{1}, \cdots, Y_{d} \end{bmatrix}^{\rm T} \sim N(\mu\bm{1}_{n}, \sigma^{2}\bm{I}_{n})$.\\
+By using matrix notation, we can write
+\begin{align*}
+\bm{Y}^{*} = 
+\begin{bmatrix}
+\bm{I}_{n-1} & \bm{0}_{n-1}
+\end{bmatrix}
+\bm{Y} -\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n}^{\rm T}\bm{Y}
+= \left(
+\begin{bmatrix}
+\bm{I}_{n-1} & \bm{0}_{n-1}
+\end{bmatrix}
+-\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n}^{\rm T}
+\right)
+\bm{Y}.
+\end{align*}
+Then, the covariance matrix of $\bm{Y}^{*}$ is
+\begin{align*}
+\bm{\Sigma}_{*} &= \Cov\left(\bm{Y}^{*}\right)\\
+&= \Cov\left(
+\left(
+\begin{bmatrix}
+\bm{I}_{n-1} & \bm{0}_{n-1}
+\end{bmatrix}
+-\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n}^{\rm T}
+\right)
+\bm{Y}
+\right)\\
+&= 
+\left(
+\begin{bmatrix}
+\bm{I}_{n-1} & \bm{0}_{n-1}
+\end{bmatrix}
+-\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n}^{\rm T}
+\right)
+\Cov\left(\bm{Y}\right)
+\left(
+\begin{bmatrix}
+\bm{I}_{n-1} & \bm{0}_{n-1}
+\end{bmatrix}
+-\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n}^{\rm T}
+\right)^{\rm T}\\
+%
+&= \sigma^{2}
+\left(
+\begin{bmatrix}
+\bm{I}_{n-1} & \bm{0}_{n-1}
+\end{bmatrix}
+-\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n}^{\rm T}
+\right)
+\left(
+\begin{bmatrix}
+\bm{I}_{n-1}\\
+\\
+\bm{0}_{n-1}^{\rm T}
+\end{bmatrix}
+-\frac{1}{n}\bm{1}_{n}\bm{1}_{n-1}^{\rm T}
+\right)\\
+%
+&= \sigma^{2}
+\left(
+\begin{bmatrix}
+\bm{I}_{n-1} & \bm{0}_{n-1}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\bm{I}_{n-1}\\
+\\
+\bm{0}_{n-1}^{\rm T}
+\end{bmatrix}
+-\frac{1}{n}
+\begin{bmatrix}
+\bm{I}_{n-1} & \bm{0}_{n-1}
+\end{bmatrix}
+\bm{1}_{n}\bm{1}_{n-1}^{\rm T}
+-\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n}^{\rm T}
+\begin{bmatrix}
+\bm{I}_{n-1}\\
+\\
+\bm{0}_{n-1}^{\rm T}
+\end{bmatrix}
++\frac{1}{n^{2}}\bm{1}_{n-1}\bm{1}_{n}^{\rm T}\bm{1}_{n}\bm{1}_{n-1}^{\rm T}
+\right)\\
+%
+&= \sigma^{2}
+\left(
+\bm{I}_{n-1}
+-\frac{1}{n}
+\begin{bmatrix}
+\bm{I}_{n-1} & \bm{0}_{n-1}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\bm{1}_{n-1}\\
+1
+\end{bmatrix}
+\bm{1}_{n-1}
+-\frac{1}{n}\bm{1}_{n-1}
+\begin{bmatrix}
+\bm{1}_{n-1}^{\rm T} & 1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\bm{I}_{n-1}\\
+\\
+\bm{0}_{n-1}^{\rm T}
+\end{bmatrix}
++\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}
+\right)\\
+%
+&= \sigma^{2}\left(
+\bm{I}_{n-1}
+-\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}
+-\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}
++\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}
+\right)\\
+%
+&= \sigma^{2}\left(\bm{I}_{n-1} -\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right).
+\end{align*}
+
+
+\vspace{\baselineskip}
+\subsection{b)}
+By a direct comutation we obtain
+\begin{align*}
+\bm{\Sigma}_{*}\bm{\Sigma}_{*}^{-1} &= \sigma^{2}\left(\bm{I}_{n-1} -\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)
+\cdot
+\frac{1}{\sigma^{2}}\left(\bm{I}_{n-1} + \bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)\\
+&= \left(\bm{I}_{n-1} -\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)
+\cdot
+\left(\bm{I}_{n-1} +\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)\\
+&= \bm{I}_{n-1} +\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}-\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}
+-\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\\
+&= \bm{I}_{n-1} +\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}-\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}
+-\frac{n-1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\\
+&= \bm{I}_{n-1}.
+\end{align*}
+Thus, $\bm{\Sigma}_{*}^{-1} = \frac{1}{\sigma^{2}}\left(\bm{I}_{n-1} + \bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)$ is the inverse of $\bm{\Sigma}_{*}$.\\
+
+Further we have that
+%
+\begin{align*}
+\mathrm{det}(\bm{\Sigma}_{*}) = \mathrm{det}\left[\sigma^{2}\left(\bm{I}_{n-1} -\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)\right]
+=\sigma^{2(n-1)}\mathrm{det}\left(\bm{I}_{n-1} -\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)
+\end{align*}
+Now a general results for determinants states that
+$\mathrm{det}(\bm{I} +\bm{a}\bm{b}^{\rm T}) = 1+\bm{a}^{\rm T}\bm{b}$,
+ so that
+\begin{align*}
+\mathrm{det}\left(\bm{I}_{n-1} -\frac{1}{n}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right) = 1-\frac{1}{n}(n-1)=\frac{1}{n}.
+\end{align*}
+(This result may also be proved by induction.) Hence we have $\mathrm{det}(\bm{\Sigma}_{*})=\tfrac{1}{n} \sigma^{2(n-1)}$.
+
+
+\vspace{\baselineskip}
+\subsection{c)}
+$\bm{Y}^{*} \sim N\left(\bm{0}_{n-1}, \bm{\Sigma}_{*}\right)$. So, the likelihood for $Y_{1}^{*}, \cdots, Y_{n-1}^{*}$ is equal to joint pdf of multivariate normal:
+\begin{align*}
+f_{N}(\bm{Y}, \bm{\mu}, \bm{\Sigma}) = \mathrm{det}(2\pi\bm{\Sigma})^{-\frac{1}{2}}\exp\left[-\frac {1}{2}(\bm{Y}-\bm{\mu})^{\rm T}\bm{\Sigma}^{-1}(\bm{Y}-\bm{\mu})\right].
+\end{align*}
+So, the likelihood for $Y_{1}^{*}, \cdots, Y_{n-1}^{*}$ is
+\begin{align*}
+L_{\bm{Y}^{*}}(\sigma^{2}) &= f_{N}(\bm{Y}^{*}, \bm{0}, \bm{\Sigma}_{*})\\
+&= \mathrm{det}(2\pi\bm{\Sigma}_{*})^{-\frac{1}{2}}\exp\left[-\frac {1}{2}\bm{Y}^{*{\rm T}}\bm{\Sigma_{*}}^{-1}\bm{Y^{*}}\right]\\
+&= \left[(2\pi)^{n-1}\mathrm{det}(\bm{\Sigma}_{*})\right]^{-\frac{1}{2}}\exp\left[-\frac {1}{2\sigma^{2}}\bm{Y}^{*{\rm T}}\left(\bm{I}_{n-1} + \bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)\bm{Y^{*}}\right]\\
+&= \left[(2\pi)^{n-1}\,\,\tfrac{1}{n} \sigma^{2(n-1)}\right]^{-\frac{1}{2}}\exp\left[-\frac {1}{2\sigma^{2}}\bm{Y}^{*{\rm T}}\left(\bm{I}_{n-1} + \bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)\bm{Y^{*}}\right]\\
+&= \left[\frac{1}{n}\left(2\pi\sigma^{2}\right)^{n-1}\right]^{-\frac{1}{2}}\exp\left[-\frac {1}{2\sigma^{2}}\bm{Y}^{*{\rm T}}\left(\bm{I}_{n-1} + \bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)\bm{Y^{*}}\right]\\
+&= \sqrt{n}\left(2\pi\sigma^{2}\right)^{-\frac{n-1}{2}}\exp\left[-\frac {1}{2\sigma^{2}}\bm{Y}^{*{\rm T}}\left(\bm{I}_{n-1} + \bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)\bm{Y^{*}}\right].
+\end{align*}
+
+The log-likelihood is
+\begin{align*}
+\ell_{\bm{Y}^{*}}(\sigma^{2}) = \frac{1}{2}\log{n} -\frac{n-1}{2}\log{2\pi} -(n-1)\log{\sigma} -\frac {1}{2\sigma^{2}}\bm{Y}^{*{\rm T}}\left(\bm{I}_{n-1} + \bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)\bm{Y}^{*}.
+\end{align*}
+So, the corresponding likelihood equation is given by
+\begin{align*}
+\frac{\partial \ell_{\bm{Y}^{*}}(\sigma^{2})}{\partial \sigma} = -(n-1) \frac{1}{\sigma}+ \frac {1}{\sigma^{3}}\bm{Y}^{*{\rm T}}\left(\bm{I}_{n-1} + \bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)\bm{Y}^{*}=0.
+\end{align*}
+Thus, the MLE of $\sigma^{2}$ is
+\begin{align*}
+\widehat{\sigma}^{2} &= \frac{\bm{Y}^{*{\rm T}}\left(\bm{I}_{n-1} + \bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)\bm{Y^{*}}}{n-1}.
+\end{align*}
+
+
+
+\vspace{\baselineskip}
+\subsection{d)}
+Now we have
+\begin{align*}
+\sum_{i=1}^{n-1}Y_{i}^{*} = \sum_{i=1}^{n-1}\left(Y_{i}-\overline{Y}\right) = \sum_{i=1}^{n-1}Y_{i} -(n-1)\overline{Y} = \sum_{i=1}^{n}Y_{i} -Y_{n} +(n-1)\overline{Y} = n\overline{Y} -Y_{n} +(n-1)\overline{Y} = \overline{Y}-Y_{n}
+\end{align*}
+which gives
+\begin{align*}
+\widehat{\sigma}^{2} &= \frac{\bm{Y}^{*{\rm T}}\left(\bm{I}_{n-1} + \bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\right)\bm{Y^{*}}}{n-1}\\
+&= \frac{1}{n-1}\left(\bm{Y}^{*{\rm T}}\bm{Y^{*}} + \bm{Y^{*{\rm T}}}\bm{1}_{n-1}\bm{1}_{n-1}^{\rm T}\bm{Y^{*}}\right)\\
+&= \frac{1}{n-1}\left(\sum_{i=1}^{n-1}Y_{i}^{*2} + \left(\sum_{i=1}^{n-1}Y_{i}^{*}\right)^{2}\right)\\
+&= \frac{1}{n-1}\left(\sum_{i=1}^{n-1}\left(Y_{i}-\overline{Y}\right)^{2} + \left(Y_{n}-\overline{Y}\right)^{2}\right)\\
+&= \frac{1}{n-1}\sum_{i=1}^{n}\left(Y_{i}-\overline{Y}\right)^{2}.
+\end{align*}
+
+
+
+\vspace{\baselineskip}
+\subsection{e)}
+From section 2.3.1 in the book by Agresti, the projection matrix for the model space $C(\bm{X})$ here takes the form 
+$\bm{P_X}=\tfrac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}$. Therefore,
+\begin{align*}
+\bm{L}=\bm{I}_n-\bm{P_X}=\bm{I}_n-\frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}
+\end{align*}
+satisfies $\bm{L}\bm{X}=\bm{0}$. Now the REML approach (cf.\ section 9.3.3 in Agresti's book) use the linear transformation
+\begin{align*}
+\bm{L}\bm{Y}=\left(\bm{I}_n-\frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}\right)\bm{Y}=\bm{Y}-\overline{Y}\bm{1}_{n}.
+\end{align*}
+Thus $(\bm{L}\bm{Y})_{i}=Y_{i}^{*}$, which shows that the estimator we derived in question d) is the REML estimator for~$\sigma^{2}$.
+
+
+
+%\bibliographystyle{plain}
+%\bibliography{bibliography.bib}
+\end{document}

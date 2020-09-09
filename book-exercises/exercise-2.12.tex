@@ -1,0 +1,7 @@
+\section*{Exercise 2.12}
+Let $\bm{X}$ be a $n \times p$ matrix of full rank, then $\mathrm{rank}(\bm{X}) = p$. Since $\bm{H}$ is a projection matrix, $\mathrm{rank}(\bm{H}) = \mathrm{tr}(\bm{H})$. (The trace is the sum of eigenvalues; all eigenvalues of a projection are equal to one (idempotency). The eigenspace of the projection equals its rank, so the rank and trace are equal.)
+
+So, we have
+\begin{align*}
+\mathrm{rank}(\bm{H}) = \mathrm{tr}(\bm{H}) = \mathrm{tr}(\bm{X}(\bm{X}^{\rm T}\bm{X})^{-1}\bm{X}^{\rm T}) = \mathrm{tr}(\bm{X}^{\rm T}\bm{X}(\bm{X}^{\rm T}\bm{X})^{-1}) = \mathrm{tr}(\bm{I}_{p}) = p = \mathrm{rank}(\bm{X}).
+\end{align*}

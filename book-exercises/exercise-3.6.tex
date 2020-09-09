@@ -1,0 +1,30 @@
+\section*{Exercise 3.6}
+\subsection*{(a)}
+\begin{framed}
+Explain why the $F$ statistic used to test $H_0$: $\mu_1 = \mu_2 \ldots = \mu_c$ has, under $H_0$, an $F$ distribution.
+\end{framed}
+
+Recall the definition of an $F$-distributed variable:
+``If $x\sim\chi_{p}^{2}$ and $y\sim\chi_{q}^{2},$with $x$ and
+$y$ independent, then 
+\[
+\frac{x/p}{y/q}\sim F_{p,q},
+\]
+the $F$ distribution with $df_{1}=p$ and $df_{2}=q$.'' (p. 82)
+
+On the other hand, the $F$ statistic for the nullhypothesis is
+\[
+F=\frac{(SSE_{0}-SSE_{1})/(p_{1}-p_{0})}{SSE_{1}/(n-p_{1})},
+\]
+where
+\[
+\frac{SSE_{0}-SSE_{1}}{\sigma^{2}}\sim\chi_{p_{1}-p_{0}}^{2},\:\frac{SSE_{1}}{\sigma^{2}}\sim\chi_{n-p_{1}}^{2}
+\]
+are independent according to Cochran's theorem.
+
+\subsection*{(b)}
+\begin{framed}
+Why is the test is called analysis of \textit{variance} when $H_0$ deals with means?
+\end{framed}
+
+``Under $H_0$ for testing $M_0$ against $M_1$, $\mu_1 = \mu_0$ and the expected value of the numerator mean square is also $\sigma^2$ Then the F test statistic is a ratio of two unbiased estimators of $\sigma^2$.`` (p. 92). 

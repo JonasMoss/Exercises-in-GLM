@@ -1,0 +1,22 @@
+\section*{Exercise 2.11}
+\subsection*{(i)}
+\begin{align*}
+\left(\bm{I} -\frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}\right)^{\rm T} = \bm{I}^{\rm T} -\frac{1}{n}\left(\bm{1}_{n}\bm{1}_{n}^{\rm T}\right)^{\rm T} = \bm{I} -\frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}
+\end{align*}
+So, $\bm{I} -\frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}$ is symmetric.
+
+\subsection*{(ii)}
+\begin{align*}
+\left(\bm{I} -\frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}\right)\left(\bm{I} -\frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}\right)
+&= \bm{I} -\frac{2}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T} +\frac{1}{n^2}\bm{1}_{n}\bm{1}_{n}^{\rm T}\bm{1}_{n}\bm{1}_{n}^{\rm T}\\
+&= \bm{I} -\frac{2}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T} +\frac{n}{n^2}\bm{1}_{n}\bm{1}_{n}^{\rm T}\\
+&= \bm{I} -\frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}
+\end{align*}
+So, $\bm{I} -\frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}$ is idempotent.
+
+\subsection*{(iii)}
+\begin{align*}
+\left(\bm{I} -\frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}\right)\bm{y}
+= \bm{y} - \bm{1}_{n}\bm{1}_{n}^{\rm T}\bm{y}
+= \bm{y} - \overline{y}\bm{1}_{n}
+\end{align*}

@@ -1,0 +1,11 @@
+\section*{Exercise 3.4}
+Sum-of-squares decomposition (p.42 of the book): $\bm{Y}^{\rm T}\bm{Y} = \bm{Y}^{\rm T}\bm{P}_{X}\bm{Y} + \bm{Y}^{\rm T}\left(\bm{I} - \bm{P}_{X} \right)\bm{Y}$.
+
+Since $\bm{P}_{X} + (\bm{I} -\bm{P}_{X}) = \bm{I}$, $\bm{Y}^{\rm T}\bm{P}_{X}\bm{Y} \independent \bm{Y}^{\rm T}\left(\bm{I} - \bm{P}_{X}\right)\bm{Y}$ by Cochran's theorem.
+
+In case of null model, $\bm{P}_{X} = \frac{1}{n}\bm{1}_{n}\bm{1}_{n}^{\rm T}$ and we have
+\begin{align*}
+\bm{Y}^{\rm T}\bm{P}_{X}\bm{Y} &= \bm{Y}^{\rm T}\overline{Y}\bm{1}_{n} = \overline{Y}\bm{Y}^{\rm T}\bm{1}_{n} = n\overline{Y}^2\\
+\bm{Y}^{\rm T}\left(\bm{I} - \bm{P}_{X}\right)\bm{Y} &= \bm{Y}^{\rm T}\left(\bm{I} - \bm{P}_{X}\right)^{\rm T}\left(\bm{I} - \bm{P}_{X}\right)\bm{Y} = \left(\bm{Y} - \overline{Y}\bm{1}_{n}\right)^{\rm T}\left(\bm{Y} - \overline{Y}\bm{1}_{n}\right) = \sum_{i=1}^{n} (Y_{i} - \overline{Y})^{2}
+\end{align*}
+So, $n\overline{Y}^2 \independent \sum_{i=1}^{n} (Y_{i} - \overline{Y})^{2}$ which implies  $\overline{Y}^2 \independent \frac{\sum_{i=1}^{n} (Y_{i} - \overline{Y})^{2}}{n-1} = S^2$.

@@ -1,0 +1,44 @@
+\section*{Exercise 1.12}
+\subsection*{(a)}
+In this \textit{two-way layout} setting, we have 2 categorical variables, one with $r$ categories and one with $c$ categories. These 2 variables are dummy coded by $\beta_{i}$ and $\gamma_{j}$ respectively. So the parameter vector is $\bm{\beta} = \left[\beta_{0}, \beta_{1}, \cdots, \beta_{r}, \gamma_{1}, \cdots, \gamma_{c} \right]^{\rm T}$. So, $p = r+c+1$.
+
+Since the model is \textit{balanced}, $\bm{y}$ and the model matrix look like
+\begin{align*}
+\bm{Y} = 
+\begin{bmatrix}
+Y_{1,1,1}\\
+\vdots\\
+Y_{1,1,n}\\
+Y_{1,2,1}\\
+\vdots\\
+Y_{1,2,n}\\
+\vdots\\
+Y_{1,r,1}\\
+\vdots\\
+Y_{1,r,n}\\
+Y_{2,1,1}\\
+\vdots\\
+Y_{r,c,n}\\
+\end{bmatrix}
+, \quad
+\bm{X} = 
+\begin{bmatrix}[c|cccc|cccc]
+\bm{1}_{n} & \bm{1}_{n} & \bm{0}_{n} & \cdots & \bm{0}_{n} & \bm{1}_{n} & \bm{0}_{n} & \cdots & \bm{0}_{n}\\
+\bm{1}_{n} & \bm{1}_{n} & \bm{0}_{n} & \cdots & \bm{0}_{n} & \bm{0}_{n} & \bm{1}_{n} & \cdots & \bm{0}_{n}\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots\\
+\bm{1}_{n} & \bm{1}_{n} & \bm{0}_{n} & \cdots & \bm{0}_{n} & \bm{0}_{n} & \bm{0}_{n} & \cdots & \bm{1}_{n}\\
+\hline
+\bm{1}_{n} & \bm{0}_{n} & \bm{1}_{n} & \cdots & \bm{0}_{n} & \bm{1}_{n} & \bm{0}_{n} & \cdots & \bm{0}_{n}\\
+\bm{1}_{n} & \bm{0}_{n} & \bm{1}_{n} & \cdots & \bm{0}_{n} & \bm{0}_{n} & \bm{1}_{n} & \cdots & \bm{0}_{n}\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots\\
+\bm{1}_{n} & \bm{0}_{n} & \bm{1}_{n} & \cdots & \bm{0}_{n} & \bm{0}_{n} & \bm{0}_{n} & \cdots & \bm{1}_{n}\\
+\hline
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots\\
+\hline
+\bm{1}_{n} & \bm{0}_{n} & \bm{0}_{n} & \cdots & \bm{1}_{n} & \bm{1}_{n} & \bm{0}_{n} & \cdots & \bm{0}_{n}\\
+\bm{1}_{n} & \bm{0}_{n} & \bm{0}_{n} & \cdots & \bm{1}_{n} & \bm{0}_{n} & \bm{1}_{n} & \cdots & \bm{0}_{n}\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots\\
+\bm{1}_{n} & \bm{0}_{n} & \bm{0}_{n} & \cdots & \bm{1}_{n} & \bm{0}_{n} & \bm{0}_{n} & \cdots & \bm{1}_{n}
+\end{bmatrix}
+\end{align*}
+and it has rank $r+c-1 < p$. (The sum of columns $2$ to $r+1$ equals the first column and so does the sum of columns r+2 to r+c+1.) So, $\bm{\beta}$ is not identifiable.

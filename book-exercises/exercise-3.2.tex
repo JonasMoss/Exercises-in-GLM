@@ -1,0 +1,28 @@
+\section*{Exercise 3.2}
+Note that we solve this exercise for more general case where $T$ has noncentral $t$-distribution.\\
+
+It's given that $T \sim t_{p,\mu}$. We can rewrite $T$ as
+\begin{align*}
+T = \frac{Z}{\sqrt{X/p}}
+\end{align*}
+where $Z \sim N(\mu, 1)$, $X \sim \chi_{p}^2$ and $Z \independent X$. (The notation $A \independent B$ means that $A$ and $B$ are independent.)\\
+Let $W = Z^2$, then $W \sim \chi_{1, \mu^2}^2$ (noncentral chi-squared distribution).\\
+
+Now we look at $T^2$:
+\begin{align*}
+T^2 = \frac{Z^2}{X/p} = \frac{W/1}{X/p}
+\end{align*}
+where $W \sim \chi_{1, \mu^2}$, $X \sim \chi_{p}^2$ and $W \independent X$.
+
+Then, by definition, $T^2 \sim F_{1,p,\mu^2}$ (noncentral $F$-distribution).
+
+If we let $\mu = 0$, then we have the (central) $F$-distribution.
+
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\begin{framed}
+The relationship between noncentral $t$-distribution and noncentral $F$-distribution:
+\begin{align*}
+T \sim t_{p, \mu} ~ \Rightarrow ~ F = T^2 \sim F_{1,p,\mu^2}
+\end{align*}
+\end{framed}

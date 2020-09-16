@@ -1,0 +1,19 @@
+\section*{Additional Exercise 11}
+
+\subsection*{(a)}
+First, note that $1 = \int f(y) \,dy = \int\exp\left[\frac{\theta y - b(\theta)}{a(\phi)} + c(y,\phi)\right] \,dy$. Now we write
+\begin{align*}
+M_{Y}(t) &= \E\left[e^{Yt}\right]\\
+&= \int e^{ty} f(y)\,dy\\
+&= \int e^{ty} \exp\left[\frac{\theta y - b(\theta)}{a(\phi)} + c(y,\phi)\right] \,dy\\
+&= \int e^{ty} \exp\left[\frac{\theta y +b(\theta +ta(\phi)) -b(\theta +ta(\phi)) - b(\theta)}{a(\phi)} + c(y,\phi)\right] \,dy\\
+&= \exp\left[ \frac{b(\theta +ta(\phi)) -b(\theta)}{a(\phi)} \right]\int e^{ty} \exp\left[\frac{\theta y -b(\theta +ta(\phi))}{a(\phi)} + c(y,\phi)\right] \,dy\\
+&= \exp\left[ \frac{b(\theta +ta(\phi)) -b(\theta)}{a(\phi)} \right]\int \exp\left[\frac{(\theta + ta(\phi))y -b(\theta +ta(\phi))}{a(\phi)} + c(y,\phi)\right] \,dy\\
+%%
+&= \exp\left[\frac{b(\theta + t a(\phi)) -b(\theta)}{a(\phi)}\right]
+\end{align*}
+Further, $R_{Y}(t) = \log M_{Y}(t) = \frac{b(\theta + t a(\phi)) -b(\theta)}{a(\phi)}$.\\
+
+\subsection*{(b)}
+From previous part, we have $R_{Y}(t) =\frac{b(\theta + t a(\phi)) -b(\theta)}{a(\phi)}$.
+So, $R_{Y}'(t) = b'(\theta + t a(\phi))$ and $R_{Y}''(t) = b''(\theta + t a(\phi)) a(\phi)$. By combining this with the fact that $\E[Y] = R_{Y}'(0)$ and $\Var[Y] = R_{Y}''(0)$, we get $\E[Y] = b'(\theta)$ and  $\Var[Y] = b''(\theta) a(\phi)$.

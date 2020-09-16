@@ -1,0 +1,80 @@
+\section*{Additional Exercise 4}
+
+\subsection*{(a)}
+
+The multivariate normal has density
+\[
+f(x;\mu,\Sigma)=\frac{1}{\sqrt{2\pi\det(\Sigma)}}e^{-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)},
+\]
+see e.g. Wikipedia. When $\Sigma=I\sigma^{2},$the inverse $\Sigma^{-1}=I\sigma^{-2}$
+and $\det(\Sigma)=\sigma^{2n}$. It follows that
+\begin{eqnarray*}
+f(x;\mu,\Sigma) & = & \frac{1}{\sqrt{2^{n}\pi^{n}\det(\sigma^{2n})}}e^{-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)},\\
+ & = & (2\pi)^{-n/2}\sigma^{-n}e^{-\frac{1}{2\sigma^{2}}(x-\mu)^{T}(x-\mu)},
+\end{eqnarray*}
+and we are done.
+
+\subsection*{(b)}
+Take the logarithm and find that
+\begin{eqnarray*}
+\log(f(x;\mu,\sigma)) & = & \log(2^{-n/2}\pi^{-n/2}\sigma^{-n})-\frac{1}{2\sigma^{2}}(x-\mu)^{T}\Sigma^{-1}(x-\mu),\\
+ & = & -\frac{n}{2}\log2\pi-n\log\sigma-\frac{1}{2\sigma^{2}}(x-\mu)^{T}(x-\mu).
+\end{eqnarray*}
+Keeping $\sigma$ fixed, 
+\[
+\log(f(x;\mu,\sigma))=C(\sigma)-\frac{1}{2\sigma^{2}}(x-\mu)^{T}(x-\mu),
+\]
+where $C(\sigma)$ is independent of $\mu$. Minimizing $(x-\mu)^{T}(x-\mu)$
+with respect to $\mu$ is equivalent to least squares, so $\hat{\mu}$is
+the least squares solution.
+
+\subsection*{(c)}
+Differentiate the expression in (b), using $SSE=(x-\mu)^{T}(x-\mu)$,
+\[
+\frac{d}{d\mu}(-n\log\sigma-\sigma^{-2}SSE)=-n\sigma^{-1}+\sigma^{3}SSE.
+\]
+Set it equal to $0$, and
+\begin{eqnarray*}
+-n\sigma^{-1}+\sigma^{3}SSE & = & 0
+\end{eqnarray*}
+implies
+\[
+\sigma^{3}SSE=-n\sigma^{-1},
+\]
+so that
+\[
+\hat{\sigma}^{2}=SSE/n.
+\]
+
+
+\subsection*{(d)}
+Since $\hat{\sigma}=SSE/n$ , we get
+\begin{eqnarray*}
+\log l(\hat{\mu},\hat{\sigma}) & = & -\frac{n}{2}\log(2\pi)-n\log\hat{\sigma}-\frac{1}{2}\hat{\sigma}^{-2}SSE,\\
+ & = & -\frac{n}{2}\log(2\pi)-n\log\hat{\sigma}-\frac{n}{2}.
+\end{eqnarray*}
+Exponentiate to get 
+\[
+l(\hat{\mu},\hat{\sigma})=(2\pi)^{-n/2}\hat{\sigma}^{-n}e^{-n/2}.
+\]
+
+\subsection*{(e)}
+Let $SSE_{0}$ belong to $X_{0}$ and $SSE_{1}$ belong to $X_{1}$.
+Using the result in (d), 
+\begin{eqnarray*}
+\log l(\hat{\mu}_{0},\hat{\sigma}_{0})-\log l(\hat{\mu}_{1},\hat{\sigma}_{1}) & = & -\frac{n}{2}\log(2\pi)-n\log\hat{\sigma}_{0}-\frac{n}{2}-(-\frac{n}{2}\log(2\pi)-n\log\hat{\sigma}_{1}-\frac{n}{2}),\\
+ & = & n(\log\hat{\sigma}_{1}-\log\hat{\sigma}_{0}).
+\end{eqnarray*}
+Exponentiate to get 
+\[
+\frac{l(\hat{\mu}_{0},\hat{\sigma}_{0})}{l(\hat{\mu}_{1},\hat{\sigma}_{1})}=\frac{\hat{\sigma}_{1}^{n}}{\hat{\sigma}_{0}^{n}}=\left(\frac{\hat{\sigma}_{1}^{2}}{\hat{\sigma}_{0}^{2}}\right)^{n/2}=\left(\frac{SSE_{0}}{SSE_{1}}\right)^{-n/2}.
+\]
+Moreover, since
+\[
+F=\frac{(SSE_{0}-SSE_{1})/(n-p_{1})}{SSE_{1}/(p_{1}-p_{0})}
+\]
+we get that
+\begin{eqnarray*}
+\left(\frac{SSE_{0}}{SSE_{1}}\right)^{-n/2} & = & \left(1+\frac{SSE_{0}-SSE_{1}}{SSE_{1}}\right)^{-n/2},\\
+ & = & \left(1+\frac{SSE_{0}-SSE_{1}}{SSE_{1}}\right)^{-n/2}.
+\end{eqnarray*}

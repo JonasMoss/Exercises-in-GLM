@@ -1,0 +1,42 @@
+\section*{Additional Exercise 10}
+\subsection*{(a)}
+The moment generating function is defined as
+\begin{align*}
+M_{Y}(t) = \E\left[e^{Yt}\right] = 
+\begin{cases}
+\sum e^{yt} f(y) & \quad \mbox{if $Y$ is discrete,}\\
+\int e^{yt} f(y) )\,dy & \quad \mbox{if $Y$ is continuous.}
+\end{cases}
+\end{align*}
+When $t = 0$,
+\begin{align*}
+M_{Y}(0) = \E\left[1\right] = 
+\begin{cases}
+\sum f(y) = 1 & \quad \mbox{if $Y$ is discrete,}\\
+\int f(y) )\, dy =1 & \quad \mbox{if $Y$ is continuous.}
+\end{cases}
+\end{align*}
+And if we differentiate $M_{Y}(t)$ with respect to $t$,
+\begin{align*}
+M_{Y}^{(r)}(t) = \frac{d^{r}}{d t^{r}}M_{Y}(t) = \E\left[Y^{r}e^{Yt}\right] = 
+\begin{cases}
+\sum e^{yt} y^{r} f(y) & \quad \mbox{if $Y$ is discrete,}\\
+\int e^{yt} y^{r} f(y) )\,dy & \quad \mbox{if $Y$ is continuous.}
+\end{cases}
+\end{align*}
+When $t = 0$, this becomes
+\begin{align*}
+M_{Y}^{(r)}(0) = \frac{d^{r}}{d t^{r}}M_{Y}(0) = \E\left[Y^{r}\right] = 
+\begin{cases}
+\sum y^{r} f(y) & \quad \mbox{if $Y$ is discrete,}\\
+\int y^{r} f(y) )\,dy & \quad \mbox{if $Y$ is continuous.}
+\end{cases}
+\end{align*}
+When $r = 1$, we have $M_{Y}'(0) = \E\left[Y\right]$ and when  $r = 2$, we have $M_{Y}''(0) = \E\left[Y^{2}\right]$.
+
+\subsection*{(b)}
+\begin{align*}
+R_{Y}'(t) &= \frac{d \log M_{Y}(t)}{d M_{Y}(t)} \cdot \frac{d M_{Y}(t)}{d t} = \frac{M_{Y}'(t)}{M_{Y}(t)}\\
+R_{Y}''(t) &= \frac{d}{d t} \left(\frac{M_{Y}'(t)}{M_{Y}(t)} \right) = \frac{M_{Y}''(t) M_{Y}(t) - M_{Y}'(t)^2}{M_{Y}(t)^2}
+\end{align*}
+When $t = 0$, $R_{Y}'(0) = \frac{M_{Y}'(0)}{M_{Y}(0)} = \E\left[Y\right]$ and $$R_{Y}''(0) = \frac{M_{Y}''(0) M_{Y}(0) - M_{Y}'(0)^2}{M_{Y}(0)^2} = \E\left[Y^{2}\right] - \E\left[Y\right]^{2} = \Var(Y).$$

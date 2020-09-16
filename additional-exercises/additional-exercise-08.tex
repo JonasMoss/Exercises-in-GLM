@@ -1,0 +1,20 @@
+\section*{Additional Exercise 8}
+\subsection*{(a)}
+\begin{align*}
+f(y,\pi) & = \pi(1-\pi)^{y}  \\
+         & = \exp\left[y \log(1-\pi) + \log\pi\right]
+\end{align*}
+So, $\theta = \log(1-\pi)$, $\pi = 1-e^{\theta}$, $b(\theta) = -\log\left(1-e^{\theta}\right)$, $a(\phi) = 1$, $c(y,\phi) = 0$.
+
+\subsection*{(b)}
+\begin{align*}
+f(y,\pi) & = \binom{y+r-1}{r-1}\pi^{r}(1-\pi)^{y} \\ 
+         & = \exp\left[y \log(1-\pi) + r\log\pi + \log\binom{y+r-1}{r-1}\right]
+\end{align*}
+So, $\theta = \log(1-\pi)$, $\pi = 1 -e^{\theta}$ $b(\theta) =-r\log\left(1-e^{\theta}\right)$, $a(\phi) = 1$, $c(y,\phi) = \log\binom{y+r-1}{r-1}$.\\
+
+\subsection*{(c)}
+\begin{align*}
+\E[Y] &= b'(\theta) = r\frac{e^{\theta}}{1-e^{\theta}} = r\left(\frac{1}{\pi}-1\right)\\ \intertext{and}
+\Var(Y) &= b''(\theta) a(\phi) = r\frac{e^{\theta}}{\left(1-e^{\theta}\right)^2} = \frac{r}{\pi}\left(\frac{1}{\pi}-1\right).
+\end{align*}

@@ -1,0 +1,30 @@
+\section*{Additional Exercise 6}
+\subsection*{(a)}
+\begin{align*}
+\pi_{i} &= P\left(Y_{i} = 1\right)\\
+&= P\left(Y_{i}^{*} > 0\right)\\
+&= P\left(\sum_{j=1}^{p} \beta_{j}^{*} x_{i,j} + \sigma \epsilon_{i} > 0\right)\\
+&= P\left(\epsilon_{i} > -\sum_{j=1}^{p} \beta_{j} x_{i,j}\right)\\
+&= 1 - P\left(\epsilon_{i} \leq -\sum_{j=1}^{p} \beta_{j} x_{i,j}\right)\\
+&= 1 - F\left(-\sum_{j=1}^{p} \beta_{j} x_{i,j}\right)\\
+&= F\left(\sum_{j=1}^{p} \beta_{j} x_{i,j}\right)
+\end{align*}
+
+
+\subsection*{(b)}
+Let $\eta_{i} = \sum_{j=1}^{p}\beta_{j} x_{i,j}$, then $\pi_{i} = F\left(\eta_{i}\right)$. If $\epsilon_{i} \sim N(0,1)$, $\pi_{i} = F\left(\eta_{i}\right) = \Phi\left(\eta_{i}\right)$ where $\eta_{i}$ is a linear predictor. This is equal to probit model. (See p.167 of the book.)
+
+
+\subsection*{(c)}
+If $F(z) = \frac{e^{z}}{1+e^{z}}$, $\pi_{i} = F\left(\eta_{i}\right) = \frac{e^{\eta_{i}}}{1+e^{\eta_{i}}}$. This is equal to $\log\left(\frac{\pi_{i}}{1-\pi_{i}} \right) = \eta_{i}$, which is logistic regression.
+
+
+\subsection*{(d)}
+If $\eta_{i} \sim \mathrm{Unif}\left(-\frac{1}{2},\frac{1}{2}\right)$, then 
+$$\pi_{i} = F\left(\eta_{i}\right) =
+\begin{cases}
+0 & \quad \mbox{if}~ \eta_{i} < -\frac{1}{2},\\
+\eta_{i} +\frac{1}{2} & \quad \mbox{if}~ -\frac{1}{2} \leq \eta_{i} < \frac{1}{2},\\
+1 & \quad \mbox{if}~ \frac{1}{2} \leq \eta_{i}.
+\end{cases}$$
+This is linear probability model (p. 167 of the book).

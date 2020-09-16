@@ -1,0 +1,29 @@
+\section*{Additional Exercise 9}
+\subsection*{(a)}
+\subsubsection*{(i)}
+\begin{align*}
+f(y,\lambda) = \lambda e^{-\lambda y} = \exp\left[-\lambda y +\log\lambda\right]
+\end{align*}
+So, $\theta = -\lambda$, $b(\theta) = -\log(-\theta)$, $a(\phi) = 1$, $c(y,\phi) = 0$.\\
+
+\subsubsection*{(ii)}
+\begin{align*}
+\E[Y] &= b'(\theta) = -\frac{1}{\theta} = \frac{1}{\lambda}\\ \intertext{and}
+\Var(Y) &= b''(\theta) a(\phi) = \frac{1}{\theta^{2}} = \frac{1}{\lambda^{2}}.
+\end{align*}
+
+
+\subsection*{(b)}
+\subsubsection*{(i)}
+\begin{align*}
+f(y,\pi) &= \frac{\left(\frac{k}{\mu}\right)^{k}}{\Gamma(k)}y^{k-1}e^{-\frac{k}{\mu}y}\\
+&= \exp\left[-\frac{k}{\mu}y +k\log\frac{k}{\mu} +(k-1)\log y -\log\Gamma(k)\right]\\
+&= \exp\left[\frac{\left(-\frac{1}{\mu}y -\log\mu\right)}{\frac{1}{k}} +(k-1)\log y -\log\Gamma(k) +k\log k\right]
+\end{align*}
+So, $\theta = -\frac{1}{\mu}$, $\mu = -\frac{1}{\theta}$, $b(\theta) = -\log(-\theta)$, $a(\phi) = \frac{1}{k}$, $c(y,\phi) = (k-1)\log y -\log\Gamma(k)$.\\
+
+\subsubsection*{(ii)}
+\begin{align*}
+\E[Y] &= b'(\theta) = -\frac{1}{\theta} = \mu\\ \intertext{and}
+\Var(Y) &= b''(\theta) a(\phi) = \frac{1}{k\theta^{2}} = \frac{\mu^{2}}{k}.
+\end{align*}

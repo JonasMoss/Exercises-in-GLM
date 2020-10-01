@@ -1,0 +1,87 @@
+\section*{Exam 2018 Problem 1}
+
+\subsection*{(a)}
+We use logarithms as usual.
+\begin{eqnarray*}
+P(Y;\pi) & = & {n \choose ny}\pi^{ny}(1-\pi)^{n-ny},\\
+ & = & \exp\left[\log{n \choose ny}+ny\log\pi+(n-ny)\log(1-\pi)\right],\\
+ & = & \exp\left[\frac{y\log[\pi/(1-\pi)]+\log(1-\pi)}{1/n}+\log{n \choose ny}\right].
+\end{eqnarray*}
+Matching this expression with 
+\[
+\exp\left[\frac{\theta y-b(\theta)}{a(\phi)}+c(y,\phi)\right]
+\]
+we find
+\begin{eqnarray*}
+\theta & = & \log\left(\frac{\pi}{1-\pi}\right),\\
+b(\theta) & = & -\log(1-\pi)=\log(1+e^{\theta}),\\
+a(\phi) & = & 1/n,\\
+c(y,\phi) & = & \log{n \choose ny}.
+\end{eqnarray*}
+\subsection*{(b)}
+Recall the formulas
+\begin{eqnarray*}
+E(X) & = & b'(\theta),\\
+\Var(X) & = & b''(\theta)a(\phi).
+\end{eqnarray*}
+Applying them gives
+\[
+E(X)=\frac{d}{d\theta}\log(1+e^{\theta})=\frac{e^{\theta}}{1+e^{\theta}}=\frac{\frac{\pi}{1-\pi}}{1+\frac{\pi}{1-\pi}}=\pi,
+\]
+while the variance is
+\[
+\Var(X)=\frac{1}{n}\frac{d}{d\theta}\log(1+e^{\theta})=\frac{1}{n}\frac{e^{\theta}}{\left(1+e^{\theta}\right)^{2}}=\frac{1}{n}\frac{\frac{\pi}{1-\pi}}{\left(1+\frac{\pi}{1-\pi}\right)^{2}}=\frac{1}{n}\pi(1-\pi).
+\]
+\subsection*{(c)}
+The likelihood is proportional to
+\[
+\prod_{i=1}^{N}\exp\left[\frac{y_{i}\log[\pi_{i}/(1-\pi_{i})]+\log(1-\pi_{i})}{1/n_{i}}\right].
+\]
+Take the logarithm to get
+\[
+l(\beta_{0},\beta_{1})=n\sum_{i=1}^{N}\left[y_{i}\log[\pi_{i}/(1-\pi_{i})]+\log(1-\pi_{i})\right],
+\]
+and make the substitution 
+\[
+\log[\pi_{i}/(1-\pi_{i})]=\beta_{0}+\beta_{1}x_{i},
+\]
+so that
+\[
+\log(1-\pi_{i})=-\log(1+e^{\beta_{0}+\beta_{1}x_{i}})
+\]
+and
+\begin{eqnarray*}
+\frac{d}{d\beta_{0}}\log(1-\pi_{i}) & = & -\frac{d}{d\beta_{0}}\log(1+e^{\beta_{0}+\beta_{1}x_{i}})=\frac{e^{\beta_{0}+\beta_{1}x_{i}}}{1+e^{\beta_{0}+\beta_{1}x_{i}}}=\pi_{i},\\
+\frac{d}{d\beta_{1}}\log(1-\pi_{i}) & = & -\frac{d}{d\beta_{1}}\log(1+e^{\beta_{0}+\beta_{1}x_{i}})=x_{i}\frac{e^{\beta_{0}+\beta_{1}x_{i}}}{1+e^{\beta_{0}+\beta_{1}x_{i}}}=x_{i}\pi_{i},
+\end{eqnarray*}
+
+Differentiate with respect to $\beta_{0},\beta_{1}$:
+\begin{eqnarray*}
+\frac{d}{d\beta_{0}} & = & \sum_{i=1}^{N}n_{i}\left[y_{i}-\pi_{i}\right],\\
+\frac{d}{d\beta_{1}} & = & \sum_{i=1}^{N}n_{i}\left[y_{i}x_{i}-\pi_{i}x_{i}\right].
+\end{eqnarray*}
+Rearrange to get
+\begin{eqnarray*}
+\sum_{i=1}^{N}n_{i}y_{i} & = & \sum_{i=1}^{N}n_{i}\pi_{i},\\
+\sum_{i=1}^{N}n_{i}y_{i}x_{i} & = & \sum_{i=1}^{N}n_{i}\pi_{i}x_{i}.
+\end{eqnarray*}
+
+
+\subsection*{(d)}
+
+The information matrix has elements
+\[
+\mathcal{J}_{ij}=E\left[-\frac{\partial^{2}}{\partial\beta_{i}\partial\beta_{j}}l(\beta)\mid x\right].
+\]
+The derivatives of $\pi_{i}$ are
+\begin{eqnarray*}
+\frac{\partial}{\partial\beta_{0}}\pi_{i} & = & \frac{\partial}{\partial\beta_{0}}\frac{e^{\beta_{0}+\beta_{1}x_{i}}}{1+e^{\beta_{0}+\beta_{1}x_{i}}}=\frac{e^{\beta_{0}+\beta_{1}x_{i}}}{\left(1+e^{\beta_{0}+\beta_{1}x_{i}}\right)^{2}}=\pi_{i}(1-\pi_{i}),\\
+\frac{\partial}{\partial\beta_{0}}\pi_{i} & = & \frac{\partial}{\partial\beta_{0}}\frac{e^{\beta_{0}+\beta_{1}x_{i}}}{1+e^{\beta_{0}+\beta_{1}x_{i}}}=\frac{x_{i}e^{\beta_{0}+\beta_{1}x_{i}}}{\left(1+e^{\beta_{0}+\beta_{1}x_{i}}\right)^{2}}=x_{i}\pi_{i}(1-\pi_{i}).
+\end{eqnarray*}
+Using the expressions above we get
+\[
+-\sum_{i=1}^{N}\left[\begin{array}{cc}
+\pi_{i}(1-\pi_{i}) & x_{i}\pi_{i}(1-\pi_{i})\\
+x_{i}\pi_{i}(1-\pi_{i}) & x_{i}^{2}\pi_{i}(1-\pi_{i})
+\end{array}\right].
+\]

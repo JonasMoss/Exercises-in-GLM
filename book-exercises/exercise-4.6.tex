@@ -1,0 +1,23 @@
+\section*{Exercise 4.6}
+Notice that
+\begin{align*}
+\Var(Y_{i}) = \mu_{i} =
+\begin{cases}
+\mu_{A} = g^{-1}(\eta_{A}) = \exp(\eta_{A}) = \exp(\beta_{0} + \beta_{1}) ~~&\mbox{if}~~~ 1 \leq i \leq n_{A}\\
+\mu_{B} = g^{-1}(\eta_{B}) = \exp(\eta_{B}) = \exp(\beta_{0}) ~~&\mbox{if}~~~ n_{A}+1 \leq i \leq n_{A}+n_{B}\\
+\end{cases}.
+\end{align*}
+So, we have
+\begin{align*}
+\frac{\partial L(\bm{\beta})}{\partial \beta_{0}} &= \sum_{i=1}^{n_{A}+n_{B}}\frac{(y_{i}-\mu_{i})\cdot 1}{\Var(Y_{i})}\frac{\partial \mu_{i}}{\partial \eta_{i}}\\
+&= \sum_{i=1}^{n_{A}}\frac{(y_{i}-\mu_{i})}{e^{\eta_{A}}}e^{\eta_{A}} + \sum_{i=n_{A}+1}^{n_{B}}\frac{(y_{i}-\mu_{i})}{e^{\eta_{B}}}e^{\eta_{B}}\\
+&= \sum_{i=1}^{n_{A}}(y_{i}-\mu_{i}) + \sum_{i=n_{A}+1}^{n_{B}}(y_{i}-\mu_{i})\\
+&= 0\\ \intertext{and}
+\frac{\partial L(\bm{\beta})}{\partial \beta_{1}} &= \sum_{i=1}^{n}\frac{(y_{i}-\mu_{i})x_{i}}{\Var(Y_{i})}\frac{\partial \mu_{i}}{\partial \eta_{i}}\\
+&= \sum_{i=1}^{n_{A}}\frac{(y_{i}-\mu_{i})\cdot 1}{\Var(Y_{i})}\frac{\partial \mu_{i}}{\partial \eta_{i}}\\
+&= \sum_{i=1}^{n_{A}}\frac{(y_{i}-\mu_{i})}{e^{\eta_{A}}}e^{\eta_{A}}\\
+&= \sum_{i=1}^{n_{A}}(y_{i}-\mu_{i})\\
+&= 0.
+\end{align*}
+This implies $\sum_{i=1}^{n_{A}}(y_{i}-\mu_{i}) = \sum_{i=1}^{n_{A}}(y_{i}-\mu_{A}) = 0$ and $\sum_{i=n_{A}+1}^{n_{B}}(y_{i}-\mu_{i}) = \sum_{i=n_{A}+1}^{n_{B}}(y_{i}-\mu_{B}) = 0$.\\
+Thus, $\widehat{\mu}_{A} = \frac{1}{n_{A}}\sum_{i=1}^{n_{A}} y_{i}$ and $\widehat{\mu}_{B} = \frac{1}{n_{B}}\sum_{i=n_{A}+1}^{n_{A}+n_{B}} y_{i}$.

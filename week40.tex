@@ -20,6 +20,18 @@
 \usepackage{biblatex}
 \addbibresource{glm-exercises.bib}
 
+\newenvironment{lyxcode}
+	{\par\begin{list}{}{
+		\setlength{\rightmargin}{\leftmargin}
+		\setlength{\listparindent}{0pt}% needed for AMS classes
+		\raggedright
+		\setlength{\itemsep}{0pt}
+		\setlength{\parsep}{0pt}
+		\normalfont\ttfamily}%
+	 \item[]}
+	{\end{list}}
+
+
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
 
@@ -36,23 +48,20 @@
  \array{#1}}
 \makeatother
 
-\title{Exercises in Generalized Linear Models \\ \textbf{Week 37}}
+\title{Exercises in Generalized Linear Models \\ \textbf{Week 40}}
 \author{Vinnie Ko and Jonas Moss}
 \date{Fall 2020}
 
 \begin{document}
 \maketitle
 \input{header}
-\input{book-exercises/exercise-2.11}
-\input{book-exercises/exercise-2.12}
-\input{book-exercises/exercise-2.13}
-\input{book-exercises/exercise-2.14}
-\input{book-exercises/exercise-2.15}
-\input{book-exercises/exercise-3.2}
-\input{book-exercises/exercise-3.4}
-\input{book-exercises/exercise-3.5}
-\input{book-exercises/exercise-3.6}
-\input{additional-exercises/additional-exercise-02}
-\input{additional-exercises/additional-exercise-03}
+%\input{additional-exercises/additional-exercise-12}
+%\input{additional-exercises/additional-exercise-15}
+\input{additional-exercises/additional-exercise-16}
+\input{additional-exercises/additional-exercise-17}
+\input{book-exercises/exercise-4.6}
+\input{book-exercises/exercise-4.9}
+\input{book-exercises/exercise-5.4}
+
 \printbibliography
 \end{document}

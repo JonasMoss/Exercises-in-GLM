@@ -1,0 +1,58 @@
+\section*{Exercise 13}
+\subsection*{(a)}
+\begin{align*}
+M_{\overline{Y}}(t) &= \E\left[e^{t \overline{Y}}\right]\\
+&= \E\left[e^{\frac{t}{n} \sum_{i=1}^{n}Y_{i}}\right]\\
+&= \E\left[\prod_{i=1}^{n} e^{\frac{t}{n} Y_{i}}\right]\\
+&= \prod_{i=1}^{n}\E\left[e^{\frac{t}{n} Y_{i}}\right]\\
+&= \left(\E\left[e^{\frac{t}{n} Y_{i}}\right]\right)^{n}\\
+&= \left(M_{Y}\left(\frac{t}{n}\right)\right)^{n}\\
+&= \left(\exp\left[\frac{b(\theta + \frac{t}{n} a(\phi)) -b(\theta)}{a(\phi)}\right]\right)^{n}\\
+&= \exp\left[\frac{b(\theta + \frac{t}{n} a(\phi)) -b(\theta)}{\frac{1}{n}a(\phi)}\right]\\
+&= \exp\left[\frac{b(\theta + t a^{*}(\phi)) -b(\theta)}{a^{*}(\phi)}\right]
+\end{align*}
+where $a^{*}(\phi) = \frac{1}{n}a(\phi)$.
+So, $\overline{Y}$ has a distribution within the exponential dispersion family.
+
+
+\subsection*{(b)}
+Note that a distribution within the exponential dispersion family is determined by $b(\theta)$ and $a(\phi)$. (e.g. see extra exercise 10.a))\\
+The function $c(y,\phi)$ is then given by the fact that pdf/pmf should integrate/sum to $1$.\\
+
+It's given that $Y_{1}, \cdots, Y_{n} \stackrel{i.i.d.}{\sim} \mathrm{Bin}(1,\pi)$. We can then rewrite the pmf:
+\begin{align*}
+f_{Y} &= \binom{1}{y}\pi^{y}(1-\pi)^{1-y}\\
+&= \exp\left[\log\binom{1}{y} + y\log \pi +(1-y)\log(1-\pi) \right]\\
+&= \exp\left[y\log \pi +(1-y)\log(1-\pi) \right]\\
+&= \exp\left[y\log\frac{\pi}{1-\pi} +\log(1-\pi)\right]\\
+&= \exp\left[\theta y -\log(1+e^{\theta})\right].
+\end{align*}
+So, $f_{Y}$ is within the exponential dispersion family with $\theta = \log\frac{\pi}{1-\pi}$, $b(\theta) = \log(1+e^{\theta})$, $a(\phi) = 1$ and $c(y,\phi) = 0$.\\
+
+By using the result from (a), we have
+\begin{align*}
+f_{\overline{Y}}(y,\theta) &= \exp\left[\frac{\theta y - b(\theta)}{a^{*}(\phi)} + c^{*}(y,\phi)\right]\\
+&= \exp\left[\frac{\theta ny - n b(\theta)}{a(\phi)} +c^{*}(y,\phi)\right]\\
+&= \exp\left[\theta ny -n\log(1+e^{\theta}) +c^{*}(y,\phi)\right]\\
+&= \left(e^{\theta}\right)^{ny}\left(1+e^{\theta}\right)^{-n}\exp\left[c^{*}(y,\phi)\right]\\
+&= \left(\frac{\pi}{1-\pi}\right)^{ny}\left(\frac{1}{1-\pi}\right)^{-n}\exp\left[c^{*}(y,\phi)\right]\\
+&= \pi^{ny}(1-\pi)^{n(1-y)} \exp\left[c^{*}(y,\phi)\right].
+\end{align*}
+
+Note that the possible values of $\overline{Y}$ are: $0, \frac{1}{n}, \frac{2}{n}, \cdots ,\frac{n-1}{n}, 1$. So, by the definition of pmf:
+\begin{align*}
+\sum_{y} f_{\overline{Y}}(y,\theta) = \sum_{y} \pi^{ny}(1-\pi)^{n(1-y)}\exp\left[c^{*}(y,\phi)\right] = 1
+\end{align*}
+where $\sum_{y}$ indicates the sum over $y = 0, \frac{1}{n}, \frac{2}{n}, \cdots ,\frac{n-1}{n}, 1$.
+
+Recall that the \textit{binomial formula} is: $(x+y)^{n}=\sum_{k=0}^{n}\binom{n}{k}x^{k}y^{n-k}$.
+So, we have
+\begin{align*}
+\sum_{y} \binom{n}{ny}\pi^{ny}(1-\pi)^{n-ny} = 1.
+\end{align*}
+We can see that $c^{*}(y,\phi) = \log\left(\binom{n}{ny}\right)$.
+
+So, 
+\begin{align*}
+f_{\overline{Y}}(y,\theta) = \binom{n}{ny}\pi^{ny}(1-\pi)^{n(1-y)}.
+\end{align*}

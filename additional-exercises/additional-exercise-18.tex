@@ -1,0 +1,43 @@
+\section*{Exercise 18}
+\subsection*{(a)}
+
+\begin{align*}
+f(y) &= \frac{1}{\sigma\sqrt{2\pi y^{3}}}\exp\left[-\frac{1}{2y}\left(\frac{y-\mu}{\mu\sigma}\right)^{2}\right]\\
+&= \exp\left[-\frac{1}{2}\left(\frac{y}{\mu^{2}\sigma^{2}} -\frac{2}{\mu\sigma^{2}} + \frac{1}{y\sigma^{2}}\right) -\log\left(\sigma\sqrt{2\pi y^{3}}\right)\right]\\
+&= \exp\left[-\frac{1}{2}\left(\frac{y}{\mu^{2}\sigma^{2}} -\frac{2}{\mu\sigma^{2}}\right) -\frac{1}{2y\sigma^{2}} -\log\left(\sigma\sqrt{2\pi y^{3}}\right)\right]\\
+&= \exp\left[\frac{-\frac{y}{2\mu^{2}} +\frac{1}{\mu}}{\sigma^{2}} -\frac{1}{2y\sigma^{2}} -\log\left(\sigma\sqrt{2\pi y^{3}}\right)\right]\\
+&= \exp\left[\frac{\theta y - b(\theta)}{a(\phi)} + c(y,\phi)\right]
+\end{align*}
+where $\theta = -\frac{1}{2\mu^{2}}$, $b(\theta) = -\sqrt{-2\theta}  = -\frac{1}{\mu}$, $a(\phi) = \phi = \sigma^{2}$, $c(y,\phi) = -\frac{1}{2y\phi} -\log\left(\sqrt{2\pi y^{3}\phi}\right) = -\frac{1}{2y\sigma^{2}} -\log\left(\sigma\sqrt{2\pi y^{3}}\right)$.\\
+So, $f(y)$ is within the exponential dispersion family.\\
+
+\subsection*{(b)}
+\begin{align*}
+\E[Y] &= b'(\theta) = \frac{1}{\sqrt{-2\theta}} = \mu\\
+\Var(Y) &= b''(\theta)a(\phi) = -\frac{-2}{2}(-2\theta)^{-\frac{3}{2}}\phi = (-2\theta)^{-\frac{3}{2}}\phi = \mu^{3}\sigma^{2}\\
+\end{align*}
+
+
+\subsection*{(c)}
+Canonical link function $g(\cdot)$ is a link function such that $\theta = g\left(\E[Y] \right)$. (p.123 of the book).
+\begin{align*}
+\theta = -\frac{1}{2\mu^{2}} = g(\mu)
+\end{align*}
+Thus, the canonical link function for inverse Gaussian distribution is $g(\mu) = -\frac{1}{2\mu^{2}}$.
+
+\subsection*{(d)}
+The log-likelihood function is
+\begin{align*}
+L(\bm{y},\widehat{\bm{\mu}},\bm{\sigma}^{2}) &= -\frac{1}{2}\sum_{i=1}^{n}\log\left(2\pi\sigma^{2}y_{i}^{3}\right) -\frac{1}{2}\sum_{i=1}^{n}\frac{1}{y_{i}}\left(\frac{y_{i}-\mu_{i}}{\mu_{i}\sigma}\right)^{2}.
+\end{align*}
+So, the scaled deviance is
+\begin{align*}
+\frac{D(\bm{y},\widehat{\bm{\mu}})}{\phi} &= -2\left(L\left(\widehat{\bm{\mu}},\bm{y}\right) - L\left(\bm{y},\bm{y}\right)\right)\\
+&= -2\left(-\frac{1}{2}\sum_{i=1}^{n}\log\left(2\pi\sigma^{2}y_{i}^{3}\right) -\frac{1}{2}\sum_{i=1}^{n}\frac{1}{y_{i}}\left(\frac{y_{i}-\widehat{\mu}_{i}}{\widehat{\mu}_{i}\sigma}\right)^{2} + \frac{1}{2}\sum_{i=1}^{n}\log\left(2\pi\sigma^{2}y_{i}^{3}\right)\right)\\
+&= \sum_{i=1}^{n}\frac{1}{y_{i}}\left(\frac{y_{i}-\widehat{\mu}_{i}}{\widehat{\mu}_{i}\sigma}\right)^{2}\\
+&= \frac{1}{\sigma^{2}}\sum_{i=1}^{n}\frac{1}{y_{i}}\left(\frac{y_{i}-\widehat{\mu}_{i}}{\widehat{\mu}_{i}}\right)^{2}.\\
+\end{align*}
+Hence, the deviance is
+\begin{align*}
+D(\bm{y},\widehat{\bm{\mu}}) = \sum_{i=1}^{n}\frac{1}{y_{i}}\left(\frac{y_{i}-\widehat{\mu}_{i}}{\widehat{\mu}_{i}}\right)^{2}.
+\end{align*}

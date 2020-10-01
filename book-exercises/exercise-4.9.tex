@@ -1,0 +1,4 @@
+\section*{Exercise 4.9}
+From p. 126 of the book, we have that $\bm{W}$ is a diagonal matrix with diagonal elements $w_{i} = \frac{1}{\Var(Y_{i})}\left(\frac{\partial \mu_{i}}{\partial \eta_{i}}\right)^{2}$. Under the ordinary normal linear model, $g(\mu) = \mu = \eta$, so that $\frac{\partial \mu_{i}}{\partial \eta_{i}} = 1$ and $w_{i} = \frac{1}{\Var(Y_{i})}$. Consequently, $\bm{W} = \sigma^{-2}\bm{I}$.
+
+By plugging this result into $\Var(\widehat{\bm{\beta}}) = \left(\bm{X}^{\rm T}\bm{W}\bm{X}\right)^{-1}$, we obtain $\Var(\widehat{\bm{\beta}}) = \sigma^{2}\left(\bm{X}^{\rm T}\bm{X}\right)^{-1}$.

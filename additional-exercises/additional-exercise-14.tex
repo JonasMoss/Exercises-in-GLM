@@ -1,0 +1,59 @@
+\section*{Exercise 14}
+Note that we stick to the notation of the book
+$L(\bm{\beta}) = \sum_{i=1}^{n} \log f(Y_{i},\bm{\beta}) = \log \prod_{i=1}^{n} f(Y_{i},\bm{\beta}) =  \log \ell(\bm{\beta})$, which is the opposite of the usual notation $\ell(\bm{\beta}) = \sum_{i=1}^{n} \log f(Y_{i},\bm{\beta}) = \log \prod_{i=1}^{n} f(Y_{i},\bm{\beta}) =  \log L(\bm{\beta})$.
+
+\subsection*{(i)}
+\textit{Lemma 1}\\
+For arbitrary $i$ and $h$,
+\begin{align*}
+\E\left[S_{i,h}(\bm{\beta})\right] &= \int S_{i,h}(\bm{\beta}) f_{Y_{i}} \,dy\\
+&= \int \frac{\partial \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h}} f_{Y_{i}} \,dy\\
+&= \int \frac{1}{f_{Y_{i}}(y_{i},\bm{\beta})}\frac{\partial f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h}} f_{Y_{i}} \,dy\\
+&= \int \frac{\partial f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h}} \,dy\\
+&= \frac{\partial}{\partial \beta_{h}} \int f_{Y_{i}}(y_{i},\bm{\beta}) \,dy\\
+&= \frac{\partial 1}{\partial \beta_{h}}\\
+&= 0.
+\end{align*}
+So,
+\begin{align*}
+\E\left[S_{h}(\bm{\beta})\right] = \sum_{i=1}^{n}\E\left[S_{i,h}(\bm{\beta})\right] = \sum_{i=1}^{n} 0 = 0.
+\end{align*}
+\hfill\ensuremath{\square}\\
+
+\textit{Lemma 2 (a.k.a information matrix equality)}\\
+First, note that for an arbitrary function $g(x)$, $\frac{\partial g(x)}{\partial x} = g(x)\frac{\partial \log g(x)}{\partial x}$.\\
+Then, for an arbitrary $i$, $h$ and $j$,
+\begin{align*}
+0 &= \frac{\partial \E\left[S_{i,h}(\bm{\beta})\right]}{\partial \beta_{j}}\\
+&= \frac{\partial}{\partial \beta_{j}} \int \frac{\partial \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h}} f_{Y_{i}} \,dy\\
+&= \int \frac{\partial^{2} \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h} \partial \beta_{j}}f_{Y_{i}} +\frac{\partial \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h}}\frac{\partial f_{Y_{i}}}{\partial \beta_{j}} \,dy\\
+&= \int \frac{\partial^{2} \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h} \partial \beta_{j}}f_{Y_{i}} +\frac{\partial \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{h}}\frac{\partial \log f_{Y_{i}}(y_{i},\bm{\beta})}{\partial \beta_{j}}f_{Y_{i}} \,dy\\
+&= -\mathcal{J}_{i,h,j}(\bm{\beta}) + \E\left[S_{i,h}(\bm{\beta})S_{i,j}(\bm{\beta})\right].
+\end{align*}
+So, $\mathcal{J}_{i,h,j}(\bm{\beta}) = \E\left[S_{i,h}(\bm{\beta})S_{i,j}(\bm{\beta})\right]$.
+\hfill\ensuremath{\square}\\
+
+Finally, we have
+\begin{align*}
+\Cov\left(S_{h}(\bm{\beta}), S_{j}(\bm{\beta})\right) &= \Cov\left(\sum_{i=1}^{n}S_{i,h}(\bm{\beta}),~ \sum_{i=1}^{n}S_{i,j}(\bm{\beta})\right)\\
+&= \sum_{i=1}^{n} \Cov\left(S_{i,h}(\bm{\beta}) \cdot S_{i,j}(\bm{\beta})\right) \tag{$\because$ independence}\\
+&= \sum_{i=1}^{n} \left[\E\left[S_{i,h}(\bm{\beta}) \cdot S_{i,j}(\bm{\beta})\right] - \E\left[S_{i,h}(\bm{\beta})\right] \E\left[S_{i,j}(\bm{\beta})\right]\right]\\
+&= \sum_{i=1}^{n}\E\left[S_{i,h}(\bm{\beta}) \cdot S_{i,j}(\bm{\beta})\right] \tag{by lemma 1}\\
+&= \sum_{i=1}^{n} \mathcal{J}_{i,h,j}(\bm{\beta}) \tag{by lemma 2}\\
+&= \mathcal{J}_{h,j}(\bm{\beta})
+\end{align*}
+where $\mathcal{J}_{h,j}(\bm{\beta}) = \E\left[-\frac{\partial^{2} L(\bm{\beta})}{\partial \beta_{h} \partial \beta_{j}} \right]$.\\
+
+\subsection*{(ii)}
+\begin{align*}
+\bm{\mathcal{J}}(\bm{\beta}) &= \Cov\left(\bm{S}(\bm{\beta}),\bm{S}(\bm{\beta})\right)\\
+&= \E\left[\bm{S}(\bm{\beta}) \bm{S}(\bm{\beta})^{\rm T}\right]
+\end{align*}
+Let $\bm{a}$ be a arbitrary non-zero vector, then
+\begin{align*}
+\bm{a}^{\rm T}\bm{\mathcal{J}}(\bm{\beta})\bm{a} &= \bm{a}^{\rm T}\Cov\left(\bm{S}(\bm{\beta}),\bm{S}(\bm{\beta})\right)\bm{a}\\
+&= \Cov\left(\bm{a}^{\rm T}\bm{S}(\bm{\beta}),\bm{a}^{\rm T}\bm{S}(\bm{\beta})\right)\\
+&= \Var\left(\bm{a}^{\rm T}\bm{S}(\bm{\beta})\right)\\
+&\geq 0.
+\end{align*}
+So, $\bm{\mathcal{J}}(\bm{\beta})$ is positive semi-definite.

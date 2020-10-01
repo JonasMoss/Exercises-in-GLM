@@ -1,0 +1,200 @@
+% Forhåndsvist kildekode for avsnittene 0 til 69
+
+
+\section*{Additional Exercise 16}
+
+\subsection*{(a)}
+
+The probability mass function of the binomial with parameters $n$
+and $\pi$ is
+
+\[
+f(v;\pi,n)={v \choose n}\pi^{v}(1-\pi)^{n-v},\:v\in\{0,1,\ldots,n\}.
+\]
+The log-likelihood, keeping $n$ constant, is 
+
+\[
+l(\pi;v)=\log{v \choose n}+v\log\pi+(n-v)\log(1-\pi).
+\]
+The score equals the derivative of the log-likelihood with respect
+to $\pi$, namely
+
+\[
+S(\pi;v)=\frac{v}{\pi}-\frac{n-v}{1-\pi}=\frac{v(1-\pi)-\pi(n-v)}{\pi(1-\pi)}=\frac{v-\pi n}{\pi(1-\pi)}.
+\]
+Since 
+
+\[
+\frac{d}{d\pi}\left[\frac{v}{\pi}-\frac{n-v}{1-\pi}\right]=-\frac{v}{\pi^{2}}-\frac{n-v}{(1-\pi)^{2}},
+\]
+the Fisher information is, using $Ev=n\pi$,
+
+\begin{eqnarray*}
+J(\pi) & = & -\frac{n\pi}{\pi^{2}}-\frac{n-\pi n}{(1-\pi)^{2}},\\
+ & = & n\left(\frac{1}{\pi}+\frac{1}{1-\pi}\right),\\
+ & = & \frac{n}{\pi(1-\pi)}.
+\end{eqnarray*}
+
+
+\subsection*{(b)}
+
+The Wald statistics is 
+
+\[
+\frac{\hat{\pi}-\pi}{\sqrt{J^{-1}(\hat{\pi})}}=\sqrt{n}\frac{\hat{\pi}-\pi}{\sqrt{\hat{\pi}(1-\hat{\pi})}}.
+\]
+
+
+\subsection*{(c)}
+
+The score statistic is 
+
+\[
+\frac{S(\pi)}{\sqrt{J(\pi)}}=\frac{\frac{v-\pi n}{\pi(1-\pi)}}{\sqrt{\frac{n}{\pi(1-\pi)}}}=\sqrt{n}\frac{\hat{\pi}-\pi}{\sqrt{\pi(1-\pi)}}.
+\]
+
+
+\subsection*{(d)}
+
+The likelihood statistic is
+
+\begin{eqnarray*}
+-2\log\Delta & = & -2(l(\pi;v)-l(\hat{\pi};v))=2v\log\left(\frac{\hat{\pi}}{\pi}\right)+2(n-v)\log\left(\frac{1-\hat{\pi}}{1-\pi}\right).
+\end{eqnarray*}
+When $n$ is large, $-2\log\Delta$ is approximately $\chi_{1}^{2}$-distributed
+by Wilks theorem.
+
+\subsection*{(e)}
+
+The solutions are as follows.
+
+\textbf{Wald:}
+
+\begin{eqnarray*}
+\sqrt{n}\frac{\hat{\pi}-\pi}{\sqrt{\hat{\pi}(1-\hat{\pi})}} & \approx & -4.4
+\end{eqnarray*}
+
+\textbf{Score:}
+
+\begin{eqnarray*}
+\sqrt{n}\frac{\hat{\pi}-\pi}{\sqrt{\hat{\pi}(1-\hat{\pi})}} & \approx & -4
+\end{eqnarray*}
+
+\textbf{Likelihood:}
+
+\begin{eqnarray*}
+-2\log\Delta & \approx & 16.5
+\end{eqnarray*}
+
+All tests agree to roughly the same degree that $H_{0}$ is false.
+Notice that $\sqrt{16.5}\approx4.05$, and since the root of a $\chi_{1}^{2}$
+is the abosolute value of the normal, the likelihood ratio test agrees
+with the others as well.
+
+\subsection*{(f)}
+
+The solutions are as follows.
+
+\textbf{Wald:}
+
+\begin{eqnarray*}
+\sqrt{n}\frac{\hat{\pi}-\pi}{\sqrt{\hat{\pi}(1-\hat{\pi})}} & \approx & -11.5
+\end{eqnarray*}
+
+\textbf{Score:}
+
+\begin{eqnarray*}
+\sqrt{n}\frac{\hat{\pi}-\pi}{\sqrt{\hat{\pi}(1-\hat{\pi})}} & \approx & -6.7
+\end{eqnarray*}
+
+\textbf{Likelihood:}
+
+\begin{eqnarray*}
+-2\log\Delta & \approx & 34
+\end{eqnarray*}
+
+Since $\sqrt{34}\approx5.85$, the likelihood test is more conservative.
+
+\subsection*{(g)}
+
+This is the case since 
+\[
+\sqrt{n}\frac{\hat{\pi}-\pi}{\sqrt{\hat{\pi}(1-\hat{\pi})}}\approx N(0,1)
+\]
+and $\pm 1.96$ are the two-sided confidence limits for a standard
+normal variable.
+
+\subsection*{(h)}
+
+The score is asymptotically standard normal, which implies the square
+is asymptotically $\chi_{1}^{2}$. The $(1-\alpha)$-percentile is
+$-\Phi^{-1}(\alpha/2)=c_{\alpha}$. We find the confidence interval
+by inverting the hypothesis test that rejects when the square of the
+score is larger than $c_{\alpha}$. This is done by solving the equaton
+
+\[
+n\frac{(\hat{\pi}-\pi)^{2}}{\pi(1-\pi)}=c_{\alpha}^{2}.
+\]
+The equation is equivalent to
+
+\[
+n(\hat{\pi}^{2}-2\hat{\pi}\pi+\pi^{2})=c_{\alpha}^{2}\pi-c_{\alpha}^{2}\pi^{2}.
+\]
+Rearrange to get
+
+\[
+\pi^{2}(n+c_{\alpha}^{2})-\pi(2v+c_{\alpha}^{2})+n\hat{\pi}^{2}=0.
+\]
+The solutions are
+
+\[
+\frac{2v+c_{\alpha}^{2}\pm\sqrt{(2v+c_{\alpha}^{2})^{2}-4(n+c_{a}^{2})n\hat{\pi}^{2}}}{2(n+c_{\alpha}^{2})}.
+\]
+Simplify to get
+
+\[
+\frac{v+\frac{1}{2}c_{\alpha}^{2}}{n+c_{\alpha}^{2}}+\frac{\sqrt{(2v+c_{\alpha}^{2})/4-(n+c_{\alpha}^{2})n\hat{\pi}^{2}}}{n+c_{\alpha}^{2}}.
+\]
+
+
+\subsection*{(i)}
+\begin{lyxcode}
+>~v~=~30
+
+>~n~=~100
+
+>~alpha~=~0.05
+
+>~CI(n,~v,~alpha)
+
+\$wald
+
+{[}1{]}~0.2101832~0.3898168
+
+\$score
+
+{[}1{]}~0.2189489~0.3958485
+
+\$lrt
+
+{[}1{]}~0.2160263~0.39409
+\end{lyxcode}
+
+\subsection*{(j)}
+\begin{lyxcode}
+>~v~=~5~
+
+>~n~=~100~
+
+>~alpha~=~0.05~
+
+>~CI(n,~v,~alpha)~
+
+\$wald~
+
+{[}1{]}~0.007283575~0.092716425~
+
+\$score~{[}1{]}~0.02154368~0.11175047~
+
+\$lrt~{[}1{]}~0.01823454~0.10438783
+\end{lyxcode}

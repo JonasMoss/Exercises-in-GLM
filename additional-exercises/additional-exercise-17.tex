@@ -1,0 +1,30 @@
+\section*{Additional Exercise 17}
+\subsection*{(a)}
+
+We are given that
+\begin{align*}
+Y_{i} = \beta_{1}x_{i,1} + \cdots + \beta_{p}x_{i,p} + \varepsilon_{i}
+\end{align*}
+where $\varepsilon_{i} \sim N\left(0,\frac{\sigma^{2}}{w_{i}}\right)$.\\
+By multiplying with $\sqrt{w_{i}}$ on both sides we get
+\begin{align*}
+\sqrt{w_{i}}Y_{i} &= \beta_{1}\sqrt{w_{i}}x_{i,1} + \cdots + \beta_{p}\sqrt{w_{i}}x_{i,p} + \sqrt{w_{i}}\varepsilon_{i}\\
+Y_{i}^{*} &= \beta_{1}x_{i,1}^{*} + \cdots + \beta_{p}x_{i,p}^{*} + \varepsilon_{i}^{*}
+\end{align*}
+where $\varepsilon_{i}^{*} = \sqrt{w_{i}}\varepsilon_{i} \sim \sqrt{w_{i}}N\left(0,\frac{\sigma^{2}}{w_{i}}\right) = N\left(0,\sigma^{2}\right)$
+
+
+\vspace{\baselineskip}
+\subsection*{(b)}
+By using normal equation, we obtain
+\begin{align*}
+\widehat{\bm{\beta}} &= \left(\left(\bm{X}^{*}\right)^{\rm T}\bm{X}^{*}\right)^{-1}\left(\bm{X}^{*}\right)^{\rm T}\bm{Y}^{*}.
+\end{align*}
+
+Let $\bm{W}^{\frac{1}{2}} = \mathrm{diag}\left\{\sqrt{w_{i}}\right\}$, then
+\begin{align*}
+\widehat{\bm{\beta}} &= \left(\left(\bm{X}^{*}\right)^{\rm T}\bm{X}^{*}\right)^{-1}\left(\bm{X}^{*}\right)^{\rm T}\bm{Y}^{*}\\
+&= \left(\left(\bm{W}^{\frac{1}{2}}\bm{X}\right)^{\rm T}\bm{W}^{\frac{1}{2}}\bm{X}\right)^{-1}\left(\bm{W}^{\frac{1}{2}}\bm{X}\right)^{\rm T}\bm{W}^{\frac{1}{2}}\bm{Y}\\
+&= \left(\bm{X}^{\rm T}\bm{W}^{\frac{1}{2}}\bm{W}^{\frac{1}{2}}\bm{X}\right)^{-1}\bm{X}^{\rm T}\bm{W}^{\frac{1}{2}}\bm{W}^{\frac{1}{2}}\bm{Y}\\
+&= \left(\bm{X}^{\rm T}\bm{W}\bm{X}\right)^{-1}\bm{X}^{\rm T}\bm{W}\bm{Y}.
+\end{align*}

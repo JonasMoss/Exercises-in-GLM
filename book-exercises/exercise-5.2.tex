@@ -1,0 +1,20 @@
+\section*{Exercise 5.2}
+
+According note 1.5 on page 21, Hoaglin's partial effect measure for
+$\beta_{j}$ is
+
+\[
+e_{i}=\frac{1}{n}\sum_{i=1}^{n}\frac{\partial\hat{\mu}_{i}}{\partial x_{ij}}.
+\]
+In our case, $\hat{\mu}_{i}=\hat{\pi}_{i}$. Recall that 
+\[
+\hat{\pi}=\frac{1}{1+\exp\left(-\hat{\beta}^{T}x_{i}\right)}
+\]
+and we can calculate
+
+\begin{eqnarray*}
+e_{j} & = & \frac{1}{n}\sum_{i=1}^{n}\frac{\partial\hat{\pi}_{i}}{\partial x_{ij}}\\
+ & = & \frac{1}{n}\sum_{i=1}^{n}\frac{\partial}{\partial x_{ij}}\frac{1}{1+\exp\left(-\hat{\beta}^{T}x_{i}\right)},\\
+ & = & \hat{\beta}_{j}\frac{1}{n}\sum_{i=1}^{n}\frac{\exp\left(-\hat{\beta}^{T}x_{i}\right)}{\left(\exp\left(-\hat{\beta}^{T}x_{i}\right)+1\right)^{2}},\\
+ & = & \hat{\beta}_{j}\frac{1}{n}\sum_{i=1}^{n}\hat{\pi}_{i}(1-\hat{\pi}_{i}).
+\end{eqnarray*}

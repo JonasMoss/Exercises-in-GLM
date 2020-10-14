@@ -1,0 +1,17 @@
+\section*{Exercise 4.13}
+\subsection*{(i)}
+From p.135 of the book, we have that the Pearson chi-squared statistic is defined as $X^{2} = \sum_{i=1}^{n} \frac{(y_{i} - \widehat{\mu}_{i})^{2}}{\Var(Y_{i})}$. Further, it's given that $y_{i} \sim N(\mu_{i},\sigma^{2})$. So, $$X^{2} = \frac{\sum_{i=1}^{n}(y_{i} - \widehat{\mu}_{i})^{2}}{\sigma^{2}} \sim \chi_{n-p}^{2}.$$
+The deviance is
+\begin{align*}
+D(\bm{y},\widehat{\bm{\mu}}) &= -2\left(L\left(\widehat{\bm{\mu}},\bm{y}\right) - L\left(\bm{y},\bm{y}\right)\right),\\
+&= -2\left(-\frac{n}{2}\log(2\pi) -n\log\sigma - \frac{1}{2\sigma^{2}}\sum_{i=1}^{n}(y_{i} - \widehat{\mu}_{i})^{2} -\left(-\frac{n}{2}\log(2\pi) -n\log\sigma\right)\right),\\
+&= \frac{1}{\sigma^{2}}\sum_{i=1}^{n}(y_{i} - \widehat{\mu}_{i})^{2}.
+\end{align*}
+So the Pearson chi-squared statistic is the same as the deviance.\\
+
+\subsection*{(ii)}
+\begin{align*}
+D(\bm{y},\widehat{\bm{\mu}}_{0}) - D(\bm{y},\widehat{\bm{\mu}}_{1}) &= -2\left(L\left(\widehat{\bm{\mu}}_{0},\bm{y}\right) - L\left(\widehat{\bm{\mu}}_{1},\bm{y}\right)\right)\\
+&= -2\left(-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}(y_{i} - \widehat{\mu}_{0,i})^{2} +\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}(y_{i} - \widehat{\mu}_{1,i})^{2}\right)\\
+&= \frac{1}{\sigma^{2}}\sum_{i=1}^{n}\left[(y_{i} - \widehat{\mu}_{0,i})^{2} -(y_{i} - \widehat{\mu}_{1,i})^{2}\right]\\
+\end{align*}

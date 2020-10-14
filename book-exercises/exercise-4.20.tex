@@ -1,0 +1,23 @@
+\section*{Exercise 4.20}
+The pmf of Poisson distribution is
+\begin{align*}
+f(y) = \frac{\mu^{y}}{y!}e^{-\mu}
+\end{align*}
+So,
+\begin{align*}
+L(\bm{y}) &= \log\mu\sum_{i=1}^{n}y_{i} - n\mu -\sum_{i}^{n}\log y_{i}!\\
+\frac{\partial L(\bm{y})}{\partial \mu} &= \frac{1}{\mu}\sum_{i=1}^{n}y_{i} -n = -n +\frac{n\overline{y}}{\mu}\\
+H &= \frac{\partial^{2} L(\bm{y})}{\partial \mu^{2}} = -\frac{n\overline{y}}{\mu^{2}}\\
+\mathcal{J} &= \E\left[-\frac{\partial^{2} L(\bm{Y})}{\partial \mu^{2}}\right] = \frac{n}{\mu^{2}}\E\left[\overline{Y}\right] = \frac{n}{\mu}.
+\end{align*}
+
+Fisher scoring gives
+\begin{align*}
+\mu^{(t+1)} = \mu^{(t)} + \left(\mathcal{J}^{(t)}\right)^{-1}u^{(t)} = \mu^{(t)} + \frac{\mu^{(t)}}{n}\left(-n +\frac{n\overline{y}}{\mu^{(t)}}\right) = \overline{y}.
+\end{align*}
+
+Newton-Raphson gives
+\begin{align*}
+\mu^{(t+1)} = \mu^{(t)} + \left(H^{(t)}\right)^{-1}u^{(t)} = \mu^{(t)} -\frac{\left(\mu^{(t)}\right)^{2}}{n\overline{y}}\left(-n +\frac{n\overline{y}}{\mu^{(t)}}\right) = \mu^{(t)}\left(2 - \frac{\mu^{(t)}}{\overline{y}}\right).
+\end{align*}
+Note that if $\mu^{(t)} = \overline{y}$, then $\mu^{(t+1)} = \overline{y}$.

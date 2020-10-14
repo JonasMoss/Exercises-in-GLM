@@ -1,0 +1,36 @@
+\section*{Exercise 5.30}
+
+A logistic regression model is
+
+\[
+E(y_{i})=\textrm{logit}^{-1}(\beta_{0}+\beta_{1}x_{i}),
+\]
+where $x_{i}=1$ if the $i$th person is a smoker and $0$ if not,
+$y_{i}=1$ if the $i$th person has lung cancer, $0$ if not. You
+cannot use this model to draw causal conclusions.
+
+The purpose of using controls is to estimatet the causal effect of
+smoking. Using controls as in this exercise is called matching or
+matched case-control studies.
+
+In matching, we typically want to estimate the average causal effect
+of $X$ on $Y$:
+
+\[
+E[Y_{X=1}-Y_{X=0}],
+\]
+where $Y_{X=1}$ is a \emph{counterfactual}, the outcome that would
+have happened to patient $Y$ if he had, in fact, smoked. When using
+matching, we pretend that the matched person are the same except for
+the single factor we want to study, which is smoking in this case. 
+
+The average causal effect can thus be estimated as
+
+\[
+\frac{1}{n}\sum(y_{i}[x=1]-y_{i}[x=0]),
+\]
+where $y_{i}[x=1]$ and $y_{i}[x=0]$ are matched pairs with different
+values on the smoking variable.
+
+For more information on causal inference, see e.g. Causal Inference
+in Statistics: A Primer (2016) by Pearl et al.

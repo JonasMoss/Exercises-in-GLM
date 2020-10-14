@@ -1,0 +1,39 @@
+\section*{Exercise 5.14}
+\textbf{Note:} I use the binomial distribution as defined in p.122 of the book. This implies that $y_{i}$ is a proportion of success, instead of a number of success.\\
+
+The binomial pmf with a common $\pi$ is
+\begin{align*}
+f(y_{i}) &= \binom{n_{i}}{n_{i}y_{i}} \pi^{n_{i}y_{i}} (1-\pi)^{n_{i}-n_{i}y_{i}}
+\end{align*}
+
+Then, the log-likelihood is
+\begin{align*}
+L(\pi) = \sum_{i=1}^{N} \left[\log\binom{n_{i}}{n_{i}y_i} + n_{i}y_{i}\log\pi + (n_{i} -n_{i}y_{i})\log(1-\pi)\right].
+\end{align*}
+By solving
+\begin{align*}
+\frac{\partial L(\pi)}{\partial \pi} =  \frac{1}{\pi}\sum_{i=1}^{N}n_{i}y_{i} -\frac{1}{1-\pi}\sum_{i=1}^{N}(n_{i}-n_{i}y_{i}) = 0
+\end{align*}
+\begin{align*}
+(1-\pi)\sum_{i=1}^{N}n_{i}y_{i}  = \pi\sum_{i=1}^{N}(n_{i}-n_{i}y_{i})
+\end{align*}
+we obtain
+\begin{align*}
+\widehat{\pi} = \frac{\sum_{i=1}^{N}n_{i}y_{i}}{\sum_{i=1}^{N}n_{i}}.
+\end{align*}
+
+The Pearson chi-squared statistic (p. 135 of the book) is
+\begin{align*}
+X^{2} &= \sum_{i=1}^{N} \frac{(y_{i} - \widehat{\pi})^{2}}{\Var(Y_{i})}\\
+&= \sum_{i=1}^{N} \frac{(y_{i} - \widehat{\pi})^{2}}{\widehat{\pi}(1-\widehat{\pi})/n_{i}}
+\end{align*}
+When all $n_{i} = 1$, we obtain $\widehat{\pi} = \frac{\sum_{i=1}^{N}n_{i}y_{i}}{\sum_{i=1}^{N}n_{i}} = \frac{\sum_{i=1}^{N}y_{i}}{N}$ and
+\begin{align*}
+X^{2} &= \sum_{i=1}^{N} \frac{(y_{i} - \widehat{\pi})^{2}}{\Var(Y_{i})}\\
+&= \frac{1}{\widehat{\pi}(1-\widehat{\pi})}\sum_{i=1}^{N}(y_{i} - \widehat{\pi})^{2}\\
+&= \frac{1}{\widehat{\pi}(1-\widehat{\pi})}\sum_{i=1}^{N}(y_{i}^{2} -2\widehat{\pi}y_{i} + \widehat{\pi}^{2})\\
+&= \frac{1}{\widehat{\pi}(1-\widehat{\pi})}\left(\sum_{i=1}^{N}y_{i} -2\widehat{\pi}\sum_{i=1}^{N}y_{i} +N\widehat{\pi}^{2}\right)\\
+&= \frac{1}{\widehat{\pi}(1-\widehat{\pi})}\left(N\widehat{\pi} -2\widehat{\pi}N\widehat{\pi} +N\widehat{\pi}^{2}\right)\\
+&= \frac{1}{\widehat{\pi}(1-\widehat{\pi})}N\widehat{\pi}\left(1 -\widehat{\pi}\right)\\
+&= N.
+\end{align*}

@@ -1,0 +1,73 @@
+\section*{Exercise 5.1}
+
+\subsection*{(a)}
+
+Let $X\mid y\sim N(\mu_{y},\sigma^{2})$, so that $P(x\mid y)=\phi(x;\mu_{y},\sigma)$.
+Define $P(Y=1)=p,$ $q=1-p$. Then 
+\begin{eqnarray*}
+P(Y=1\mid x) & = & P(x\mid Y=1)\frac{P(Y=1)}{P(x)},\\
+ & = & \frac{p\phi(x;\mu_{1},\sigma^{2})}{p\phi(x;\mu_{1},\sigma^{2})+q\phi(x;\mu_{0},\sigma^{2})},\\
+ & = & \frac{1}{1+\frac{q}{p}\frac{\phi(x;\mu_{0},\sigma^{2})}{\phi(x;\mu_{1},\sigma^{2})}}.
+\end{eqnarray*}
+Here
+
+\[
+\frac{\phi(x;\mu_{0},\sigma^{2})}{\phi(x;\mu_{1},\sigma^{2})}=\exp\left(-\frac{1}{2\sigma^{2}}(\mu_{1}^{2}-2x(\mu_{0}-\mu_{1})-\mu_{0}^{2})\right),
+\]
+and we obtain
+
+\begin{eqnarray*}
+\frac{1}{1+\frac{q}{p}\exp\left(-\frac{1}{2\sigma^{2}}(\mu_{1}^{2}-2x(\mu_{0}-\mu_{1})-\mu_{0}^{2})\right)} & =\\
+\frac{1}{1+\frac{q}{p}\exp\left(\beta_{0}+x\frac{(\mu_{1}-\mu_{0})}{2\sigma^{2}}\right)}
+\end{eqnarray*}
+This equals the inverse logistic function applied to $\beta_{0}=-\frac{1}{2\sigma^{2}}(\mu_{1}^{2}-\mu_{0}^{2})+\log(q/p)$.
+
+\subsection*{(b)}
+
+Let $X\mid y\sim N(\mu_{y},\sigma_{y}^{2})$, so that $P(x\mid y)=\phi(x;\mu_{y},\sigma_{y})$.
+Define $P(Y=1)=p,$ $q=1-p$. 
+
+Then 
+\begin{eqnarray*}
+P(Y=1\mid x) & = & P(x\mid Y=1)\frac{P(Y=1)}{P(x)},\\
+ & = & \frac{p\phi(x;\mu_{1},\sigma_{1}^{2})}{p\phi(x;\mu_{1},\sigma_{1}^{2})+q\phi(x;\mu_{0},\sigma_{0}^{2})},\\
+ & = & \frac{1}{1+\frac{q}{p}\frac{\phi(x;\mu_{0},\sigma_{0}^{2})}{\phi(x;\mu_{1},\sigma_{1}^{2})}}.
+\end{eqnarray*}
+Here
+
+\begin{eqnarray*}
+\frac{q}{p}\frac{\phi(x;\mu_{0},\sigma^{2})}{\phi(x;\mu_{1},\sigma^{2})} & = & \exp\left(-\frac{(\mu_{1}-x)^{2}}{2\sigma_{1}^{2}}+\frac{(\mu_{0}-x)^{2}}{2\sigma_{0}^{2}}+\log(q/p)\right),\\
+ & = & \exp\left(\beta_{0}+\beta_{1}x+\beta_{2}x^{2}\right),
+\end{eqnarray*}
+for some coefficients $\beta_{0},\beta_{1},\beta_{2}$ depending on
+$\mu_{0},\mu_{1},\sigma_{0},\sigma_{1},p,q$.
+
+\subsection*{(c)}
+
+Let $P(x\mid y)=h(x)\exp(x\theta_{y}-b(\theta_{y}))$. Define $P(Y=1)=p,$
+$q=1-p$. 
+
+Then 
+\begin{eqnarray*}
+P(Y=1\mid x) & = & P(x\mid Y=1)\frac{P(Y=1)}{P(x)},\\
+ & = & \frac{ph(x)\exp(x\theta_{1}-b(\theta_{1}))}{ph(x)\exp(x\theta_{1}-b(\theta_{1}))+qh(x)\exp(x\theta_{0}-b(\theta_{0}))},\\
+ & = & \frac{1}{1+\frac{q}{p}\frac{\exp(x\theta_{1}-b(\theta_{1}))}{\exp(x\theta_{0}-b(\theta_{0}))}}.
+\end{eqnarray*}
+Now we see that
+\[
+\frac{q}{p}\frac{\exp(x\theta_{1}-b(\theta_{1}))}{\exp(x\theta_{0}-b(\theta_{0}))}=\exp\left(\beta_{0}+\beta_{1}x\right)
+\]
+for some coefficients $\beta_{0},\beta_{1},\beta_{2}$ depending on
+$\mu_{0},\mu_{1},p,q$. 
+
+\subsection*{(d{*})}
+
+The same result as in $b$ holds for aribtrary exponential dispersion
+families as well. 
+
+\subsection*{Comments}
+
+This regression speficiation is in reverse; it assumes that we know
+regression of $X$ on $Y$, $X\mid Y\sim\mu_{y}+\sigma_{y}\epsilon$.This
+flips causality on its head, and doesn't work well with our usual
+practice of conditioning on $X$ when doing regression.

@@ -1,0 +1,20 @@
+\vspace{\baselineskip}
+\section*{Exercise 4.19}
+\subsection*{(a)}
+For $\beta^{(0)}$ that is close to $\widehat{\beta}$, we can use first order Taylor approximation
+\begin{align*}
+0 = L'(\widehat{\beta}) = L'(\beta^{(0)}) + \left(\widehat{\beta}-\beta^{(0)}\right)L''(\beta^{(0)}) + o_p (n^{-\frac{1}{2}}).
+\end{align*}
+We can rewrite this as
+\begin{align*}
+\widehat{\beta} \approx \beta^{(0)} - \frac{L'(\beta^{(0)})}{L''(\beta^{(0)})}.
+\end{align*}
+Approximating $\widehat{\beta}$ by $\beta^{(1)}$ gives us
+\begin{align*}
+\beta^{(1)} = \beta^{(0)} - \frac{L'(\beta^{(0)})}{L''(\beta^{(0)})}.
+\end{align*}
+\subsection*{(b)}
+By generalizing the result from a), we have
+\begin{align*}
+\beta^{(t+1)} = \beta^{(t)} - \frac{L'(\beta^{(t)})}{L''(\beta^{(t)})}.
+\end{align*}

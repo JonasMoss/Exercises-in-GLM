@@ -1,0 +1,19 @@
+\section*{Exercise 4.14}
+The likelihood equation of GLM is $\frac{\partial L(\bm{\beta})}{\partial \beta_{j}} = \sum_{i=1}^{n}\frac{(y_{i}-\mu_{i})x_{i,j}}{\Var(Y_{i})}\frac{\partial \mu_{i}}{\partial \eta_{i}} = 0$ (p.124 of the book).\\
+For the intercept. this becomes 
+$\frac{\partial L(\bm{\beta})}{\partial \beta_{0}} = \sum_{i=1}^{n}\frac{(y_{i}-\mu_{i})}{\Var(Y_{i})}\frac{\partial \mu_{i}}{\partial \eta_{i}} = 0$.
+
+The canonical link function $g$ is the function satisfying $\theta = g\left(\E[Y] \right)$. (p. 123 of the book).\\
+So, $\frac{\partial \mu_{i}}{\partial \eta_{i}} = \frac{\partial \mu_{i}}{\partial \theta_{i}} = \frac{\partial b'(\theta_{i})}{\partial \theta_{i}} = b''(\theta_{i})$. Further, we know $\Var(Y_{i}) = b''(\theta_{i})a(\phi)$.\\
+Thus,
+\begin{align*}
+\frac{\partial L(\bm{\beta})}{\partial \beta_{0}} &= \sum_{i=1}^{n}\frac{(y_{i}-\mu_{i})}{\Var(Y_{i})}\frac{\partial \mu_{i}}{\partial \eta_{i}}\\
+&= \sum_{i=1}^{n}(y_{i}-\mu_{i})\frac{1}{a(\phi)}\\
+&= 0
+\end{align*}
+In most cases $a(\phi)$ doesn't depend on the data. In that case, 
+\begin{align*}
+\frac{\partial L(\bm{\beta})}{\partial \beta_{0}} = \frac{1}{a(\phi)}\sum_{i=1}^{n}(y_{i}-\mu_{i}) = 0.
+\end{align*}
+So, $\sum_{i=1}^{n}y_{i} = \sum_{i=1}^{n}\widehat{\mu}_{i}$ and this equality doesn't necessarily hold for a GLM with non-canonical function.\\
+Obviously, when there is no $\beta_{0}$ for a GLM with canonical link function, we can't derive this equality.

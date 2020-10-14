@@ -1,0 +1,50 @@
+\section*{Exam 2015 Problem 1}
+\subsection*{(a)}
+The probability mass function of a binomially distributed variable
+is
+\begin{eqnarray*}
+f(y;\pi) & = & \binom{n}{y}\pi^{y}(1-\pi)^{n-y},\\
+ & = & {\binom{n}{y}}\exp\left(y\log\left[\frac{\pi}{1-\pi}\right]+n\log(1-\pi)\right).
+\end{eqnarray*}
+From this representation we can read off, using the form
+\[
+\exp\left[\frac{y\theta-b(\theta)}{a(\phi)}+c(y,\phi)\right],
+\]
+that
+\begin{eqnarray*}
+\theta & = & \log\left[\frac{\pi}{1-\pi}\right],\\
+a(\theta) & = & -n\log(1-\pi),\\
+\phi & = & 1,\\
+c(y,\phi) & = & \log{\binom{n}{y}}.
+\end{eqnarray*}
+The link function connects the linear combination $\beta^{T}X$ to
+the parameter $\theta$ using the relation $g(\theta)=\beta^{T}X$.
+
+\subsection*{(b)}
+The likelihood in a generalized linear model is
+\[
+L(\theta;y)=\prod_{i=1}^{n}\exp\left[\frac{y_{i}\theta_{i}-b(\theta_{i})}{a(\phi)}+c(y_{i},\phi)\right].
+\]
+If $\check{\theta}$ and $\hat{\theta}$ are the fitted parameter
+vectors in a saturated and another model, the deviance is
+\begin{eqnarray*}
+\Delta & = & 2\log L(\check{\theta};y)-2\log L(\hat{\theta},y),\\
+ & = & 2\sum_{i=1}^{n}\left[\frac{y_{i}\check{\theta}_{i}-a(\check{\theta}_{i})}{\phi}-\frac{y_{i}\hat{\theta}_{i}-a(\hat{\theta}_{i})}{\phi}\right],\\
+ & = & 2\sum_{i=1}^{n}\left[y_{i}(\check{\theta}_{i}-\hat{\theta}_{i})-b(\check{\theta}_{i})+b(\hat{\theta}_{i})\right].
+\end{eqnarray*}
+For the binomial distribution we have
+\begin{eqnarray*}
+\check{\theta}_{i} & = & \log(y_{i}/(n_{i}-y_{i}),\\
+\hat{\theta}_{i} & = & \log(\hat{\mu}_{i}/(n_{i}-\hat{\mu}_{i}),
+\end{eqnarray*}
+and 
+\begin{eqnarray*}
+b(\check{\theta}_{i}) & = & -n_{i}\log(1-y_{i}/n_{i}),\\
+b(\hat{\theta}_{i}) & = & -n_{i}\log(1-\hat{\mu}_{i}/n_{i}).
+\end{eqnarray*}
+Plugging this into the expression for the deviance above yields
+\[
+\Delta=2\sum_{i=1}^{n}[y_{i}\log(y_{i}/\hat{\mu}_{i})+(n_{i}-y_{i})\log[(n_{i}-y_{i})/(n_{i}-\hat{\mu}_{i})].
+\]
+The deviance is primarily used do significance testing with nested
+models.

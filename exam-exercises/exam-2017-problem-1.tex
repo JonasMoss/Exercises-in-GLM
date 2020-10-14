@@ -1,0 +1,77 @@
+\section*{Exam 2017 Problem 2}
+
+\subsection*{(a)}
+The variable $Y$ has a Poisson distribution, with probability mass
+function
+\[
+P(Y=y;\lambda)=\frac{\lambda^{y}}{y!}e^{-\lambda},\quad y=0,1,2,\ldots.
+\]
+We want to write probability on the canonical form
+\[
+\exp\left[\frac{y\theta-b(\theta)}{a(\phi)}+c(y,\phi)\right].
+\]
+This is easily done using exponentiation and logarithms:
+\[
+P(Y=y;\lambda)=\frac{\lambda^{y}}{y!}e^{-\lambda}=e^{y\log\lambda-\lambda\log(y!)}.
+\]
+Now we identify the terms of of the canonical form:
+\begin{eqnarray*}
+\theta & = & \log(\lambda),\\
+b(\theta) & = & \lambda=e^{\theta},\\
+a(\phi) & = & 1,\\
+c(y,\phi) & = & -\log(y!).
+\end{eqnarray*}
+
+\subsection*{(b)}
+A generalized model is a regression model where
+\[
+Y_{i}\mid X_{i}\sim f(g^{-1}(X_{i}^{T}\beta),\phi)
+\]
+for some density $f(\mu,\phi)$ in the exponential dispersion family
+with mean parameter $\mu$ and dispersion parameter $\phi$. The function
+$g$ is strictly increasing, differentiable, and called the \emph{link
+function}. (A strictly increasing function almost everywhere differentiable,
+by the way.) It connects the mean to the $X_{i}^{T}\beta$ by $g(\mu)=X_{i}^{T}\beta$.
+Sometimes the model is formulated in terms of the canonical parameter
+$\theta_{i}$ where $\mu_{i}=b'(\theta_{i})$ in the formulation above.
+\subsection*{(c)}
+Using the result from (a), we find the log-likelihood is
+\[
+L(\mu,y)=\sum_{i=1}^{n}\{y_{i}\log\mu_{i}-\mu_{i}-\log(y_{i}!)\}.
+\]
+\subsection*{(d)}
+For a saturated model there are no restrictions on the expected values,
+so there is a separately fitted parameter $\mu_{i}$ for each observation
+$y_{i}$.
+
+The log-likelihood attains its maximum when
+\[
+\frac{\partial}{\partial\mu_{i}}L(\mu;y)=0,\quad i=1,\ldots,n.
+\]
+Now we have
+\[
+\frac{\partial}{\partial\mu_{i}}L(\mu;y)=\frac{y_{i}}{\mu_{i}}-1,
+\]
+so the log-likelihood takes its maximal value when $y_{i}=\mu_{i}$,
+and the maximal value of the log-likelihood is
+\[
+L(y;y)=\sum_{i=1}^{n}\{y_{i}\log y_{i}-y_{i}-\log(y_{i}!)\}.
+\]
+\subsection*{(e)}
+The deviance is defined as
+\[
+\Delta=D(y;\mu)=2\left(L(\check{\theta};y)-L(\hat{\theta};y)\right),
+\]
+where $\hat{\theta}$ is the maximum likelihood estimator of our model
+and $\check{\theta}$ is the maximum likelihood estimator of the saturated
+model. In our Poisson case, the deviance is
+\[
+2\sum_{i=1}^{n}\{y_{i}\log y_{i}-y_{i}-\log(y_{i}!)\}-2\sum_{i=1}^{n}\{y_{i}\log\hat{\mu}_{i}-\hat{\mu}_{i}-\log(y_{i}!)\},
+\]
+which equals
+\[
+2\sum_{i=1}^{n}\left\{ y_{i}\log(y_{i}/\hat{\mu}_{i})-y_{i}+\hat{\mu}_{i}\right\} .
+\]
+The deviance is used for carrying out significance tests for nested
+models, as $\Delta\sim\chi_{n-p}^{2}$ asymptotically, where $p$
+is the number of fitted parameters in the non-saturated model.

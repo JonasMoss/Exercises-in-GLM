@@ -1,0 +1,35 @@
+\section*{Exercise 4.16}
+\textbf{Note:} I use the binomial distribution as defined in p. 122 of the book. This implies that $y_{i}$ is a proportion of success, instead of a number of success.
+
+\subsection*{(a)}
+The pmf of binomial distribution is
+\begin{align*}
+f(y_{i}) &= \binom{n_{i}}{n_{i}y_{i}} \pi_{i}^{n_{i}y_{i}} (1-\pi_{i})^{n_{i}-n_{i}y_{i}}\\
+&= \exp\left[\frac{\theta_{i}y_{i} -\log\left(1+e^{\theta_{i}}\right)}{\frac{1}{n_{i}}} + \log\binom{n_{i}}{n_{i}y_{i}}\right]\\
+&= \exp\left[\frac{\theta_{i}y_{i} -b(\theta_{i})}{a(\phi)} + c(y_{i},\phi)\right]
+\end{align*}
+where $\theta_{i} = \log\left(\frac{\pi_{i}}{1-\pi_{i}}\right)$, $\pi_{i} = \frac{e^{\theta_{i}}}{1+e^{\theta_{i}}}$, $b(\theta_{i}) = \log\left(1+e^{\theta_{i}}\right) = -\log\left(1-\pi_{i}\right)$, $c(y_{i}) = \log\binom{n_{i}}{n_{i}y_{i}}$, $a(\phi) = \frac{1}{n_{i}}$.\\
+Since $a(\phi) = \frac{1}{n_{i}}$, $w_{i} = n_{i}$ (p.121 of the book) and we have
+\begin{align*}
+d_{i} &= 2w_{i}\left[y_{i}\left(\widetilde{\theta}_{i} - \widehat{\theta}_{i}\right) -b\left(\widetilde{\theta}_{i}\right) + b\left(\widehat{\theta}_{i}\right)\right]\\
+&= 2n_{i}\left[y_{i}\left(\log\left(\frac{y_{i}}{1-y_{i}}\right) -  \log\left(\frac{\widehat{\pi}_{i}}{1-\widehat{\pi}_{i}}\right)\right) +\log\left(1-y_{i}\right) -\log\left(1-\widehat{\pi}_{i}\right)\right]\\
+&= 2n_{i}\left[y_{i}\log y_{i} - y_{i}\log (1-y_{i}) - y_{i}\log\widehat{\pi}_{i} +y_{i}\log(1-\widehat{\pi}_{i}) +\log\left(1-y_{i}\right) -\log\left(1-\widehat{\pi}_{i}\right)\right]\\
+&= 2n_{i}\left[y_{i}\log \frac{y_{i}}{\widehat{\pi}_{i}} +(1-y_{i})\log\left(\frac{1-y_{i}}{1-\widehat{\pi}_{i}}\right)\right]\\
+&= 2\left[n_{i}y_{i}\log \frac{y_{i}}{\widehat{\pi}_{i}} +n_{i}(1-y_{i})\log\left(\frac{1-y_{i}}{1-\widehat{\pi}_{i}}\right)\right].
+\end{align*}
+
+\subsection*{(b)}
+The pmf of Poisson distribution is
+\begin{align*}
+f(y_{i}) &= \frac{\mu_{i}^{y_{i}}}{y_{i}!}e^{-\mu_{i}}\\
+&= \exp\left[y_{i}\log\mu_{i} -\mu_{i} -\log y_{i}!\right]\\
+&= \exp\left[\frac{\theta_{i}y_{i} -b(\theta_{i})}{a(\phi)} + c(y_{i},\phi)\right]
+\end{align*}
+where $\theta_{i} = \log\mu_{i}$, $b(\theta_{i}) = e^{\theta_{i}} = \mu_{i}$, $c(y_{i}) = -\log y_{i}!$, $a(\phi) = 1$, $w_{i} = 1$.\\
+Thus, we have
+\begin{align*}
+d_{i} &= 2w_{i}\left[y_{i}\left(\widetilde{\theta}_{i} - \widehat{\theta}_{i}\right) -b\left(\widetilde{\theta}_{i}\right) + b\left(\widehat{\theta}_{i}\right)\right]\\
+&= 2\left[y_{i}\left(\log y_{i} -\log\widehat{\mu}_{i}\right) -y_{i} +\widehat{\mu}_{i}\right]\\
+&= 2\left[y_{i}\log\left(\frac{y_{i}}{\widehat{\mu}_{i}}\right) -y_{i} +\widehat{\mu}_{i}\right].
+\end{align*}
+This matches the expression in p.133 of the book.

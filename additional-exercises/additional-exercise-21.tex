@@ -1,0 +1,67 @@
+\section{Exercise 20}
+\subsection{a)}
+$y \in \{0,1\}$: death by SIDS\\
+$x_{1} \in \{1,2,3,4,5\}$: \texttt{kohort}\\
+$x_{2} \in \{1,2\}$: \texttt{kj{\o}nn}\\
+$x_{3} \in \mathbb{R}^{+}$: \texttt{vekt}\\
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l|l|l|l|l|l|l|}
+\cline{2-7}
+\multicolumn{1}{c|}{} & Additional parameters & \multicolumn{1}{c|}{Df} & \multicolumn{1}{c|}{Deviance} & \multicolumn{1}{c|}{Resid. Df} & \multicolumn{1}{c|}{Resid. Dev} & P($\vert$Chi$\vert$) \\ \hline
+%
+\multicolumn{1}{|l|}{NULL} & $\beta_{0}$ & & & {\color[HTML]{3531FF} $570 (=n-1)$} & {\color[HTML]{3531FF} 1101.92} & \\ \hline
+\multicolumn{1}{|l|}{vekt} & $\beta_{3}$ & 1 & $259.59$ & {\color[HTML]{3531FF} $569 (=n-2)$} & {\color[HTML]{3531FF} 842.33} & $< 0.001$ \\ \hline
+\multicolumn{1}{|l|}{factor(kohort)} & $\beta_{1,1}, \cdots, \beta_{1,4}$ & 4 & 314.59 & $565 (=n-6)$ & {\color[HTML]{3531FF} 527.74} & $< 0.001$ \\ \hline
+\multicolumn{1}{|l|}{kjonn} & $\beta_{2}$ & 1 & 92.81 & $564 (=n-7)$ & {\color[HTML]{3531FF} 434.93} & $< 0.001$ \\ \hline
+\multicolumn{1}{|l|}{vekt:factor(kohort)} & $\beta_{3:1,1}, \cdots, \beta_{3:1,4}$ & 4 & 6.37 & $560 (=n-11)$ & {\color[HTML]{3531FF} 428.56} & $0.1732$ \\ \hline
+\multicolumn{1}{|l|}{vekt:kjonn} & $\beta_{3:2}$ & 1 & 0.19 & $559 (=n-12)$ & {\color[HTML]{3531FF} 428.37} & $0.6630$ \\ \hline
+\multicolumn{1}{|l|}{factor(kohort):kjonn} & $\beta_{2:1,1}, \cdots, \beta_{2:1,4}$ & 4 & 15.32 & $555 (=n-16)$ & {\color[HTML]{3531FF} 413.05} & {\color[HTML]{3531FF} 0.0041} \\ \hline
+\multicolumn{1}{|l|}{vekt:factor(kohort):kjonn} & $\beta_{3:2:1,1}, \cdots, \beta_{3:2:1,4}$ & 4 & 5.25 & $549 (=n-20)$ & {\color[HTML]{3531FF} 407.80} & $0.2626$\\ \hline
+\end{tabular}
+\end{table}
+
+The deviance table can be used for Likelihood ratio test of model parameters. For example, if we want to test the significance of parameter $\beta_{2}$ (for the variable \texttt{kj{\o}nn}). We can read off from the deviance table:
+\begin{align*}
+-2\log\left(\frac{\mathrm{max}_{H_{0}}\ell\left(\beta_{0}, \beta_{1,1}, \cdots, \beta_{1,4}, \beta_{2}, \beta_{3}\right)}{\mathrm{max}_{\mathrm{full}}\ell\left(\beta_{0}, \beta_{1,1}, \cdots, \beta_{1,4}, \beta_{2}, \beta_{3}\right)}\right)
+&= -2\log\left(\frac{\mathrm{max~}\ell\left(\beta_{0}, \beta_{1,1}, \cdots, \beta_{1,4}, \beta_{3}\right)}{\mathrm{max~}\ell\left(\beta_{0}, \beta_{1,1}, \cdots, \beta_{1,4}, \beta_{2}, \beta_{3}\right)}\right)\\
+&= 527.74 - 424.93\\
+&= 92.81\\
+&> \chi_{1,0.95}^{2}\\
+&= 3.84
+\end{align*}
+
+
+\vspace{\baselineskip}
+\subsection{b)}
+i)\\
+This is similar to what we have done in  Problem 1, c) of mandatory assignment 1.\\
+Interpretation of $\beta_{j}$: log of odds ratio when variable $j$ has increased by 1 unit.
+
+ii)\\
+$95\%$ confidence interval for odds ratio can be obtained by:\\
+$\exp\left[\widehat{\beta}_{j}\right] \cdot \exp\left[\pm z_{0.975}\cdot SE(\widehat{\beta}_{j})\right]$
+
+For example, for $\beta_{3}$ (\texttt{vekt}):
+\begin{align*}
+\exp\left[\widehat{\beta}_{3}\right] \cdot \exp\left[\pm z_{0.975}\cdot SE(\widehat{\beta}_{3})\right] = \exp\left[-0.6711\right] \cdot \exp\left[\pm 1.96\cdot 0.03758\right] = [0.4749, 0.5502]
+\end{align*}
+
+
+\vspace{\baselineskip}
+\subsection{c)}
+i)\\
+Consider a child with covariate vector $\bm{x}_i$, and let $y_{i,j} = 1$ if the child dies of cause $j$ $(j = 1, \cdots, J)$, and $y_{i,j} = 0$ otherwise. Let $y_{i,0} = 1$ if the child survives, and $y_{i,0} = 0$ if she/he dies. Thus, $\pi_{i,j} = P(y_{i,j} = 1)$.\\
+
+Now, we let $j=1$ correspond to SIDS. To only consider those who dies of SIDS and survive, we ignore the irrelevant part of the model and condition only on $\{y_{i,0} = 1$ \mbox{~or~} $y_{i,1} = 1\}$. This gives:
+\begin{align*}
+P(y_{i,1} = 1 | y_{i,0} = 1 \mbox{~or~} y_{i,1} = 1) = \frac{P(y_{i,1} = 1)}{P(y_{i,0} = 1) + P(y_{i,1} = 1)} = \frac{\pi_{i,1}}{\pi_{i,0}+\pi_{i,1}} = \frac{\exp\left[\bm{x}_{i}\bm{\beta}_{1}\right]}{1+\exp\left[\bm{x}_{i}\bm{\beta}_{1}\right]}
+\end{align*}
+which is a logistic regression model with the same $\bm{\beta}_{1}$ as in the multinomial logit model.\\
+(See p.203 of the book.)\\
+
+ii)\\
+The advantage of using separate logistic regression for each cause, is simplicity.\\
+The disadvantage is that there is no guarantee that $\sum_{j=0}^{J} \widehat{\pi}_{i,j} = 1$.
+

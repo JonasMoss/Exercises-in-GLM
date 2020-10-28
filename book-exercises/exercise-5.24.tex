@@ -1,0 +1,12 @@
+\vspace{\baselineskip}
+\section*{Exercise 5.24}
+\subsection*{(i)}
+Since $f$ is symmetric around $0$, $F^{-1}(0.5) = 0$. Thus, if $0.5 = F(\beta_{0} + \beta_{1}x_{i})$, then $\beta_{0} + \beta_{1}x_{i} = 0$ and $x_{i} = -\frac{\beta_{0}}{\beta_{1}}$
+
+\subsection*{(ii)}
+The rate of change is $\frac{\partial \pi_{i}}{\partial x_{i}} = \frac{\partial \pi_{i}}{\partial \eta_{i}}\frac{\partial \eta_{i}}{\partial x_{i}} = f(\eta_{i})\beta_{1}$. When $\pi_{i} = 0.5$, we have $\eta_{i} = 0$ and the rate of change is $\beta_{1}f(0)$.\\
+
+For the probit link, $f(0) = \frac{1}{\sqrt{2\pi}}$, the rate of change is $\frac{1}{\sqrt{2\pi}}\beta_{1,\mathrm{probit}}$.\\
+For the logit link, $f(0) = 0.25$, the change of rate is $0.25\beta_{1,\mathrm{logit}}$.\\
+
+Since the rate of change should be approximately the same whether the probit or logit link is used, the estimates for the logistic model should be approximately $\frac{4}{\sqrt{2\pi}} \approx 1.6$ times the estimates for the probit model.

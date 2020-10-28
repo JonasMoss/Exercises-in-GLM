@@ -1,0 +1,8 @@
+\section*{Exercise 5.26}
+It's given that $Y_{i} \sim \mathrm{Pois}\left(\mu_{i} = \exp\left[\sum_{j}\beta_{j}x_{i,j}\right]\right)$ and $Z_{i} = I(Y_{i} > 0)$.\\
+So, $Z_{i} \sim \mathrm{Bin}\left(1,\mathrm{P}(Y_{i} > 0)\right)$.\\
+Notice that
+$\pi_{i} = \mathrm{P}(Y_{i} > 0) = 1 - \mathrm{P}(Y_{i} \leq 0) = 1 - \mathrm{P}(Y_{i} = 0) = 1 -e^{-\mu_{i}} = 1-\exp\left[-\exp\left[\eta_{i}\right]\right] = 1-\exp\left[-\exp\left[\sum_{j}\beta_{j}x_{i,j}\right]\right]$.\\
+
+This gives $\eta_{i} = \log\left(-\log\left(1-\pi_{i}\right)\right)$.
+

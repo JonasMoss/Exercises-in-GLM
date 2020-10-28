@@ -1,0 +1,42 @@
+\section*{Exercise 6.3}
+We use vector notation
+$\bm{x}_{i} =
+\begin{bmatrix}
+x_{i,1}, \cdots, x_{i,p}
+\end{bmatrix}$
+~and~
+$\bm{\beta}_{j} =
+\begin{bmatrix}
+\beta_{j,1}, \cdots, \beta_{j,p}
+\end{bmatrix}^{\rm T}$.\\
+
+$\pi_{i,j}$ is defined as
+\begin{align*}
+\pi_{i,j} =
+\begin{cases}
+\frac{\exp\left[\bm{x}_{i}\bm{\beta}_{j}\right]}{1+\sum_{h=1}^{c-1}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]} ~~&\mbox{for}~~ j = 1, \cdots, c-1\\
+\\
+\frac{1}{1+\sum_{h=1}^{c-1}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]} ~~&\mbox{for}~~ j = c\\
+\end{cases}.
+\end{align*}
+Since the restriction we impose is $\bm{\beta}_{c} = \bm{0}$, I prefer to merge these two cases into one: 
+\begin{align*}
+\pi_{i,j} =
+\frac{\exp\left[\bm{x}_{i}\bm{\beta}_{j}\right]}{\sum_{h=1}^{c}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]} ~~&\mbox{for}~~ j = 1, \cdots, c.
+\end{align*}
+
+Thus, the rate of change is
+\begin{align*}
+\frac{\partial \pi_{i,j}}{\partial x_{i,k}} &= \frac{\partial}{\partial x_{i,k}}\left(\frac{\exp\left[\bm{x}_{i}\bm{\beta}_{j}\right]}{\sum_{h=1}^{c}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]}\right)\\
+&= \frac{\beta_{j,k}\exp\left[\bm{x}_{i}\bm{\beta}_{j}\right] \cdot \sum_{h=1}^{c}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right] - \exp\left[\bm{x}_{i}\bm{\beta}_{j}\right] \cdot \sum_{h=1}^{c}\beta_{h,k}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]}{\left(\sum_{h=1}^{c}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]\right)^2}\\
+&= \frac{\exp\left[\bm{x}_{i}\bm{\beta}_{j}\right]}{\sum_{h=1}^{c}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]}\left(\frac{\beta_{j,k}\sum_{h=1}^{c}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right] - \sum_{h=1}^{c}\beta_{h,k}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]}{\sum_{h=1}^{c}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]}\right)\\
+&= \frac{\exp\left[\bm{x}_{i}\bm{\beta}_{j}\right]}{\sum_{h=1}^{c}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]}\left(\beta_{j,k} -\frac{\sum_{h=1}^{c}\beta_{h,k}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]}{\sum_{h=1}^{c}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]}\right)\\
+&= \frac{\exp\left[\bm{x}_{i}\bm{\beta}_{j}\right]}{\sum_{h=1}^{c}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]}\left(\beta_{j,k} -\sum_{h=1}^{c}\left[\frac{\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]}{\sum_{h=1}^{c}\exp\left[\bm{x}_{i}\bm{\beta}_{h}\right]}\beta_{h,k}\right]\right)\\
+&= \pi_{i,j}\left(\beta_{j,k} -\sum_{h=1}^{c}\left[\pi_{i,h}\beta_{h,k}\right]\right)\\
+&= \pi_{i,j}\left(\beta_{j,k} -\sum_{h=1}^{c-1}\left[\pi_{i,h}\beta_{h,k}\right]\right)
+\end{align*}
+
+In binary case (i.e. $c = 2$), $j = 1$. So, the rate of change simplifies to 
+\begin{align*}
+\frac{\partial \pi_{i}}{\partial x_{i,k}} = \beta_{k}\pi_{i}(1-\pi_{i}).
+\end{align*}

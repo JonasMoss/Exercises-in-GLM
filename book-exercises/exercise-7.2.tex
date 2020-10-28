@@ -1,0 +1,17 @@
+\section*{Exercise 7.2}
+The pmf of Poisson distribution is $f(y) = \frac{\mu^{y}}{y!}e^{-\mu}$. The corresponding log-likelihood function is $L(\bm{y}) = \log\mu\sum_{i=1}^{n}y_{i} - n\mu -\sum_{i}^{n}\log y_{i}!$. The MLE of $\mu$ is then $\widehat{\mu} = \overline{y}$. Thus, the likelihood-ratio statistic is
+
+\begin{align*}
+-2\left(L_{0} - L_{1}\right) &= 2\left(
+\log\widehat{\mu}_{1}\sum_{i=1}^{n}y_{i} - n\widehat{\mu}_{1} -\sum_{i}^{n}\log y_{i}!
+-\log\mu_{0}\sum_{i=1}^{n}y_{i} +n\mu_{0} +\sum_{i}^{n}\log y_{i}!
+\right)\\
+&= 2\left(\log\frac{\widehat{\mu}_{1}}{\mu_{0}}\sum_{i=1}^{n}y_{i} +n\left(\widehat{\mu}_{1} -\mu_{0}\right)\right)\\
+&= 2\left(n\overline{y}\log\frac{\widehat{\mu}_{1}}{\mu_{0}} +n\left(\widehat{\mu}_{1} -\mu_{0}\right)\right)\\
+&= 2\left(n\overline{y}\log\frac{\overline{y}}{\mu_{0}} +n\left(\overline{y} -\mu_{0}\right)\right).
+\end{align*}
+The likelihood-ratio statistics follows chi-squared distribution with degrees of freedom $1$. So, a $100(1-\alpha)\%$ confidence interval is given as the set of $\mu_{0}$ that satisfy
+\begin{align*}
+2\left(n\overline{y}\log\frac{\overline{y}}{\mu_{0}} +n\left(\overline{y} -\mu_{0}\right)\right) < \chi_{1}^{2}(\alpha).
+\end{align*}
+(See problem 2 i) of the mandatory assignment.)

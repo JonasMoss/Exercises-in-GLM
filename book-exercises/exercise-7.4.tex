@@ -1,0 +1,22 @@
+\section*{Exercise 7.4}
+Let $Y_{1},Y_{2}$ be Poisson with parameters $\mu_{1}$ and $\mu_{2}$
+and $H_{0}:\mu_{1}=\mu_{2}$. The likelihood-ratio statistic is
+\begin{eqnarray*}
+-2\log\left[\frac{\sup_{\mu}f(y_{1};\mu)f(y_{2};\mu)}{\sup_{\mu_{1},\mu_{2}}f(y_{1};\mu_{1})f(y_{2};\mu_{2})}\right] & = & -2\log\left[\frac{\sup_{\mu}\mu^{y_{1}+y_{2}}\frac{e^{-2\mu}}{y_{1}!y_{2}!}}{\sup_{\mu_{1}}\left(\mu_{1}^{y_{1}}\frac{e^{-\mu_{1}}}{y_{1}!}\right)\sup_{\mu_{2}}\left(\mu_{2}^{y_{2}}\frac{e^{-\mu_{2}}}{y_{2}!}\right)}\right].
+\end{eqnarray*}
+We already know that $\hat{\mu}_{1}=y_{1}$ and $\hat{\mu}_{2}=y_{2}$,
+thus 
+\[
+\sup_{\mu_{1}}\left(\mu_{1}^{y_{1}}\frac{e^{-\mu_{1}}}{y_{1}!}\right)\sup_{\mu_{2}}\left(\mu_{2}^{y_{2}}\frac{e^{-\mu_{2}}}{y_{2}!}\right)=y_{1}^{y_{1}}\frac{e^{-y_{1}}}{y_{1}!}y_{2}^{y_{2}}\frac{e^{-y_{2}}}{y_{2}!}.
+\]
+On the other hand
+\[
+\log\left(\mu^{y_{1}+y_{2}}\frac{e^{-2\mu}}{y_{1}!y_{2}!}\right)=(y_{1}+y_{2})\log\mu-2\mu-\log(y_{1}!y_{2}!)
+\]
+Differentiate to find $\hat{\mu}=\frac{1}{2}(y_{1}+y_{2})$. The statistic
+is
+\[
+-2\log\left[\frac{\left[\frac{1}{2}(y_{1}+y_{2})\right]^{y_{1}+y_{2}}\frac{e^{-(y_{1}+y_{2})}}{y_{1}!y_{2}!}}{y_{1}^{y_{1}}y_{2}^{y_{2}}\frac{e^{-y_{1}}}{y_{1}!}\frac{e^{-y_{2}}}{y_{2}!}}\right]=-2\log\left[\frac{\left[\frac{1}{2}(y_{1}+y_{2})\right]^{y_{1}+y_{2}}}{y_{1}^{y_{1}}y_{2}^{y_{2}}}\right]
+\]
+The asymptotic null distribution is $\chi^{2}(1)$. Since the sum
+of Poissons is Poisson, the asymptotic approximation holds as $\mu\to\infty$. 

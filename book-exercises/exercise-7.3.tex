@@ -1,0 +1,17 @@
+\section*{Exercise 7.3}
+The score and information of Poisson distribution are
+\begin{align*}
+S(\mu) &= \frac{\partial L(\bm{y})}{\partial \mu} = \frac{1}{\mu}\sum_{i=1}^{n}y_{i} -n = n\left(\frac{\overline{y}}{\mu}-1\right)\\
+H(\mu) &= \frac{\partial^{2} L(\bm{y})}{\partial \mu^{2}} = -\frac{n\overline{y}}{\mu^{2}}\\
+\mathcal{J}(\mu) &= \E\left[-\frac{\partial^{2} L(\bm{Y})}{\partial \mu^{2}}\right] = \frac{n}{\mu^{2}}\E\left[\overline{Y}\right] = \frac{n}{\mu}.
+\end{align*}
+
+So, the score test statistic is
+\begin{align*}
+\frac{S(\mu_{0})}{\sqrt{\mathcal{J}(\mu_{0})}} = \frac{n\left(\frac{\overline{y}}{\mu_{0}}-1\right)}{\frac{n}{\mu_{0}}} = \frac{\sqrt{n}(\overline{y}-\mu_{0})}{\sqrt{\mu_{0}}} = \sim N(0,1).
+\end{align*}
+
+Thus, a $100(1-\alpha)\%$ confidence interval is given as the set of $\mu_{0}$ that satisfy
+\begin{align*}
+\left|\frac{\sqrt{n}(\overline{y}-\mu_{0})}{\sqrt{\mu_{0}}}\right| < z_{1-\frac{\alpha}{2}}.
+\end{align*}

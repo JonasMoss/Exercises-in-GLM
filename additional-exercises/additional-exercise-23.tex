@@ -1,0 +1,39 @@
+\section*{Additional Exercise 23}
+\subsection*{(a)}
+Law of total expectation:
+\begin{align*}
+\E\left[\E\left[Y|X\right]\right] &= \E\left[\int_{-\infty}^{\infty} yf(y|X)\, dy \right]\\
+&= \int_{-\infty}^{\infty} \left(\int_{-\infty}^{\infty} yf(y|x)\, dy\right) f(x) \, dx\\
+&= \int_{-\infty}^{\infty} \left(\int_{-\infty}^{\infty} y\frac{f(x,y)}{f(x)}f(x) \, dy\right)\, dx\\
+&= \int_{-\infty}^{\infty} \left(\int_{-\infty}^{\infty} y f(x,y) \, dy\right)\, dx\\
+&= \int_{-\infty}^{\infty} \left(\int_{-\infty}^{\infty} y f(x,y) \, dx\right)\, dy\\
+&= \int_{-\infty}^{\infty} y\left(\int_{-\infty}^{\infty} f(x,y) \, dx\right)\, dy\\
+&= \int_{-\infty}^{\infty} y \, f(y)\, dy\\
+&= \E\left[Y\right]
+\end{align*}
+
+\textbf{Remark:} In the measure-theoretic definition of the conditional expectation, the law of total expectation is even more trivial: For then $Z$ is a variant of the conditional expectation, i.e.,
+\[
+Z=E(Y\mid X),\quad\textrm{almost everywhere}
+\]
+if and only if
+\[
+\int_{A}ZdP=\int_{A}YdP,\ldots A\in\sigma(X),
+\]
+where $\sigma(X)$ is the sigma-algebra of $X$-measurable sets. Since
+$\Omega\in\sigma(X)$, $\int_{\Omega}E(Y\mid X)dP=\int_{\Omega}YdP=E(Y)$. See e.g. Billingsley's book \parencite[Chapter 34]{Billingsley1995-pp}.
+
+
+
+\subsection*{(b)}
+By definition, $\Var(Y\mid X)=E(Y^{2}\mid X)-E(Y\mid X)^{2}$, and the law of total variance can be proved directly.
+\begin{align*}
+\Var(Y) &= \E\left[Y^{2}\right] - \E\left[Y\right]^{2}\\
+&= \E\left[\E\left[Y^{2}|X\right]\right] - \left(\E\left[\E\left[Y|X\right]\right]\right)^{2}\\
+&= \E\left[\Var\left(Y|X\right) + \left(\E\left[Y|X\right]\right)^{2}\right] - \left(\E\left[\E\left[Y|X\right]\right]\right)^{2}\\
+&= \E\left[\Var\left(Y|X\right)\right] + \E\left[\left(\E\left[Y|X\right]\right)^{2}\right] - \left(\E\left[\E\left[Y|X\right]\right]\right)^{2}\\
+&= \E\left[\Var\left(Y|X\right)\right] + \Var\left(\E\left[Y|X\right]\right)
+\end{align*}
+
+
+\vspace{\baselineskip}

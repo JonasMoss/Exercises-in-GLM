@@ -1,5 +1,5 @@
-\section{Exercise 20}
-\subsection{a)}
+\section*{Exercise 20}
+\subsection*{(a)}
 $y \in \{0,1\}$: death by SIDS\\
 $x_{1} \in \{1,2,3,4,5\}$: \texttt{kohort}\\
 $x_{2} \in \{1,2\}$: \texttt{kj{\o}nn}\\
@@ -34,12 +34,12 @@ The deviance table can be used for Likelihood ratio test of model parameters. Fo
 
 
 \vspace{\baselineskip}
-\subsection{b)}
-i)\\
+\subsection*{(b)}
+\subsubsection*{(i)}
 This is similar to what we have done in  Problem 1, c) of mandatory assignment 1.\\
 Interpretation of $\beta_{j}$: log of odds ratio when variable $j$ has increased by 1 unit.
 
-ii)\\
+\subsubsection*{(ii)}
 $95\%$ confidence interval for odds ratio can be obtained by:\\
 $\exp\left[\widehat{\beta}_{j}\right] \cdot \exp\left[\pm z_{0.975}\cdot SE(\widehat{\beta}_{j})\right]$
 
@@ -50,8 +50,8 @@ For example, for $\beta_{3}$ (\texttt{vekt}):
 
 
 \vspace{\baselineskip}
-\subsection{c)}
-i)\\
+\subsection*{(c)}
+\subsubsection*{(i)}
 Consider a child with covariate vector $\bm{x}_i$, and let $y_{i,j} = 1$ if the child dies of cause $j$ $(j = 1, \cdots, J)$, and $y_{i,j} = 0$ otherwise. Let $y_{i,0} = 1$ if the child survives, and $y_{i,0} = 0$ if she/he dies. Thus, $\pi_{i,j} = P(y_{i,j} = 1)$.\\
 
 Now, we let $j=1$ correspond to SIDS. To only consider those who dies of SIDS and survive, we ignore the irrelevant part of the model and condition only on $\{y_{i,0} = 1$ \mbox{~or~} $y_{i,1} = 1\}$. This gives:
@@ -61,7 +61,7 @@ P(y_{i,1} = 1 | y_{i,0} = 1 \mbox{~or~} y_{i,1} = 1) = \frac{P(y_{i,1} = 1)}{P(y
 which is a logistic regression model with the same $\bm{\beta}_{1}$ as in the multinomial logit model.\\
 (See p.203 of the book.)\\
 
-ii)\\
+\subsubsection*{(ii)}
 The advantage of using separate logistic regression for each cause, is simplicity.\\
 The disadvantage is that there is no guarantee that $\sum_{j=0}^{J} \widehat{\pi}_{i,j} = 1$.
 

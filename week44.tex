@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage[svgnames]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{fullpage} % Package to use full page
+\usepackage{parskip} % Package to tweak paragraph skipping
+\usepackage{tikz} % Package for drawing
+\usepackage{amsmath}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=purple,
+    filecolor=magenta,      
+    urlcolor=pink,
+}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{framed}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{biblatex}
+
+\lstset{language=R,
+    basicstyle=\small\ttfamily,
+    stringstyle=\color{DarkGreen},
+    otherkeywords={0,1,2,3,4,5,6,7,8,9},
+    morekeywords={TRUE,FALSE},
+    deletekeywords={data,frame,length,as,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{DarkGreen},
+}
+
+\addbibresource{glm-exercises.bib}
+
+\newenvironment{lyxcode}
+	{\par\begin{list}{}{
+		\setlength{\rightmargin}{\leftmargin}
+		\setlength{\listparindent}{0pt}% needed for AMS classes
+		\raggedright
+		\setlength{\itemsep}{0pt}
+		\setlength{\parsep}{0pt}
+		\normalfont\ttfamily}%
+	 \item[]}
+	{\end{list}}
+
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Cor}{\mathrm{Cor}}
+
+% vertical line in {bmatrix}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+ \hskip -\arraycolsep
+ \let\@ifnextchar\new@ifnextchar
+ \array{#1}}
+\makeatother
+
+\title{Exercises in Generalized Linear Models \\ \textbf{Week 42}}
+\author{Vinnie Ko, Jonas Moss, and Ørnulf Borgan}
+\date{Fall 2020}
+
+\begin{document}
+\maketitle
+\input{header}
+\input{additional-exercises/additional-exercise-22}
+\input{additional-exercises/additional-exercise-23}
+\input{additional-exercises/additional-exercise-24}
+\input{book-exercises/exercise-7.2}
+\input{book-exercises/exercise-7.3}
+\input{book-exercises/exercise-7.4}
+\includepdf[pages = {1,2,3}]{exam-exercises/exam-2014-solution.pdf}
+\includepdf[pages = {1,2,3}]{exam-exercises/exam-2016-solution.pdf}
+
+\printbibliography
+\end{document}

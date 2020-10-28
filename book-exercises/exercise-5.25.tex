@@ -1,0 +1,41 @@
+\section*{Exercise 5.25}
+
+\subsection*{(i)}
+With complementary log-log link we have
+\begin{align*}
+\log\left(-\log(1-\pi_{i})\right) &= \beta_{0} + \beta_{1}x_{i}\\
+\log\left(\frac{1}{1-\pi_{i}}\right) &= \exp\left[\beta_{0} + \beta_{1}x_{i}\right]\\
+\frac{1}{1-\pi_{i}} &= \exp\left[\exp\left[\beta_{0} + \beta_{1}x_{i}\right]\right]\\
+\pi_{i} &= 1 - \frac{1}{\exp\left[\exp\left[\beta_{0} + \beta_{1}x_{i}\right]\right]}\\
+\end{align*}
+
+When $\pi_{i} = 0.5$,
+\begin{align*}
+2 &= \exp\left[\exp\left[\beta_{0} + \beta_{1}x_{i}\right]\right]\\
+\log\left(\log 2\right) &= \beta_{0} + \beta_{1}x_{i}\\
+x_{i} &= \frac{\log\left(\log 2\right) - \beta_{0}}{\beta_{1}} = \frac{-0.3665 -\beta_{0}}{\beta_{1}}.\\
+\end{align*}
+
+The rate of change is
+\begin{align*}
+\frac{\partial \pi_{i}}{\partial x_{i}} &= \frac{\partial \pi_{i}}{\partial \eta_{i}}\frac{\partial \eta_{i}}{\partial x_{i}}\\
+&= \frac{\exp\left[\exp\left[\beta_{0} + \beta_{1}x_{i}\right]\right] \cdot \exp\left[\beta_{0} + \beta_{1}x_{i}\right]}{\left(\exp\left[\exp\left[\beta_{0} + \beta_{1}x_{i}\right]\right]\right)^{2}}\beta_{1}\\
+&= \frac{\exp\left[\beta_{0} + \beta_{1}x_{i}\right]}{\exp\left[\exp\left[\beta_{0} + \beta_{1}x_{i}\right]\right]}\beta_{1}.
+\end{align*}
+
+We find $x_{i}$ that maximizes the rate of change
+\begin{align*}
+\frac{\partial^{2} \pi_{i}}{\partial x_{i}^{2}} &= \frac{\partial}{\partial x_{i}}\left(\frac{\partial \pi_{i}}{\partial x_{i}}\right)\\
+&= \frac{\partial}{\partial x_{i}}\left(\frac{\exp\left[\beta_{0} + \beta_{1}x_{i}\right]}{\exp\left[\exp\left[\beta_{0} + \beta_{1}x_{i}\right]\right]}\beta_{1}\right)\\
+&= \frac{\beta_{1} \exp\left[\beta_{0} + \beta_{1}x_{i}\right]\exp\left[\exp\left[\beta_{0} + \beta_{1}x_{i}\right]\right] - \exp\left[\beta_{0} + \beta_{1}x_{i}\right] \exp\left[\exp\left[\beta_{0} + \beta_{1}x_{i}\right]\right] \exp\left[\beta_{0} + \beta_{1}x_{i}\right] \beta_{1}}{\left(\exp\left[\exp\left[\beta_{0} + \beta_{1}x_{i}\right]\right]\right)^{2}}\beta_{1}\\
+&= \frac{\exp\left[\beta_{0} + \beta_{1}x_{i}\right] - \exp\left[\beta_{0} + \beta_{1}x_{i}\right] \exp\left[\beta_{0} + \beta_{1}x_{i}\right] }{\exp\left[\exp\left[\beta_{0} + \beta_{1}x_{i}\right]\right]}\beta_{1}^{2}\\
+&= \frac{\exp\left[\beta_{0} + \beta_{1}x_{i}\right]\left(1 - \exp\left[\beta_{0} + \beta_{1}x_{i}\right]\right)}{\exp\left[\exp\left[\beta_{0} + \beta_{1}x_{i}\right]\right]}\beta_{1}^{2}\\
+&= 0.
+\end{align*}
+So, the rate of change reaches its maximum when $\exp\left[\beta_{0} + \beta_{1}x_{i}\right] = 1$. We have then $\beta_{0} + \beta_{1}x_{i} = 0$ and $x_{i} = -\frac{\beta_{0}}{\beta_{1}}$. When $x_{i} = -\frac{\beta_{0}}{\beta_{1}}$, $\pi_{i} = 1 - \frac{1}{e} = 0.6321$.\\
+
+\subsection*{(ii)}
+Repeat i) for log-log link
+\begin{align*}
+-\log\left(-\log\pi_{i}\right) &= \beta_{0} + \beta_{1}x_{i}\\
+\end{align*}

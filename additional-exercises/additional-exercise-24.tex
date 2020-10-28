@@ -1,0 +1,53 @@
+\section*{Additional Exercise 24}
+\subsection*{(a)}
+We already did this many times in earlier exercises.
+
+\vspace{\baselineskip}
+\subsection*{(b)}
+\subsubsection*{(i)}
+$\exp\left[\beta_{\mathrm{\texttt{badh}}}\right] = \frac{\E\left[Y|x_{\mathrm{\texttt{badh}}} = 1\right]}{\E\left[Y|x_{\mathrm{\texttt{badh}}} = 0\right]}$.\\
+
+So, the estimate of rate ratio is
+\begin{align*}
+\exp\left[\widehat{\beta}_{\mathrm{\texttt{badh}}}\right] = \exp\left[1.1409\right] = 3.1296.
+\end{align*}
+
+$95\%$ confidence interval for this rate ratio is
+\begin{align*}
+&\left[\exp\left[\widehat{\beta}_{\mathrm{\texttt{badh}}} - z_{0.975} \cdot \mathrm{SE}(\widehat{\beta}_{\mathrm{\texttt{badh}}})\right],~\exp\left[\widehat{\beta}_{\mathrm{\texttt{badh}}} + z_{0.975} \cdot \mathrm{SE}(\widehat{\beta}_{\mathrm{\texttt{badh}}})\right] \right]\\
+&= \left[\exp[1.1409 - 1.96 \cdot 0.0399], \exp[1.1409 + 1.96 \cdot 0.0399]\right]\\
+&= \left[\exp[1.0628], \exp[1.2190]\right]\\
+&= [2.8944, 3.3839]
+\end{align*}
+
+\subsubsection*{(ii)}
+$\exp\left[10\beta_{\mathrm{\texttt{age}}}\right] = \frac{\E\left[Y|x_{\mathrm{\texttt{age}}} = 50\right]}{\E\left[Y|x_{\mathrm{\texttt{age}}} = 40\right]}$.\\
+
+So, the estimate of rate ratio is
+\begin{align*}
+\exp\left[10\cdot\widehat{\beta}_{\mathrm{\texttt{age}}}\right] = \exp\left[0.0556\right] = 1.0571.
+\end{align*}
+
+$95\%$ confidence interval for this rate ratio is
+\begin{align*}
+&\left[\exp\left[10\cdot\widehat{\beta}_{\mathrm{\texttt{age}}} - 10\cdot z_{0.975} \cdot \mathrm{SE}(\widehat{\beta}_{\mathrm{\texttt{age}}})\right],~\exp\left[10\cdot\widehat{\beta}_{\mathrm{\texttt{age}}} + 10\cdot z_{0.975} \cdot \mathrm{SE}(\widehat{\beta}_{\mathrm{\texttt{age}}})\right] \right]\\
+&= [\exp[0.0556 - 1.96 \cdot 0.0168], \exp[0.0556 + 1.96 \cdot 0.0168]]\\
+&= \left[\exp[0.0227], \exp[0.0884]\right]\\
+&= [1.0230, 1.0924]
+\end{align*}
+
+\subsubsection*{(iii)}
+$\{\widehat{\mu}|\texttt{age} = 40, \texttt{badh} = 0\} = \exp\left[\widehat{\beta}_{0} + \widehat{\beta}_{\texttt{age}}\cdot40 + \widehat{\beta}_{\texttt{badh}}\cdot0\right] = \exp\left[0.5888 + 0.0056*40\right] = \exp\left[0.810971\right] = 2.2501$
+
+The confidence interval of this rate ratio is equal to the confidence interval of $e^{\eta}$ where $\eta = \beta_{0} + \beta_{\texttt{age}}\cdot40$. We would then first find a confidence interval of $\eta$. This takes the form $\widehat{\eta} \pm z_{1-\frac{\alpha}{2}}\cdot \mathrm{SE}(\widehat{\eta})$, where $\mathrm{SE}(\widehat{\eta}) = \sqrt{\widehat{\Var}(\widehat{\beta}_{0}) + 40^{2}\widehat{\Var}(\widehat{\beta}_{\texttt{age}}) + 2\cdot40\cdot \widehat{\Cov}\left(\widehat{\beta}_{0}, \widehat{\beta}_{\texttt{age}}\right)}$. So, we would need $\Cov\left(\widehat{\beta}_{0}, \widehat{\beta}_{\texttt{age}}\right)$.
+
+
+\vspace{\baselineskip}
+\subsection*{(c)}
+
+\subsubsection*{(i)}
+We estimate parameters by solving quasi-likelihood equations instead of the likelihood equations. However, since $\phi$ will cancel, the estimates are the same as for the Poisson model.
+
+\subsubsection*{(ii)}
+We compute the Pearson statistic $X^{2} = \sum_{i=1}^{n} \frac{(y_{i} - \widehat{\mu}_{i})^{2}}{\widehat{\mu}_{i}}$ for the Poisson model, and estimate $\phi$ by $\widehat{\phi} = \frac{X^{2}}{n-p}$ where $p = 3$.
+

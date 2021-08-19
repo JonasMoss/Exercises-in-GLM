@@ -1,0 +1,123 @@
+\section*{Exercise 7.31}
+\subsection*{(a)}
+
+\begin{lstlisting}
+> # Read data
+> homicide.data = read.table("http://www.stat.ufl.edu/~aa/glm/data/Homicides.dat", header = T)
+> homicide.data[,"race"] = as.factor(homicide.data[,"race"])
+> head(homicide.data)
+  Obs race count
+1   1    0     0
+2   2    0     0
+3   3    0     0
+4   4    0     0
+5   5    0     0
+6   6    0     0
+> table(homicide.data[,"count"], homicide.data[,"race"])
+   
+       0    1
+  0 1070  119
+  1   60   16
+  2   14   12
+  3    4    7
+  4    0    3
+  5    0    2
+  6    1    0
+> 
+> # a)
+> 
+> # Fit Poisson model
+> Poisson.model = glm(count ~ race, family = poisson, data = homicide.data)
+> summary(Poisson.model)
+
+Call:
+glm(formula = count ~ race, family = poisson, data = homicide.data)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.0218  -0.4295  -0.4295  -0.4295   6.1874  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -2.38321    0.09713  -24.54   <2e-16 ***
+race1        1.73314    0.14657   11.82   <2e-16 ***
+---
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 962.80  on 1307  degrees of freedom
+Residual deviance: 844.71  on 1306  degrees of freedom
+AIC: 1122
+
+Number of Fisher Scoring iterations: 6
+\end{lstlisting}
+
+$\widehat{\beta}_{0}$ can be interpreted as the log of the average number of known homicide victims for the reference group (white): $\E\left[Y|x_{i} = 0\right] = e^{\widehat{\beta}_{0}} = e^{-2.3832} = 0.0923$.\\
+
+$\widehat{\beta}_{1}$ can be interpreted as the log rate ratio between the average number of known homicide victims for white and black: $\frac{\E\left[Y|x_{i} = 1\right]}{\E\left[Y|x_{i} = 0\right]} = e^{\widehat{\beta}_{1}} = e^{1.7331} = 5.6584$.\\
+
+
+\vspace{\baselineskip}
+\subsection*{(b)}
+Possible factors of heterogeneity might be socio-economic variables.\\
+
+Fit negative binomial GLM
+\begin{lstlisting}
+> # Fit negative binomial model 
+> negbin.model = glm.nb(count ~ race, data = homicide.data)
+> summary(negbin.model)
+
+Call:
+glm.nb(formula = count ~ race, data = homicide.data, init.theta = 0.2023119205, 
+    link = log)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.7184  -0.3899  -0.3899  -0.3899   3.5072  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -2.3832     0.1172 -20.335  < 2e-16 ***
+race1         1.7331     0.2385   7.268 3.66e-13 ***
+---
+
+(Dispersion parameter for Negative Binomial(0.2023) family taken to be 1)
+
+    Null deviance: 471.57  on 1307  degrees of freedom
+Residual deviance: 412.60  on 1306  degrees of freedom
+AIC: 1001.8
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  0.2023 
+          Std. Err.:  0.0409 
+
+ 2 x log-likelihood:  -995.7980 
+> 
+> # Test overdispersion
+> overdisp.test.statistic = -2*(logLik(Poisson.model) - logLik(negbin.model))
+> 1 - pchisq(as.numeric(overdisp.test.statistic), df = 1)
+[1] 0
+> # We reject the null hypothesis with alpha = 0.05.
+> # So, we conclude that there is overdispersion and choose for the negative binomial model.
+\end{lstlisting}
+
+The coefficient estimates are virtually the same as in the Poisson GLM, but the estimated dispersion parameter is $\widehat{\gamma} = \frac{1}{\theta} = \frac{1}{0.2023} = 4.94$. This suggests that there is overdispersion and that the Poisson GLM is inadequate.
+
+
+\vspace{\baselineskip}
+\subsection*{(c)}
+\begin{lstlisting}
+> # Wald 95% confidence interval
+> exp(confint.default(Poisson.model))
+                2.5 %    97.5 %
+(Intercept) 0.0762623 0.1115994
+race1       4.2455738 7.5414329
+> exp(confint.default(negbin.model))
+                 2.5 %    97.5 %
+(Intercept) 0.07332043 0.1160771
+race1       3.54571025 9.0299848
+\end{lstlisting}
+
+As we saw in b), there is an evidence of overdispersion. Therefore, the confidence interval from negative binomial GLM is more reliable.\\

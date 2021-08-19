@@ -1,0 +1,75 @@
+\section*{Additional Exercise 27}
+
+\subsection*{(a)}
+We have done this one many times.
+
+\subsection*{(b)}
+We have done this one many times.
+
+\subsection*{(c)}
+The score function is
+\begin{eqnarray*}
+\left(\begin{array}{c}
+\frac{d}{d\beta_{0}}\sum_{i=1}^{n}\log f(y_{i})\\
+\frac{d}{d\beta_{1}}\sum_{i=1}^{n}\log f(y_{i})
+\end{array}\right) & = & \left(\begin{array}{c}
+\frac{d}{d\beta_{0}}\sum_{i=1}^{n}\left[-(\exp[\beta_{0}+\beta_{1}x_{i}])+y_{i}(\beta_{0}+\beta_{1}x_{i})\right]\\
+\frac{d}{d\beta_{1}}\sum_{i=1}^{n}\left[-(\exp[\beta_{0}+\beta_{1}x_{i}])+y_{i}(\beta_{0}+\beta_{1}x_{i})\right]
+\end{array}\right),\\
+ & = & \left(\begin{array}{c}
+\sum_{i=1}^{n}\left[-\exp[\beta_{0}+\beta_{1}x_{i}]+y_{i}\right]\\
+\sum_{i=1}^{n}\left[-x_{i}\exp[\beta_{0}+\beta_{1}x_{i}]+x_{i}y_{i}\right]
+\end{array}\right),\\
+ & = & \left(\begin{array}{c}
+1\\
+x_{i}
+\end{array}\right)\left(y_{i}-\mu_{i}\right),
+\end{eqnarray*}
+since $\mu_{i}=\exp[\beta_{0}+\beta_{1}x_{i}]$.
+The information matrix is the negative expected matrix of second derivatives
+of the log-likelihood. Each observation contributes
+\[
+I_{i}=\left[\begin{array}{cc}
+\mu_{i} & x_{i}\mu_{i}\\
+x_{i}\mu_{i} & x_{i}^{2}\mu
+\end{array}\right],
+\]
+as can be seen from the calculations above. Thus the information matrix
+is
+\[
+\sum_{i=1}^{n}\left[\begin{array}{cc}
+\mu_{i} & x_{i}\mu_{i}\\
+x_{i}\mu_{i} & x_{i}^{2}\mu
+\end{array}\right].
+\]
+
+\subsection*{(d)}
+A saturated model fits as well as possible to every observation, so
+that it has $p=n$. Since the maximum likelihood estimator of the
+Poisson distribution is the mean, $\tilde{\mu}_{i}=Y_{i}$.
+
+\subsection*{(e)}
+The deviance is $2\log L_{s}-2\log L_{m}$, where $L_{s}$ is the
+saturated model and $L_{m}$ is the model under consideration. Use
+it to test hypotheses for nested models.
+
+\subsection*{(f)}
+Calculate 
+\[
+P(1[Y_{i}>0]=1\mid x_{i})=1-P(Y_{i}=0\mid x_{i})=1-e^{-\mu_{i}}.
+\]
+ Invert it with respect to $\pi_{i}$ to get
+\[
+\log(1-\pi_{i})=-\mu_{i}
+\]
+and continue to get
+\[
+\log(-\log(1-\pi_{i}))=\beta^{T}x_{i}.
+\]
+The link function is called the cloglog. 
+
+\subsection*{(g)}
+See e.g. the solution to Additional Exercise 24 for how to do this.
+
+\subsection*{(h)}
+See e.g. the solution to Additional Exercise 24 for how to do this.

@@ -1,0 +1,14 @@
+\section*{Exercise 7.30}
+\begin{lstlisting}
+# Plot the data; no evidence of linear trend.
+y = c(33, 29, 29, 12, 17, 21, 31, 28, 19, 14, 11, 26, 23)
+x = 2001:2013
+plot(x, y)
+
+AIC(MASS::glm.nb(y ~ 1), glm(y ~ 1, family = poisson())) # 92.6 and 97.1
+
+# Negative binomial fits the data better.
+library('fitdistrplus')
+plot(fitdist(y, "pois"))  
+plot(fitdist(y, "nbinom"))
+\end{lstlisting}

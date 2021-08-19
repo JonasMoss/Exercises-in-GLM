@@ -1,0 +1,9 @@
+\section*{Exercise 9.8}
+Assume that $\Cov(\epsilon_{i,j},\epsilon_{i,k}) = \sigma_{\epsilon}^{2}\rho^{|j-k|}$, then
+\begin{align*}
+\Cor(y_{i,j},y_{i,k}) &= \frac{\Cov(y_{i,j},y_{i,k})}{\sqrt{\Var(y_{i,j})\Var(y_{i,k})}}\\
+&= \frac{\Cov(u_{i,j} + \epsilon_{i,j}, u_{i,k}+\epsilon_{i,k})}{\sigma_{u}^{2}+\sigma_{\epsilon}^{2}}\\
+&= \frac{\Cov(u_{i,j}, u_{i,k}) + \Cov(\epsilon_{i,j}, \epsilon_{i,k})}{\sigma_{u}^{2}+\sigma_{\epsilon}^{2}}\\
+&= \frac{\Var(u_{i,j}) + \Cov(\epsilon_{i,j})}{\sigma_{u}^{2}+\sigma_{\epsilon}^{2}}\\
+&= \frac{\sigma_{u}^{2} + \sigma_{\epsilon}^{2}\rho^{|j-k|}}{\sigma_{u}^{2}+\sigma_{\epsilon}^{2}}.
+\end{align*}

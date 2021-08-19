@@ -1,0 +1,112 @@
+\section*{Exercise 8.14}
+\begin{lstlisting}
+> # Load packages
+> library(MASS)
+> 
+> # Read data
+> homicide.data = read.table("http://www.stat.ufl.edu/~aa/glm/data/Homicides.dat", header = T)
+> homicide.data[,"race"] = as.factor(homicide.data[,"race"])
+> head(homicide.data)
+  Obs race count
+1   1    0     0
+2   2    0     0
+3   3    0     0
+4   4    0     0
+5   5    0     0
+6   6    0     0
+> table(homicide.data[,"count"], homicide.data[,"race"])
+   
+       0    1
+  0 1070  119
+  1   60   16
+  2   14   12
+  3    4    7
+  4    0    3
+  5    0    2
+  6    1    0
+> 
+> # Fit Poisson model
+> Poisson.model = glm(count ~ race, family = poisson, data = homicide.data)
+> summary(Poisson.model)
+
+Call:
+glm(formula = count ~ race, family = poisson, data = homicide.data)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.0218  -0.4295  -0.4295  -0.4295   6.1874  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -2.38321    0.09713  -24.54   <2e-16 ***
+race1        1.73314    0.14657   11.82   <2e-16 ***
+---
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 962.80  on 1307  degrees of freedom
+Residual deviance: 844.71  on 1306  degrees of freedom
+AIC: 1122
+
+Number of Fisher Scoring iterations: 6
+
+> 
+> # Fit negative binomial model
+> negbin.model = glm.nb(count ~ race, data = homicide.data)
+> summary(negbin.model)
+
+Call:
+glm.nb(formula = count ~ race, data = homicide.data, init.theta = 0.2023119205, 
+    link = log)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.7184  -0.3899  -0.3899  -0.3899   3.5072  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  -2.3832     0.1172 -20.335  < 2e-16 ***
+race1         1.7331     0.2385   7.268 3.66e-13 ***
+---
+
+(Dispersion parameter for Negative Binomial(0.2023) family taken to be 1)
+
+    Null deviance: 471.57  on 1307  degrees of freedom
+Residual deviance: 412.60  on 1306  degrees of freedom
+AIC: 1001.8
+
+Number of Fisher Scoring iterations: 1
+
+
+              Theta:  0.2023 
+          Std. Err.:  0.0409 
+
+ 2 x log-likelihood:  -995.7980 
+> 
+> # Quasi likelihood approach.
+> QL.model = glm(count ~ race, family = quasi(link = "log", variance = "mu"), data = homicide.data)
+> summary(QL.model)
+
+Call:
+glm(formula = count ~ race, family = quasi(link = "log", variance = "mu"), 
+    data = homicide.data)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.0218  -0.4295  -0.4295  -0.4295   6.1874  
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  -2.3832     0.1283  -18.57   <2e-16 ***
+race1         1.7331     0.1937    8.95   <2e-16 ***
+---
+
+(Dispersion parameter for quasi family taken to be 1.745693)
+
+    Null deviance: 962.80  on 1307  degrees of freedom
+Residual deviance: 844.71  on 1306  degrees of freedom
+AIC: NA
+
+Number of Fisher Scoring iterations: 6
+\end{lstlisting}
+For the QL-method, we obtain the same estimate as for Poisson model, but the standard errors are multiplied by $\sqrt{1.7457} = 1.3212$. Also, the negative binomial does here give the same estimates as Poisson model (which is not the case in general) and the standard errors are about the same as for the QL-method. (Check p.248 to see how variance is defined for negative binomial model.)

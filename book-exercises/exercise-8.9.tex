@@ -1,0 +1,10 @@
+\section*{Exercise 8.9}
+Assume the null model $\mu_{i} = \beta$ and $v(\mu_{i}) = \mu_{i}$, then
+\begin{align*}
+u(\beta) = \sum_{i=1}^{n}\frac{\partial \mu_{i}}{\partial \beta} \frac{y_{i}-\mu_{i}}{v(\mu_{i})} = \sum_{i=1}^{n}\frac{y_{i}-\mu_{i}}{\mu_{i}} = \sum_{i=1}^{n}\frac{y_{i}-\beta}{\beta}.
+\end{align*}
+Thus, $u(\bm{\beta}) = 0$ gives $\widehat{\beta} = \overline{y}$ and by using formula (8.3) we obtain $V = \left[\sum_{i=1}^{n}\left(\frac{\partial \mu_{i}}{\partial \bm{\beta}}\right)^{\rm T}\left(v(\mu_{i})\right)^{-1}\left(\frac{\partial \mu_{i}}{\partial \bm{\beta}}\right)\right]^{-1} = \left[\sum_{i=1}^{n}1 \cdot \frac{1}{\beta} \cdot 1\right]^{-1} = \frac{\beta}{n}$. A sensible model based estimate of $V$ is $\widehat{V} = \frac{\overline{y}}{n}$. The actual asymptotic variance of $\widehat{\beta}$ is by formula (8.4)
+\begin{align*}
+V\left(\sum_{i=1}^{n}\frac{\partial \mu_{i}}{\partial \beta}\frac{\Var(y_{i})}{v(\mu_{i})^{2}}\frac{\partial \mu_{i}}{\partial \beta}\right)V = \frac{\beta}{n}\left(\sum_{i=1}^{n}\frac{\sigma^{2}}{\beta^{2}}\right)\frac{\beta}{n} = \frac{\sigma^{2}}{n}.
+\end{align*}
+To find the robust estimate of the variance that adjusts for model misspecification, we replace $\Var(y_{i})$ in the expression above with $(y_{i}-\overline{y})^{2}$. We find the robust estimate to be $\frac{1}{n^{2}}\sum_{i=1}^{n}(y_{i}-\overline{y})^{2}$.
